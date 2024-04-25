@@ -25,7 +25,7 @@ const BotonFavoritos = () => {
 const estilos = StyleSheet.create({
   boton: {
     padding: 5,
-    margin:5,
+    margin:3,
   },
   iconoContenedor: {
     backgroundColor: "rgba(128, 128, 128, 0.7)",
