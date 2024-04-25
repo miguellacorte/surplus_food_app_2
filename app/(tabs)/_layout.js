@@ -13,7 +13,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          headerShown: false ,
+          title: "Inicio",
           tabBarIcon: ({ color }) => (
             <FontAwesome size={iconSize} name="home" color={color} />
           ),
@@ -22,6 +23,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="ordena"
         options={{
+          headerShown: false ,
           title: "Ordena",
           tabBarIcon: ({ color }) => (
             <FontAwesome size={iconSize} name="list-ul" color={color} />
@@ -31,6 +33,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="favoritos"
         options={{
+          headerShown: false ,
           title: "Favoritos",
           tabBarIcon: ({ color, focused }) => (
             <FontAwesome

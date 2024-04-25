@@ -1,8 +1,9 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, SafeAreaView } from "react-native";
 import ContenedorComidaPrincipal from "../../components/ContenedorComidaPrincipal";
 
 export default function Tab() {
   return (
+<SafeAreaView style={{ flex:1}}> 
     <ScrollView
       horizontal
       contentContainerStyle={{
@@ -20,5 +21,6 @@ export default function Tab() {
       </View>
       {/* Wrap more components as needed */}
     </ScrollView>
+    </SafeAreaView>
   );
 }
