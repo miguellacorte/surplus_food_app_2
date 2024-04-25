@@ -8,12 +8,31 @@ import {
   Dimensions,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Colors } from "../constants/Colors";
 
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
 import BotonFavoritos from "./BotonFavoritos";
 
-const { width } = Dimensions.get("window");
-const anchoTarjeta = width * 0.65; //dimensionsAPI: cambiar dependiendo a tamano de pantalla
+const { width, height } = Dimensions.get('window');
+
+const widthBreakpoint = 429;
+const heightBreakpoint = 667;
+
+const TagSize = width < widthBreakpoint ? 'small' : 'medium';
+const BotonFavoritosSize = width < widthBreakpoint ? 'small' : 'medium';
+
+const anchoTarjeta = width < widthBreakpoint ? width * 0.6 : width * 0.65;
+const imagenRestauranteHeight = height < heightBreakpoint ? 100 : 120;
+const detallesRestauranteWidth = width < widthBreakpoint ? 140 : 190;
+const contenedorHorarioWidth = width < widthBreakpoint ? 150 : 160;
+const logoStyleWidth = width < widthBreakpoint ? 35 : 50;
+const logoStyleHeight = height < heightBreakpoint ? 35 : 50;
+
+const marginTopDetallesRestaurante = height < heightBreakpoint ? '5%' : '7%';
+const fontSizeNombreRestaurante = height < heightBreakpoint ? 16 : 18;
+const fontSizePrecioAntes = width < widthBreakpoint ? 12 : 14;
+const fontSizePrecioDespues = width < widthBreakpoint ? 16 : 18;
+const topPrecioDespues = height < heightBreakpoint ? '0%' : '2%';
 
 const InformacionRestaurante = ({
   nombre,
@@ -34,9 +53,9 @@ const InformacionRestaurante = ({
       style={estilos.imagenRestaurante}
     >
       <View style={estilos.contenedorTope}>
-        <TagDisponibilidadProducto />
+        <TagDisponibilidadProducto size={TagSize} />
         <View style={{ bottom: 3 }}>
-          <BotonFavoritos />
+          <BotonFavoritos size={BotonFavoritosSize} />
         </View>
       </View>
 
@@ -48,7 +67,7 @@ const InformacionRestaurante = ({
         />
         <View style={estilos.contenedorNombreRestaurante}>
           <Text style={estilos.nombreRestaurante}>
-            {nombre}- <Text style={estilos.cocinaTexto}>{cocina}</Text>
+            {nombre} - <Text style={estilos.cocinaTexto}>{cocina}</Text>
           </Text>
         </View>
       </View>
@@ -69,7 +88,7 @@ const InformacionRestaurante = ({
               <FontAwesome
                 name="star"
                 size={12}
-                color="#F6D348"
+                color={Colors.Amarillo}
                 style={{ margin: 3 }}
               />
               <Text style={estilos.calificacion}>{calificacion}</Text>
@@ -102,8 +121,8 @@ const estilos = StyleSheet.create({
   },
   imagenRestaurante: {
     width: "100%",
-    height: 120,
-    minHeight: 110, //dimensionsAPI (?): cambiar dependiendo a tamano de pantalla
+    height: imagenRestauranteHeight,
+    minHeight: 90,
   },
   contenedorTope: {
     flexDirection: "row-reverse",
@@ -114,27 +133,28 @@ const estilos = StyleSheet.create({
   detallesRestaurante: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 15, //dimensionsAPI : conectar con height de imagenRestaurante
+    marginTop: marginTopDetallesRestaurante,
     paddingHorizontal: 5,
-    maxWidth: 190,
-    minWidth: 150, //dimensionsAPI (?): cambiar dependiendo a tamano de pantalla
+    maxWidth: detallesRestauranteWidth,
+    minWidth: 150,
   },
   miniaturaRestaurante: {
-    width: 50,
-    height: 50,
+    width: logoStyleWidth,
+    height: logoStyleHeight,
     borderRadius: 25,
   },
   contenedorNombreRestaurante: {
     marginLeft: 10,
+    width: "100%",
   },
   nombreRestaurante: {
-    fontSize: 18,
+    fontSize: fontSizeNombreRestaurante,
     fontWeight: "bold",
     color: "#FFF",
   },
   cocinaTexto: {
-    fontSize: 16,
-    fontWeight: "bold", //cambiar Font (?)
+    fontSize: fontSizeNombreRestaurante - 2,
+     //cambiar Font (?)
   },
   detallesProducto: {
     paddingHorizontal: 10,
@@ -153,15 +173,16 @@ const estilos = StyleSheet.create({
     marginBottom: 0,
   },
   contenedorHorario: {
-    maxWidth: 160,
-    minWidth: 100, //dimensionsAPI : cambiar dependiendo a tamano de pantalla
+    maxWidth: contenedorHorarioWidth,
+    minWidth: 100,
+    
   },
   horario: {
     fontSize: 14,
     color: "#78828A",
   },
   contenedorDistanciaCalificacion: {
-    marginTop: 10,
+    marginTop: '5%',
     flexDirection: "row",
     alignItems: "baseline",
   },
@@ -188,13 +209,14 @@ const estilos = StyleSheet.create({
   },
   precioAntes: {
     textDecorationLine: "line-through",
-    fontSize: 14,
+    fontSize: fontSizePrecioAntes,
+    marginBottom: "2%",
   },
   precioDespues: {
-    fontSize: 18,
+    fontSize: fontSizePrecioDespues,
     fontWeight: "bold",
-    color: "#E35940",
-    top: 3,
+    color: Colors.Naranja,
+    top: topPrecioDespues,
   },
 });
 
