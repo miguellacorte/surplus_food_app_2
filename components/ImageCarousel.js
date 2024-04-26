@@ -1,14 +1,22 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { View, Image, StyleSheet, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useRef, useState, useEffect } from "react";
+import {
+  View,
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-const carouselWidth = windowWidth - 20; 
-const imageWidth = carouselWidth ; 
+// IMPROVE ON CLICK FUNCTIONALITY 
 
-const dynamicHeight = windowWidth < 667 ? 150 : 175;
-
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+const carouselWidth = windowWidth - 20;
+const imageWidth = carouselWidth;
+const dynamicHeight = windowHeight < 667 ? 130 : 175;
 const dynamicLineHeight = windowWidth < 429 ? 4 : 5;
+const topMargin = windowWidth < 429 ? "5%" : "7%";
 
 const ImageCarousel = () => {
   let interval = null;
@@ -16,10 +24,10 @@ const ImageCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const images = [
-    { uri: 'https://source.unsplash.com/300x200/?food' },
-    { uri: 'https://source.unsplash.com/300x200/?meal' },
-    { uri: 'https://source.unsplash.com/300x200/?dinner' },
-    { uri: 'https://source.unsplash.com/300x200/?lunch' },
+    { uri: "https://source.unsplash.com/300x200/?promotion" },
+    { uri: "https://source.unsplash.com/300x200/?sale" },
+    { uri: "https://source.unsplash.com/300x200/?discount" },
+    { uri: "https://source.unsplash.com/300x200/?offer" },
   ];
 
   useEffect(() => {
@@ -36,12 +44,17 @@ const ImageCarousel = () => {
 
   const scrollToIndex = (index) => {
     if (carouselRef.current) {
-      carouselRef.current.scrollTo({ x: index * carouselWidth, animated: true });
+      carouselRef.current.scrollTo({
+        x: index * carouselWidth,
+        animated: true,
+      });
     }
   };
 
   const onScroll = (event) => {
-    const newIndex = Math.round(event.nativeEvent.contentOffset.x / carouselWidth);
+    const newIndex = Math.round(
+      event.nativeEvent.contentOffset.x / carouselWidth
+    );
     setActiveIndex(newIndex);
   };
 
@@ -49,19 +62,19 @@ const ImageCarousel = () => {
     return (
       <View style={styles.linesContainer}>
         {images.map((_, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[styles.line, activeIndex === index && styles.activeLine]}
-            onPress={() => scrollToIndex(index)}
-          />
+          <View key={index} style={{}}>
+            <TouchableOpacity
+              key={index}
+              style={[styles.line, activeIndex === index && styles.activeLine]}
+              onPress={() => scrollToIndex(index)}
+            />
+          </View>
         ))}
       </View>
     );
   };
 
-  
   return (
-   
     <View style={styles.carouselContainer}>
       <View style={styles.scrollViewWrapper}>
         <ScrollView
@@ -73,8 +86,12 @@ const ImageCarousel = () => {
           scrollEventThrottle={16}
         >
           {images.map((image, index) => (
-            <View key={index} style={{borderRadius:15}}>
-            <Image key={index} source={image} style={[styles.image, styles.rounded]} />
+            <View key={index} style={{ borderRadius: 15 }}>
+              <Image
+                key={index}
+                source={image}
+                style={[styles.image, styles.rounded]}
+              />
             </View>
           ))}
         </ScrollView>
@@ -88,40 +105,40 @@ const styles = StyleSheet.create({
   carouselContainer: {
     borderRadius: 15,
     marginVertical: 10,
-    alignItems: 'center',
+    alignItems: "center",
     marginHorizontal: 20,
-    marginBottom: 20, 
-    height: dynamicHeight, 
+    marginBottom: 20,
+    height: dynamicHeight,
   },
   scrollViewWrapper: {
-    overflow: 'hidden',
+    overflow: "hidden",
     borderRadius: 15,
   },
   scrollViewContainer: {
     paddingHorizontal: 5,
   },
   linesContainer: {
-    position: 'absolute',
-    top: "5%",
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    position: "absolute",
+    top: topMargin,
+    flexDirection: "row",
+    justifyContent: "space-between",
     width: carouselWidth,
     paddingHorizontal: 15,
   },
   line: {
-    height: dynamicLineHeight, 
-    width: (carouselWidth - 75) / 4, // Adjust width according to number of lines
-    backgroundColor: 'grey',
+    height: dynamicLineHeight,
+    width: (carouselWidth - 80) / 4, // Adjust width according to number of lines
+    backgroundColor: "grey",
     borderRadius: 5,
-    marginHorizontal: 5, // Add margin between lines
+    marginHorizontal: 5,
   },
   activeLine: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   image: {
     width: imageWidth,
-    height: dynamicHeight, 
-    resizeMode: 'cover',
+    height: dynamicHeight,
+    resizeMode: "cover",
   },
   rounded: {
     borderRadius: 15,

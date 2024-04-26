@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { Pressable, View, StyleSheet, Dimensions } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
-const BotonFavoritos = ({ size = 'medium' }) => {
+const BotonFavoritos = ({ size = "medium" }) => {
   const [favorito, setFavorito] = useState(false);
 
   let scale;
   switch (size) {
-    case 'small':
+    case "small":
       scale = 0.8;
       break;
-    case 'large':
+    case "large":
       scale = 1.3;
       break;
     default:
@@ -23,7 +23,6 @@ const BotonFavoritos = ({ size = 'medium' }) => {
     boton: {
       padding: 5 * scale,
       margin: 3 * scale,
-      
     },
     iconoContenedor: {
       backgroundColor: "rgba(128, 128, 128, 0.7)",
@@ -31,7 +30,7 @@ const BotonFavoritos = ({ size = 'medium' }) => {
       padding: 5 * scale,
       width: 30 * scale,
       alignItems: "center",
-      marginTop: 3 ,
+      marginTop: 3,
     },
   });
 

@@ -9,30 +9,32 @@ import {
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Colors } from "../constants/Colors";
-
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
 import BotonFavoritos from "./BotonFavoritos";
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 const widthBreakpoint = 429;
 const heightBreakpoint = 667;
 
-const TagSize = width < widthBreakpoint ? 'small' : 'medium';
-const BotonFavoritosSize = width < widthBreakpoint ? 'small' : 'medium';
+const TagSize = width < widthBreakpoint ? "small" : "medium";
+const BotonFavoritosSize = width < widthBreakpoint ? "small" : "medium";
 
 const anchoTarjeta = width < widthBreakpoint ? width * 0.6 : width * 0.65;
 const imagenRestauranteHeight = height < heightBreakpoint ? 100 : 120;
 const detallesRestauranteWidth = width < widthBreakpoint ? 140 : 190;
-const contenedorHorarioWidth = width < widthBreakpoint ? 150 : 160;
+const contenedorHorarioWidth = width < widthBreakpoint ? 155 : 190;
 const logoStyleWidth = width < widthBreakpoint ? 35 : 50;
 const logoStyleHeight = height < heightBreakpoint ? 35 : 50;
 
-const marginTopDetallesRestaurante = height < heightBreakpoint ? '5%' : '7%';
+const marginTopDetallesRestaurante = height < heightBreakpoint ? "5%" : "7%";
 const fontSizeNombreRestaurante = height < heightBreakpoint ? 16 : 18;
 const fontSizePrecioAntes = width < widthBreakpoint ? 12 : 14;
 const fontSizePrecioDespues = width < widthBreakpoint ? 16 : 18;
-const topPrecioDespues = height < heightBreakpoint ? '0%' : '2%';
+const topPrecioDespues = height < heightBreakpoint ? "0%" : "2%";
+
+const horarioFontSize = width < widthBreakpoint ? 12 : 14;
+const contenedorInfoProductoHeight = width < widthBreakpoint ? 50 : 60;
 
 const InformacionRestaurante = ({
   nombre,
@@ -154,7 +156,6 @@ const estilos = StyleSheet.create({
   },
   cocinaTexto: {
     fontSize: fontSizeNombreRestaurante - 2,
-     //cambiar Font (?)
   },
   detallesProducto: {
     paddingHorizontal: 10,
@@ -164,6 +165,7 @@ const estilos = StyleSheet.create({
   nombrePlato: {
     fontWeight: "600",
     fontSize: 16,
+    bottom: 5,
   },
   contenedorInfoProducto: {
     flexDirection: "row",
@@ -171,23 +173,23 @@ const estilos = StyleSheet.create({
     alignItems: "flex-end",
     marginTop: 5,
     marginBottom: 0,
+    height: contenedorInfoProductoHeight,
   },
   contenedorHorario: {
     maxWidth: contenedorHorarioWidth,
     minWidth: 100,
-    
   },
   horario: {
-    fontSize: 14,
+    fontSize: horarioFontSize,
     color: "#78828A",
   },
   contenedorDistanciaCalificacion: {
-    marginTop: '5%',
+    marginTop: "5%",
     flexDirection: "row",
     alignItems: "baseline",
   },
   distancia: {
-    fontSize: 14,
+    fontSize: horarioFontSize,
   },
   separador: {
     marginHorizontal: 5,
@@ -197,7 +199,7 @@ const estilos = StyleSheet.create({
     alignItems: "center",
   },
   calificacion: {
-    fontSize: 14,
+    fontSize: horarioFontSize,
   },
   cantidadRevisiones: {
     fontSize: 12,
@@ -228,7 +230,7 @@ export default function ContenedorPrincipalComida() {
       distancia: "1.5",
       calificacion: "4.8",
       cantidadRevisiones: "121",
-      horario: "Retira hoy entre las 3:30 pm - 5:59PM",
+      horario: "Retira hoy entre las 10:30pm - 11:59pm",
       precioAntes: "$ 10,00",
       precioDespues: "$ 4,80",
       urlImagenLogo:

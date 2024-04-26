@@ -1,5 +1,6 @@
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Feather } from '@expo/vector-icons';
 import { Tabs } from "expo-router";
 import { Colors } from "../../constants/Colors";
 import { Dimensions } from "react-native";
@@ -16,7 +17,7 @@ export default function TabLayout() {
           headerShown: false ,
           title: "Inicio",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={iconSize} name="home" color={color} />
+            <Feather name="home" size={iconSize} color={color} />
           ),
         }}
       />
@@ -26,7 +27,7 @@ export default function TabLayout() {
           headerShown: false ,
           title: "Ordena",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={iconSize} name="list-ul" color={color} />
+            <Feather name="shopping-bag" size={iconSize} color={color} />
           ),
         }}
       />

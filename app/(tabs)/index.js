@@ -1,46 +1,23 @@
-import { ScrollView, View, SafeAreaView, Dimensions } from "react-native";
-import ContenedorComidaPrincipal from "../../components/ContenedorComidaPrincipal";
+import { StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import ImageCarousel from "../../components/ImageCarousel";
-
-// ADD SAFEAREAVIEW FOR ANDROID 
-// MAKE CONTENERDORCOMIDAPRINCIPAL BIT SMALLER IN ANDROID 
-
+import RecomendadosParaTi from "../../components/FoodContainers/RecomendadosParaTi";
 
 export default function Tab() {
   const handleLayout = (event) => {
     const { width, height } = event.nativeEvent.layout;
-    console.log('ScrollView dimensions:', width, 'x', height);
+    console.log("ScrollView dimensions:", width, "x", height);
   };
   return (
-    
-  
-
-
-    <SafeAreaView style={{ flex:1 }}> 
-      
+    <SafeAreaView style={styles.container}>
       <ImageCarousel />
-
-
-      <ScrollView
-        style={{ height: 200}}
-          horizontal
-          contentContainerStyle={{
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            margin: 20,
-            flexGrow: 1,
-          }}
-        >
-          <View style={{ marginRight: 20 }}>
-            <ContenedorComidaPrincipal />
-          </View>
-          <View style={{ marginRight: 20 }}>
-            <ContenedorComidaPrincipal />
-          </View>
-          {/* Wrap more components as needed */}
-        </ScrollView>
-
+      <RecomendadosParaTi />
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
