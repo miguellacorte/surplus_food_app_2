@@ -9,12 +9,13 @@ import {
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Colors } from "../constants/Colors";
-import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
+import TagDisponibilidadProducto from "./UI/TagDisponibilidadProducto";
 import BotonFavoritos from "./BotonFavoritos";
 
 const { width, height } = Dimensions.get("window");
+console.log(width, height);
 
-const widthBreakpoint = 429;
+const widthBreakpoint = 392;
 const heightBreakpoint = 667;
 
 const TagSize = width < widthBreakpoint ? "small" : "medium";
@@ -24,14 +25,15 @@ const anchoTarjeta = width < widthBreakpoint ? width * 0.6 : width * 0.65;
 const imagenRestauranteHeight = height < heightBreakpoint ? 100 : 120;
 const detallesRestauranteWidth = width < widthBreakpoint ? 140 : 190;
 const contenedorHorarioWidth = width < widthBreakpoint ? 155 : 190;
-const logoStyleWidth = width < widthBreakpoint ? 35 : 50;
-const logoStyleHeight = height < heightBreakpoint ? 35 : 50;
+const logoStyleWidth = width < widthBreakpoint ? 40 : 50;
+const resautantTitleTop = width < widthBreakpoint ? 8 : 0;
 
 const marginTopDetallesRestaurante = height < heightBreakpoint ? "5%" : "7%";
 const fontSizeNombreRestaurante = height < heightBreakpoint ? 16 : 18;
 const fontSizePrecioAntes = width < widthBreakpoint ? 12 : 14;
 const fontSizePrecioDespues = width < widthBreakpoint ? 16 : 18;
 const topPrecioDespues = height < heightBreakpoint ? "0%" : "2%";
+const contenedorPrecioDerecha = width < widthBreakpoint ? 0 : 10;
 
 const horarioFontSize = width < widthBreakpoint ? 12 : 14;
 const contenedorInfoProductoHeight = width < widthBreakpoint ? 50 : 60;
@@ -139,14 +141,15 @@ const estilos = StyleSheet.create({
     paddingHorizontal: 5,
     maxWidth: detallesRestauranteWidth,
     minWidth: 150,
+    top: resautantTitleTop,
   },
   miniaturaRestaurante: {
     width: logoStyleWidth,
-    height: logoStyleHeight,
-    borderRadius: 25,
+    height: logoStyleWidth,
+    borderRadius: logoStyleWidth / 2,
   },
   contenedorNombreRestaurante: {
-    marginLeft: 10,
+    marginLeft: 5,
     width: "100%",
   },
   nombreRestaurante: {
@@ -208,6 +211,7 @@ const estilos = StyleSheet.create({
   contenedorPrecio: {
     flexDirection: "column",
     alignItems: "flex-end",
+    right: contenedorPrecioDerecha,
   },
   precioAntes: {
     textDecorationLine: "line-through",
@@ -217,7 +221,8 @@ const estilos = StyleSheet.create({
   precioDespues: {
     fontSize: fontSizePrecioDespues,
     fontWeight: "bold",
-    color: Colors.Naranja,
+    fontWeight:'800',
+    color: 'black',
     top: topPrecioDespues,
   },
 });

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { Octicons } from "@expo/vector-icons";
-import { Colors } from "../constants/Colors";
+import { Colors } from "../../constants/Colors";
 
 //ADD PRESSABLE / MODAL POSSIBILITY THAT DISPLAYS YOUR ADDRESSES 
 
