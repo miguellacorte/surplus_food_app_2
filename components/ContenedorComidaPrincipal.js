@@ -13,7 +13,6 @@ import TagDisponibilidadProducto from "./UI/TagDisponibilidadProducto";
 import BotonFavoritos from "./BotonFavoritos";
 
 const { width, height } = Dimensions.get("window");
-console.log(width, height);
 
 const widthBreakpoint = 392;
 const heightBreakpoint = 667;
@@ -133,7 +132,6 @@ const estilos = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "flex-start",
   },
-
   detallesRestaurante: {
     flexDirection: "row",
     alignItems: "center",

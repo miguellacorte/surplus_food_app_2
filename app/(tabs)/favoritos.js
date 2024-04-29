@@ -1,9 +1,10 @@
 import { View, Text } from 'react-native';
+import RestaurantPage from '../../components/RestaurantPage';
 
 export default function Tab() {
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-      <Text>Favoritos</Text>
+    <View style={{ flex: 1 }}>
+   <RestaurantPage />
     </View>
   );
 }
