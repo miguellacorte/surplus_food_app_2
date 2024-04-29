@@ -10,26 +10,12 @@ import {
   Pressable,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-const datosRestaurante = [
-  {
-    nombre: "El Coyuco",
-    cocina: "Pollo en brasa y parrilla",
-    distancia: "1.5",
-    calificacion: "4.8",
-    cantidadRevisiones: "121",
-    ordenesCantidad: "32",
-    horario: "Retira hoy entre las 10:30pm - 11:59pm",
-    precioAntes: "$ 10,00",
-    precioDespues: "$ 4,80",
-    urlImagenLogo:
-      "https://cdn.builder.io/api/v1/image/assets/TEMP/d49a502485ec5cfa23e5bb59bc169df6a240c31ae56c86b3ad9ef8f1e5bb28ba?apiKey=64cf540a2469411fb888e6001ea1b7f2&",
-    urlImagenPortada:
-      "https://cdn.builder.io/api/v1/image/assets/TEMP/164d420ddd7ad34c6edf2890f7912b900b98b29f58d00cd7cb13fba47b580fcb?apiKey=64cf540a2469411fb888e6001ea1b7f2&",
-  },
-];
+import CategoriesContainer from "./UI/CategoriesContainer";
+import ContenedorComidaRestaurante from "./UI/ContenedorComidaRestaurante";
+import { datosRestaurante } from "../data/datosRestaurante";
 
 const { width, height } = Dimensions.get("window");
 
@@ -39,6 +25,11 @@ const heightBreakpoint = 667;
 const imagenRestauranteHeight = height < heightBreakpoint ? 160 : 180;
 const logoStyleWidth = width < widthBreakpoint ? 70 : 90;
 const horarioFontSize = width < widthBreakpoint ? 12 : 14;
+const bottomContainerMargin = height < heightBreakpoint ? "5%" : "7.5%";
+const resenasMargin = width < widthBreakpoint ? "31%" : "33%";
+const logoImageMarginBottom = height < heightBreakpoint ? 10 : 30;
+const logoImageTop = height < heightBreakpoint ? 10 : 25;
+const addressTextMargin = width < widthBreakpoint ? 10 : 18;
 
 const AddressItem = ({ address }) => (
   <View style={styles.addressContainer}>
@@ -49,13 +40,8 @@ const AddressItem = ({ address }) => (
 const DireccionRestaurant = () => {
   return (
     <View style={styles.DireccionContainer}>
-      <FontAwesome
-        name="map-marker"
-        size={24}
-        color={Colors.VerdeOscuro}
-        style={{ bottom: 5 }}
-      />
-      <AddressItem address="Trans. 3, Qta Guio, con Av 3, Caracas 1060, Distrito Capital" />
+      <FontAwesome name="map-marker" size={16} color={Colors.VerdeOscuro} />
+      <AddressItem address={datosRestaurante[0].direccion} />
     </View>
   );
 };
@@ -65,25 +51,12 @@ const SectionTitle = ({ title }) => (
   </View>
 );
 
-const InfoBlock = ({ title, content, isLast }) => (
-  <View style={isLast ? {} : styles.infoBlockContainer}>
-    <Text style={styles.infoBlockTitle}>{title}</Text>
-    <Text style={styles.infoBlockContent}>{content}</Text>
-  </View>
-);
-
-const CategoryButton = ({ text }) => (
-  <View style={styles.categoryButton}>
-    <Text style={styles.categoryButtonText}>{text}</Text>
-  </View>
-);
-
 const HeartIcon = () => {
   const [isPressed, setIsPressed] = useState(false);
   return (
     <Pressable onPress={() => setIsPressed(!isPressed)}>
       <FontAwesome
-        size={12}
+        size={20}
         name={isPressed ? "heart" : "heart-o"}
         color={Colors.VerdeOscuro}
       />
@@ -104,58 +77,86 @@ function RestaurantPage() {
             <Text> {"<"} </Text>
           </ImageBackground>
         </View>
-        <View style={{ paddingHorizontal: 10 }}>
+        <View style={{ paddingHorizontal: 20, bottom: bottomContainerMargin }}>
           <Image
             resizeMode="cover"
             source={{ uri: datosRestaurante[0].urlImagenLogo }}
             style={styles.miniaturaRestaurante}
           />
           <View style={styles.containerTituloRestaurante}>
-            <Text style={styles.restaurantName}>El Coyuco</Text>
+            <Text style={styles.restaurantName}>
+              {datosRestaurante[0].nombre}
+            </Text>
             <HeartIcon />
           </View>
-          <View>
-            <DireccionRestaurant />
-          </View>
-          <View style={styles.divider} />
+          <DireccionRestaurant />
+          <View style={[styles.divider, { bottom: 10 }]} />
           <Text style={styles.distance}>1.5 Km de distancia</Text>
           <View>
             <View style={styles.contenedorCalificacion}>
-              <FontAwesome
-                name="star"
-                size={12}
-                color={Colors.Amarillo}
-                style={{ margin: 3 }}
-              />
-              <Text style={styles.calificacion}>
-                {datosRestaurante[0].calificacion}
-              </Text>
-              <Text style={styles.cantidadRevisiones}>
-                {" "}
-                ({datosRestaurante[0].cantidadRevisiones})
-              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "stretch",
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <FontAwesome
+                    name="star"
+                    size={12}
+                    color={Colors.Amarillo}
+                    style={{ margin: 3 }}
+                  />
+                  <Text style={styles.calificacion}>
+                    {datosRestaurante[0].calificacion}
+                  </Text>
+                  <Text style={styles.cantidadRevisiones}>
+                    {" "}
+                    ({datosRestaurante[0].cantidadRevisiones})
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      left: "7%",
+                    }}
+                  >
+                    <Ionicons
+                      name="bag-check-outline"
+                      size={14}
+                      color="black"
+                    />
+                    <Text> {datosRestaurante[0].ordenesCantidad} +</Text>
+                  </View>
+                </View>
+
+                <View
+                  style={{
+                    flexDirection: "row-reverse",
+                    flex: 1,
+                    marginLeft: 5,
+                  }}
+                >
+                  <Text style={{ fontWeight: "500", borderBottomWidth: 1 }}>
+                    Reseñas
+                  </Text>
+                </View>
+              </View>
             </View>
           </View>
-          <SectionTitle title="Reseñas" />
-          <View style={styles.categoriesContainer}>
-            <CategoryButton text="Plato principal" />
-            <CategoryButton text="Caja sorpresa" />
-            <CategoryButton text="Postre" />
-            <CategoryButton text="Otros" />
-          </View>
+          <CategoriesContainer categories={datosRestaurante[0].categoria} />
+          <View style={[styles.divider, { top: 10 }]} />
+
           <SectionTitle title="Comida disponible" />
-          <InfoBlock title="Plato de pollo" content="5 disponibles!" />
-          <InfoBlock
-            title="Retira hoy entre las 3:30 pm - 5:59PM"
-            content="$ 10,00"
-            isLast
-          />
-          <InfoBlock title="Caja sorpresa" content="Último disponible!" />
-          <InfoBlock
-            title="Retira hoy entre las 3:30 pm - 5:59PM"
-            content="$ 7,80"
-            isLast
-          />
+
+          <ContenedorComidaRestaurante datosRestaurante={datosRestaurante} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -176,8 +177,9 @@ const styles = StyleSheet.create({
     width: logoStyleWidth,
     height: logoStyleWidth,
     borderRadius: logoStyleWidth / 2,
-    bottom: "7.5%", //Dimension API: 5 for small screen
     right: 2,
+    marginBottom: logoImageMarginBottom,
+    top: logoImageTop,
   },
   restaurantName: {
     fontWeight: "bold",
@@ -185,7 +187,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   containerTituloRestaurante: {
-    bottom: "10%",
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
@@ -206,11 +207,10 @@ const styles = StyleSheet.create({
 
   addressContainer: {
     paddingHorizontal: 20,
-    paddingVertical: 10,
     borderRadius: 5,
-    marginBottom: 10,
   },
   addressText: {
+    right: addressTextMargin,
     fontSize: 14,
     color: "#34654B",
     fontWeight: "600",
@@ -222,6 +222,7 @@ const styles = StyleSheet.create({
   contenedorCalificacion: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
   },
   calificacion: {
     fontSize: horarioFontSize,
@@ -246,21 +247,6 @@ const styles = StyleSheet.create({
   },
   infoBlockContent: {
     fontSize: 16,
-  },
-  categoriesContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginTop: 10,
-  },
-  categoryButton: {
-    borderWidth: 1,
-    borderColor: "#34654B",
-    borderRadius: 10,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  },
-  categoryButtonText: {
-    color: "#34654B",
   },
 });
 

@@ -28,7 +28,7 @@ const logoStyleWidth = width < widthBreakpoint ? 40 : 50;
 const resautantTitleTop = width < widthBreakpoint ? 8 : 0;
 
 const marginTopDetallesRestaurante = height < heightBreakpoint ? "5%" : "7%";
-const fontSizeNombreRestaurante = height < heightBreakpoint ? 16 : 18;
+const fontSizeNombreRestaurante = height < heightBreakpoint ? 20 : 22;
 const fontSizePrecioAntes = width < widthBreakpoint ? 12 : 14;
 const fontSizePrecioDespues = width < widthBreakpoint ? 16 : 18;
 const topPrecioDespues = height < heightBreakpoint ? "0%" : "2%";
@@ -56,7 +56,7 @@ const InformacionRestaurante = ({
       style={estilos.imagenRestaurante}
     >
       <View style={estilos.contenedorTope}>
-        <TagDisponibilidadProducto size={TagSize} />
+        <TagDisponibilidadProducto size={TagSize} style={{marginTop: 10}}/>
         <View style={{ bottom: 3 }}>
           <BotonFavoritos size={BotonFavoritosSize} />
         </View>
@@ -70,7 +70,7 @@ const InformacionRestaurante = ({
         />
         <View style={estilos.contenedorNombreRestaurante}>
           <Text style={estilos.nombreRestaurante}>
-            {nombre} - <Text style={estilos.cocinaTexto}>{cocina}</Text>
+            {nombre} 
           </Text>
         </View>
       </View>
@@ -101,6 +101,9 @@ const InformacionRestaurante = ({
               </Text>
             </View>
           </View>
+          <View>
+
+          </View>
         </View>
 
         <View style={estilos.contenedorPrecio}>
@@ -128,7 +131,7 @@ const estilos = StyleSheet.create({
     minHeight: 90,
   },
   contenedorTope: {
-    flexDirection: "row-reverse",
+    flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
   },
