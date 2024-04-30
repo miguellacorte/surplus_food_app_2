@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
+import TiempoDeRetiro from "./tiempodeRetiro";
 
 const Precio = ({ precioAntes, precioDescuento }) => (
   <View style={styles.discountContainer}>
@@ -9,7 +10,7 @@ const Precio = ({ precioAntes, precioDescuento }) => (
   </View>
 );
 
-function ContenedorComidaRestaurante( { datosRestaurante } ) {
+function ContenedorComidaRestaurante({ datosRestaurante }) {
   return (
     <View>
       {datosRestaurante[0].Productos.map((item, index) => (
@@ -17,22 +18,29 @@ function ContenedorComidaRestaurante( { datosRestaurante } ) {
           <View style={styles.headerContainer}>
             <Text style={styles.headerTitle}>{item.nombre}</Text>
             <View>
-              <TagDisponibilidadProducto size="medium" cantidadDisponible={item.cantidadDisponible} />
+              <TagDisponibilidadProducto
+                size="medium"
+                cantidadDisponible={item.cantidadDisponible}
+              />
             </View>
           </View>
           <View style={styles.pickupInfoContainer}>
-            <Text style={styles.pickupInfoText}>
-              {item.horario}
-            </Text>
-            <Precio precioAntes={item.precioAntes} precioDescuento={item.precioVenta} />
+            <TiempoDeRetiro
+              dia={item.diaRetiro}
+              hora={item.horaRetiro}
+              textSize={14}
+              containerSize={"80%"}
+            />
+            <Precio
+              precioAntes={item.precioAntes}
+              precioDescuento={item.precioVenta}
+            />
           </View>
           <View style={styles.divider} />
           <Text style={styles.productDescriptionTitle}>
             Descripción de producto:
           </Text>
-          <Text style={styles.productDescriptionText}>
-            {item.descripcion}
-          </Text>
+          <Text style={styles.productDescriptionText}>{item.descripcion}</Text>
         </View>
       ))}
     </View>
@@ -63,7 +71,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "700",
   },
-
   availabilityText: {
     color: "#FFF",
   },
@@ -79,7 +86,7 @@ const styles = StyleSheet.create({
     margin: "auto 0",
     fontSize: 14,
     fontWeight: "500",
-    width: "70%", //Dimensions API
+    width: "30%", //Dimensions API
   },
   discountContainer: {
     color: "#111",

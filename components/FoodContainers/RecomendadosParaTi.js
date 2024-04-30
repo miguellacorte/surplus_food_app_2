@@ -15,6 +15,7 @@ const RecomendadosParaTi = () => {
         style={styles.scrollView}
         horizontal
         contentContainerStyle={styles.scrollViewContent}
+        showsHorizontalScrollIndicator={false}
       >
         {datosRestaurante.slice(0, 10).map((restaurante, index) => (
           <View key={index} style={styles.foodContainer}>

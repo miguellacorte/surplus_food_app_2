@@ -11,6 +11,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Colors } from "../../constants/Colors";
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
 import BotonFavoritos from "../BotonFavoritos";
+import TiempoDeRetiro from "./tiempodeRetiro";
 
 const { width, height } = Dimensions.get("window");
 
@@ -93,7 +94,12 @@ const ContenedorComidaPrincipal = ({
       <View style={estilos.contenedorInfoProducto}>
         <View>
           <View style={estilos.contenedorHorario}>
-            <Text style={estilos.horario}>{Productos[0].horario}</Text>
+            <TiempoDeRetiro
+              dia={Productos[0].diaRetiro}
+              hora={Productos[0].horaRetiro}
+              textSize={horarioFontSize}
+              containerSize={"100%"}
+            />
           </View>
           <View style={estilos.contenedorDistanciaCalificacion}>
             <Text style={estilos.distancia}>{distancia} km</Text>
@@ -194,6 +200,7 @@ const estilos = StyleSheet.create({
   horario: {
     fontSize: horarioFontSize,
     color: "#78828A",
+    fontSize: 12,
   },
   contenedorDistanciaCalificacion: {
     marginTop: "5%",

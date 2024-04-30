@@ -107,7 +107,8 @@ export const datosRestaurante = [
         precioAntes: "$ 10,00",
         precioVenta: "$ 4,80",
         cantidadDisponible: "5",
-        horario: "Retira hoy entre las 3:30 pm - 5:59PM",
+        diaRetiro: 'hoy',
+        horaRetiro: "3:30 pm - 5:59PM",
         descripcion:
           "2x1 en pollo a la brasa, acompañado de papas fritas y ensalada",
         categoriaProducto: ["Plato principal"],
@@ -117,7 +118,8 @@ export const datosRestaurante = [
         precioAntes: "$ 18,00",
         precioVenta: "$ 9,00",
         cantidadDisponible: "1",
-        horario: "Retira hoy entre las 10:30 pm - 12:59PM",
+        diaRetiro: 'mañana',
+        horaRetiro: "10:30 pm - 12:59PM",
         descripcion:
           "Caja sorpresa con 2 platos principales, 2 postres y 2 bebidas",
         categoriaProducto: ["Caja sorpresa"],
@@ -153,7 +155,8 @@ export const datosRestaurante = [
         precioAntes: "$ 8.00",
         precioVenta: "$ 5.60",
         cantidadDisponible: "15",
-        horario: "11:00am - 2:00pm",
+        diaRetiro: 'mañana',
+        horaRetiro: "11:00am - 2:00pm",
         descripcion:
           "Hamburguesa con doble carne, queso, y nuestras salsas secretas",
         categoriaProducto: ["Comida rápida"],
@@ -163,7 +166,7 @@ export const datosRestaurante = [
         precioAntes: "$ 4.00",
         precioVenta: "$ 2.80",
         cantidadDisponible: "20",
-        horario: "2:00pm - 6:00pm",
+        horaRetiro: "2:00pm - 6:00pm",
         descripcion:
           "Cheesecake cremoso con una capa generosa de fresas frescas",
         categoriaProducto: ["Postre"],
@@ -195,7 +198,8 @@ export const datosRestaurante = [
         precioAntes: "$ 3.00",
         precioVenta: "$ 1.80",
         cantidadDisponible: "25",
-        horario: "8:00am - 12:00pm",
+        diaRetiro: 'hoy',
+        horaRetiro: "8:00am - 12:00pm",
         descripcion:
           "Croissant recién horneado con relleno de crema de almendras",
         categoriaProducto: ["Panadería"],
@@ -205,7 +209,8 @@ export const datosRestaurante = [
         precioAntes: "$ 2.50",
         precioVenta: "$ 1.50",
         cantidadDisponible: "30",
-        horario: "8:00am - 12:00pm",
+        diaRetiro: 'mañana',
+        horaRetiro: "8:00am - 12:00pm",
         descripcion: "Capuchino con espuma perfecta y un toque de canela",
         categoriaProducto: ["Desayuno"],
       },
@@ -236,7 +241,8 @@ export const datosRestaurante = [
         precioAntes: "$ 12.00",
         precioVenta: "$ 8.00",
         cantidadDisponible: "10",
-        horario: "10:00am - 4:00pm",
+        diaRetiro: 'mañana',
+        horaRetiro: "10:00am - 4:00pm",
         descripcion:
           "Torta de chocolate húmeda con capas de ganache y sprinkles de chocolate",
         categoriaProducto: ["Postre"],
@@ -246,7 +252,8 @@ export const datosRestaurante = [
         precioAntes: "$ 2.00",
         precioVenta: "$ 1.20",
         cantidadDisponible: "30",
-        horario: "7:00am - 11:00am",
+        diaRetiro: 'mañana',
+        horaRetiro: "7:00am - 11:00am",
         descripcion:
           "Croissant francés tradicional, ligero y aireado con exterior crujiente",
         categoriaProducto: ["Panadería"],
@@ -277,7 +284,8 @@ export const datosRestaurante = [
         precioAntes: "$ 6.00",
         precioVenta: "$ 3.60",
         cantidadDisponible: "20",
-        horario: "12:00pm - 3:00pm",
+        diaRetiro: 'hoy',
+        horaRetiro: "12:00pm - 3:00pm",
         descripcion:
           "Emparedado de pollo grillado con lechuga, tomate y mayonesa en pan artesanal",
         categoriaProducto: ["Comida rápida"],
@@ -287,7 +295,8 @@ export const datosRestaurante = [
         precioAntes: "$ 4.00",
         precioVenta: "$ 2.40",
         cantidadDisponible: "25",
-        horario: "2:00pm - 6:00pm",
+        diaRetiro: 'hoy',
+        horaRetiro: "2:00pm - 6:00pm",
         descripcion:
           "Batido de frutas naturales, selección del día según disponibilidad",
         categoriaProducto: ["Snacks y merienda"],
@@ -319,7 +328,8 @@ export const datosRestaurante = [
         precioAntes: "$ 4.00",
         precioVenta: "$ 2.50",
         cantidadDisponible: "15",
-        horario: "6:00am - 10:00am",
+        diaRetiro: 'hoy',
+        horaRetiro: "6:00am - 10:00am",
         descripcion:
           "Arepa rellena de queso de mano y pernil, acompañada de café con leche",
         categoriaProducto: ["Desayuno"],
@@ -329,7 +339,8 @@ export const datosRestaurante = [
         precioAntes: "$ 3.00",
         precioVenta: "$ 2.00",
         cantidadDisponible: "20",
-        horario: "6:00am - 10:00am",
+        diaRetiro: 'hoy',
+        horaRetiro: "6:00am - 10:00am",
         descripcion:
           "Pan de jamón tradicional, relleno de jamón ahumado, pasas y aceitunas",
         categoriaProducto: ["Panadería"],
@@ -361,7 +372,8 @@ export const datosRestaurante = [
         precioAntes: "$ 12.00",
         precioVenta: "$ 7.20",
         cantidadDisponible: "15",
-        horario: "11:00am - 3:00pm",
+        diaRetiro: 'hoy',
+        horaRetiro: "11:00am - 3:00pm",
         descripcion:
           "Bowl nutritivo de quinoa con pollo grillado, aguacate y salsa de yogur",
         categoriaProducto: ["Plato principal"],
@@ -371,7 +383,8 @@ export const datosRestaurante = [
         precioAntes: "$ 6.00",
         precioVenta: "$ 3.60",
         cantidadDisponible: "20",
-        horario: "1:00pm - 5:00pm",
+        diaRetiro: 'hoy',
+        horaRetiro: "1:00pm - 5:00pm",
         descripcion:
           "Mousse ligero de mango con un toque de jengibre fresco y menta",
         categoriaProducto: ["Postre"],
@@ -402,7 +415,8 @@ export const datosRestaurante = [
         precioAntes: "$ 10.00",
         precioVenta: "$ 6.00",
         cantidadDisponible: "10",
-        horario: "12:00pm - 4:00pm",
+        diaRetiro: 'hoy',
+        horaRetiro: "12:00pm - 4:00pm",
         descripcion:
           "Plato tradicional venezolano con arroz, carne mechada, plátano y frijoles",
         categoriaProducto: ["Plato principal"],
@@ -412,7 +426,8 @@ export const datosRestaurante = [
         precioAntes: "$ 3.00",
         precioVenta: "$ 1.80",
         cantidadDisponible: "50",
-        horario: "All day",
+        diaRetiro: 'hoy',
+        horaRetiro: "All day",
         descripcion:
           "Deditos de queso envueltos en masa dorada y crujiente, acompañados de salsa tártara",
         categoriaProducto: ["Snacks y merienda"],
@@ -443,7 +458,8 @@ export const datosRestaurante = [
         precioAntes: "$ 4.00",
         precioVenta: "$ 2.40",
         cantidadDisponible: "30",
-        horario: "10:00am - 2:00pm",
+        diaRetiro: 'hoy',
+        horaRetiro: "10:00am - 2:00pm",
         descripcion:
           "Hot dog con salchicha de res, cebolla caramelizada, queso cheddar y salsa especial",
         categoriaProducto: ["Comida rápida"],
@@ -453,7 +469,8 @@ export const datosRestaurante = [
         precioAntes: "$ 2.00",
         precioVenta: "$ 1.20",
         cantidadDisponible: "40",
-        horario: "8:00am - 11:00am",
+        diaRetiro: 'hoy',
+        horaRetiro: "8:00am - 11:00am",
         descripcion:
           "Empanada de masa crujiente rellena de carne picada y especias",
         categoriaProducto: ["Desayuno"],
