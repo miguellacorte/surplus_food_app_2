@@ -12,6 +12,7 @@ import { Colors } from "../../constants/Colors";
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
 import BotonFavoritos from "../BotonFavoritos";
 import TiempoDeRetiro from "./tiempodeRetiro";
+import CalificacionesMiniatura from "./calificacionesMiniatura";
 
 const { width, height } = Dimensions.get("window");
 
@@ -34,6 +35,7 @@ const fontSizePrecioAntes = width < widthBreakpoint ? 12 : 14;
 const fontSizePrecioDespues = width < widthBreakpoint ? 16 : 18;
 const topPrecioDespues = height < heightBreakpoint ? "0%" : "2%";
 const contenedorPrecioDerecha = width < widthBreakpoint ? 0 : 10;
+const bottomContenedorHorario = width < widthBreakpoint ? 0 : 3;
 
 const horarioFontSize = width < widthBreakpoint ? 12 : 14;
 const contenedorInfoProductoHeight = width < widthBreakpoint ? 50 : 60;
@@ -104,22 +106,9 @@ const ContenedorComidaPrincipal = ({
           <View style={estilos.contenedorDistanciaCalificacion}>
             <Text style={estilos.distancia}>{distancia} km</Text>
             <Text style={estilos.separador}>|</Text>
-            <View style={estilos.contenedorCalificacion}>
-              <FontAwesome
-                name="star"
-                size={12}
-                color={Colors.Amarillo}
-                style={{ margin: 3 }}
-              />
-              <Text style={estilos.calificacion}>{calificaciones.length}</Text>
-              <Text style={estilos.cantidadRevisiones}>
-                {" "}
-                ({ordenesCantidad})
-              </Text>
-            </View>
+            <CalificacionesMiniatura calificaciones={calificaciones} />
           </View>
         </View>
-
         <View style={estilos.contenedorPrecio}>
           <Text style={estilos.precioAntes}>{Productos[0].precioAntes}</Text>
           <Text style={estilos.precioDespues}>{Productos[0].precioVenta}</Text>
@@ -196,6 +185,7 @@ const estilos = StyleSheet.create({
   contenedorHorario: {
     maxWidth: contenedorHorarioWidth,
     minWidth: 100,
+    bottom: bottomContenedorHorario,
   },
   horario: {
     fontSize: horarioFontSize,
@@ -213,13 +203,7 @@ const estilos = StyleSheet.create({
   separador: {
     marginHorizontal: 5,
   },
-  contenedorCalificacion: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  calificacion: {
-    fontSize: horarioFontSize,
-  },
+
   cantidadRevisiones: {
     fontSize: 12,
     marginLeft: 2,

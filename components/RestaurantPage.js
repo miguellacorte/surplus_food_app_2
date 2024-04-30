@@ -16,6 +16,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CategoriesContainer from "./UI/CategoriesContainer";
 import ContenedorComidaRestaurante from "./UI/ContenedorComidaRestaurante";
 import { datosRestaurante } from "../data/datosRestaurante";
+import CalificacionesMiniatura from "./UI/calificacionesMiniatura";
 
 const { width, height } = Dimensions.get("window");
 
@@ -99,60 +100,30 @@ function RestaurantPage() {
           <Text style={styles.distance}>1.5 Km de distancia</Text>
           <View>
             <View style={styles.contenedorCalificacion}>
+              <CalificacionesMiniatura
+                calificaciones={datosRestaurante[0].calificaciones}
+              />
               <View
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  justifyContent: "stretch",
+                  left: "5%",
                 }}
               >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <FontAwesome
-                    name="star"
-                    size={12}
-                    color={Colors.Amarillo}
-                    style={{ margin: 3 }}
-                  />
-                  <Text style={styles.calificacion}>
-                    {datosRestaurante[0].calificacion}
-                  </Text>
-                  <Text style={styles.cantidadRevisiones}>
-                    {" "}
-                    ({datosRestaurante[0].cantidadRevisiones})
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      left: "10%",
-                    }}
-                  >
-                    <Ionicons
-                      name="bag-check-outline"
-                      size={14}
-                      color="black"
-                    />
-                    <Text> {datosRestaurante[0].ordenesCantidad}+</Text>
-                  </View>
-                </View>
+                <Ionicons name="bag-check-outline" size={14} color="black" />
+                <Text> {datosRestaurante[0].ordenesCantidad}+</Text>
+              </View>
 
-                <View
-                  style={{
-                    flexDirection: "row-reverse",
-                    flex: 1,
-                    marginLeft: 5,
-                    width: 10,
-                  }}
-                >
-                  <View style={{ borderBottomWidth: 1 }}>
-                    <Text style={{ fontWeight: "600" }}>Reseñas</Text>
-                  </View>
+              <View
+                style={{
+                  flexDirection: "row-reverse",
+                  flex: 1,
+                  marginLeft: 5,
+                  width: 10,
+                }}
+              >
+                <View style={{ borderBottomWidth: 1 }}>
+                  <Text style={{ fontWeight: "600" }}>Reseñas</Text>
                 </View>
               </View>
             </View>
