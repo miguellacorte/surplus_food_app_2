@@ -8,9 +8,9 @@ import {
   Dimensions,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Colors } from "../constants/Colors";
-import TagDisponibilidadProducto from "./UI/TagDisponibilidadProducto";
-import BotonFavoritos from "./BotonFavoritos";
+import { Colors } from "../../constants/Colors";
+import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
+import BotonFavoritos from "../BotonFavoritos";
 
 const { width, height } = Dimensions.get("window");
 
@@ -25,10 +25,10 @@ const imagenRestauranteHeight = height < heightBreakpoint ? 100 : 120;
 const detallesRestauranteWidth = width < widthBreakpoint ? 140 : 190;
 const contenedorHorarioWidth = width < widthBreakpoint ? 155 : 190;
 const logoStyleWidth = width < widthBreakpoint ? 40 : 50;
-const resautantTitleTop = width < widthBreakpoint ? 8 : 0;
+const resautantTitleTop = width < widthBreakpoint ? 2 : 0;
 
 const marginTopDetallesRestaurante = height < heightBreakpoint ? "5%" : "7%";
-const fontSizeNombreRestaurante = height < heightBreakpoint ? 20 : 22;
+const fontSizeNombreRestaurante = height < heightBreakpoint ? 18 : 22;
 const fontSizePrecioAntes = width < widthBreakpoint ? 12 : 14;
 const fontSizePrecioDespues = width < widthBreakpoint ? 16 : 18;
 const topPrecioDespues = height < heightBreakpoint ? "0%" : "2%";
@@ -37,17 +37,14 @@ const contenedorPrecioDerecha = width < widthBreakpoint ? 0 : 10;
 const horarioFontSize = width < widthBreakpoint ? 12 : 14;
 const contenedorInfoProductoHeight = width < widthBreakpoint ? 50 : 60;
 
-const InformacionRestaurante = ({
+const ContenedorComidaPrincipal = ({
   nombre,
-  cocina,
   distancia,
-  calificacion,
-  cantidadRevisiones,
-  horario,
-  precioAntes,
-  precioDespues,
+  calificaciones,
+  ordenesCantidad,
   urlImagenLogo,
   urlImagenPortada,
+  Productos,
 }) => (
   <View style={estilos.contenedorTarjeta}>
     <ImageBackground
@@ -55,8 +52,24 @@ const InformacionRestaurante = ({
       source={{ uri: urlImagenPortada }}
       style={estilos.imagenRestaurante}
     >
+      <View
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(128,128,128,0.5)",
+        }}
+      />
       <View style={estilos.contenedorTope}>
-        <TagDisponibilidadProducto size={TagSize} style={{marginTop: 10}}/>
+        <View style={{ marginTop: 10, marginLeft: 10 }}>
+          <TagDisponibilidadProducto
+            size={TagSize}
+            cantidadDisponible={Productos[0].cantidadDisponible}
+          />
+        </View>
+
         <View style={{ bottom: 3 }}>
           <BotonFavoritos size={BotonFavoritosSize} />
         </View>
@@ -69,20 +82,18 @@ const InformacionRestaurante = ({
           style={estilos.miniaturaRestaurante}
         />
         <View style={estilos.contenedorNombreRestaurante}>
-          <Text style={estilos.nombreRestaurante}>
-            {nombre} 
-          </Text>
+          <Text style={estilos.nombreRestaurante}>{nombre}</Text>
         </View>
       </View>
     </ImageBackground>
 
     <View style={estilos.detallesProducto}>
-      <Text style={estilos.nombrePlato}>Plato de pollo</Text>
+      <Text style={estilos.nombrePlato}>{Productos[0].nombre}</Text>
 
       <View style={estilos.contenedorInfoProducto}>
         <View>
           <View style={estilos.contenedorHorario}>
-            <Text style={estilos.horario}>{horario}</Text>
+            <Text style={estilos.horario}>{Productos[0].horario}</Text>
           </View>
           <View style={estilos.contenedorDistanciaCalificacion}>
             <Text style={estilos.distancia}>{distancia} km</Text>
@@ -94,21 +105,18 @@ const InformacionRestaurante = ({
                 color={Colors.Amarillo}
                 style={{ margin: 3 }}
               />
-              <Text style={estilos.calificacion}>{calificacion}</Text>
+              <Text style={estilos.calificacion}>{calificaciones.length}</Text>
               <Text style={estilos.cantidadRevisiones}>
                 {" "}
-                ({cantidadRevisiones})
+                ({ordenesCantidad})
               </Text>
             </View>
-          </View>
-          <View>
-
           </View>
         </View>
 
         <View style={estilos.contenedorPrecio}>
-          <Text style={estilos.precioAntes}>{precioAntes}</Text>
-          <Text style={estilos.precioDespues}>{precioDespues}</Text>
+          <Text style={estilos.precioAntes}>{Productos[0].precioAntes}</Text>
+          <Text style={estilos.precioDespues}>{Productos[0].precioVenta}</Text>
         </View>
       </View>
     </View>
@@ -222,35 +230,10 @@ const estilos = StyleSheet.create({
   precioDespues: {
     fontSize: fontSizePrecioDespues,
     fontWeight: "bold",
-    fontWeight:'800',
-    color: 'black',
+    fontWeight: "800",
+    color: "black",
     top: topPrecioDespues,
   },
 });
 
-export default function ContenedorPrincipalComida() {
-  const datosRestaurante = [
-    {
-      nombre: "El Coyuco",
-      cocina: "Pollo en brasa y parrilla",
-      distancia: "1.5",
-      calificacion: "4.8",
-      cantidadRevisiones: "121",
-      horario: "Retira hoy entre las 10:30pm - 11:59pm",
-      precioAntes: "$ 10,00",
-      precioDespues: "$ 4,80",
-      urlImagenLogo:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/d49a502485ec5cfa23e5bb59bc169df6a240c31ae56c86b3ad9ef8f1e5bb28ba?apiKey=64cf540a2469411fb888e6001ea1b7f2&",
-      urlImagenPortada:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/164d420ddd7ad34c6edf2890f7912b900b98b29f58d00cd7cb13fba47b580fcb?apiKey=64cf540a2469411fb888e6001ea1b7f2&",
-    },
-  ];
-
-  return (
-    <View style={{ flex: 1, alignItems: "center" }}>
-      {datosRestaurante.map((restaurante, indice) => (
-        <InformacionRestaurante key={indice} {...restaurante} />
-      ))}
-    </View>
-  );
-}
+export default ContenedorComidaPrincipal;

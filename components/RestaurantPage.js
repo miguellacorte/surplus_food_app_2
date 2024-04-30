@@ -26,10 +26,9 @@ const imagenRestauranteHeight = height < heightBreakpoint ? 160 : 180;
 const logoStyleWidth = width < widthBreakpoint ? 70 : 90;
 const horarioFontSize = width < widthBreakpoint ? 12 : 14;
 const bottomContainerMargin = height < heightBreakpoint ? "5%" : "7.5%";
-const resenasMargin = width < widthBreakpoint ? "31%" : "33%";
 const logoImageMarginBottom = height < heightBreakpoint ? 10 : 30;
 const logoImageTop = height < heightBreakpoint ? 10 : 25;
-const addressTextMargin = width < widthBreakpoint ? 10 : 18;
+const addressTextMargin = width < widthBreakpoint ? 8 : 12;
 
 const AddressItem = ({ address }) => (
   <View style={styles.addressContainer}>
@@ -42,6 +41,12 @@ const DireccionRestaurant = () => {
     <View style={styles.DireccionContainer}>
       <FontAwesome name="map-marker" size={16} color={Colors.VerdeOscuro} />
       <AddressItem address={datosRestaurante[0].direccion} />
+      <Ionicons
+        name="chevron-forward"
+        size={24}
+        color={Colors.VerdeOscuro}
+        style={{ right: 16 }}
+      />
     </View>
   );
 };
@@ -74,7 +79,7 @@ function RestaurantPage() {
             source={{ uri: datosRestaurante[0].urlImagenPortada }}
             style={[styles.restaurantImage, { padding: 0 }]}
           >
-            <Text> {"<"} </Text>
+            <Text> {"< GO BACK"} </Text>
           </ImageBackground>
         </View>
         <View style={{ paddingHorizontal: 20, bottom: bottomContainerMargin }}>
@@ -125,7 +130,7 @@ function RestaurantPage() {
                     style={{
                       flexDirection: "row",
                       alignItems: "center",
-                      left: "7%",
+                      left: "10%",
                     }}
                   >
                     <Ionicons
@@ -133,7 +138,7 @@ function RestaurantPage() {
                       size={14}
                       color="black"
                     />
-                    <Text> {datosRestaurante[0].ordenesCantidad} +</Text>
+                    <Text> {datosRestaurante[0].ordenesCantidad}+</Text>
                   </View>
                 </View>
 
@@ -142,11 +147,12 @@ function RestaurantPage() {
                     flexDirection: "row-reverse",
                     flex: 1,
                     marginLeft: 5,
+                    width: 10,
                   }}
                 >
-                  <Text style={{ fontWeight: "500", borderBottomWidth: 1 }}>
-                    Reseñas
-                  </Text>
+                  <View style={{ borderBottomWidth: 1 }}>
+                    <Text style={{ fontWeight: "600" }}>Reseñas</Text>
+                  </View>
                 </View>
               </View>
             </View>

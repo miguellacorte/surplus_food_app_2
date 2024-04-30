@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ImageCarousel from "../../components/ImageCarousel";
+import ImageCarousel from "../../components/UI/ImageCarousel";
 import RecomendadosParaTi from "../../components/FoodContainers/RecomendadosParaTi";
 
 export default function Tab() {

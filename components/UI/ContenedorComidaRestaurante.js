@@ -18,7 +18,6 @@ function ContenedorComidaRestaurante( { datosRestaurante } ) {
             <Text style={styles.headerTitle}>{item.nombre}</Text>
             <View>
               <TagDisponibilidadProducto size="medium" cantidadDisponible={item.cantidadDisponible} />
-              {console.log(item.cantidadDisponible)}
             </View>
           </View>
           <View style={styles.pickupInfoContainer}>
@@ -29,7 +28,7 @@ function ContenedorComidaRestaurante( { datosRestaurante } ) {
           </View>
           <View style={styles.divider} />
           <Text style={styles.productDescriptionTitle}>
-            Descripción de producto
+            Descripción de producto:
           </Text>
           <Text style={styles.productDescriptionText}>
             {item.descripcion}
@@ -106,7 +105,7 @@ const styles = StyleSheet.create({
   },
   productDescriptionText: {
     color: "#000",
-    marginTop: 19,
+    marginTop: 10,
     fontSize: 12,
     fontWeight: "500",
   },
