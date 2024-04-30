@@ -17,6 +17,7 @@ import CategoriesContainer from "./UI/CategoriesContainer";
 import ContenedorComidaRestaurante from "./UI/ContenedorComidaRestaurante";
 import { datosRestaurante } from "../data/datosRestaurante";
 import CalificacionesMiniatura from "./UI/calificacionesMiniatura";
+import { Link } from "expo-router";
 
 const { width, height } = Dimensions.get("window");
 
@@ -123,7 +124,9 @@ function RestaurantPage() {
                 }}
               >
                 <View style={{ borderBottomWidth: 1 }}>
-                  <Text style={{ fontWeight: "600" }}>Reseñas</Text>
+                  <Link href="calificaciones">
+                    <Text style={{ fontWeight: "600" }}>Reseñas</Text>
+                  </Link>
                 </View>
               </View>
             </View>
