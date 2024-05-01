@@ -21,7 +21,7 @@ const RetirarParaCenar = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Retira para cenar</Text>
+        <Text style={styles.headerText}>Retirar para cenar</Text>
         <FontAwesome name="chevron-right" size={12} color="black" />
       </View>
       <ScrollView

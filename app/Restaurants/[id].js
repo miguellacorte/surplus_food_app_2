@@ -152,7 +152,6 @@ function RestaurantPage() {
               </View>
             </View>
           </View>
-          <CategoriesContainer categories={restaurante.categoria} />
           <View style={[styles.divider, { top: 10 }]} />
 
           <SectionTitle title="Comida disponible" />

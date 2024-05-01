@@ -6,22 +6,22 @@ import { datosRestaurante } from "../../data/datosRestaurante";
 import { router } from "expo-router";
 
 const RetirarParaDesayuno = () => {
-    const filteredRestaurants = datosRestaurante
-      .map((restaurant) => ({
-        ...restaurant,
-        Productos: restaurant.Productos.filter(
-          (product) =>
-            product.diaRetiro === "hoy" &&
-            product.horaRetiro &&
-            parseInt(product.horaRetiro.split("-")[1].split(":")[0]) >= 15 // 15:00 hora de pickup para cenar
-        ),
-      }))
-      .filter((restaurant) => restaurant.Productos.length > 0);
+  const filteredRestaurants = datosRestaurante
+    .map((restaurant) => ({
+      ...restaurant,
+      Productos: restaurant.Productos.filter(
+        (product) =>
+          product.diaRetiro === "mañana" &&
+          product.horaRetiro &&
+          parseInt(product.horaRetiro.split("-")[1].split(":")[0]) >= 12 // 12:00: hora hasta que se puede retirar
+      ),
+    }))
+    .filter((restaurant) => restaurant.Productos.length > 0);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Retira para cenar</Text>
+        <Text style={styles.headerText}>Retirar mañana para desayunar</Text>
         <FontAwesome name="chevron-right" size={12} color="black" />
       </View>
       <ScrollView

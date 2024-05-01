@@ -6,18 +6,32 @@ import LlevateloAntesQueSeAcabe from "../../components/FoodContainers/LlevateloA
 import RetirarParaCenar from "../../components/FoodContainers/RetirarParaCenar";
 import RetirarParaDesayuno from "../../components/FoodContainers/RetirarParaDesayuno";
 import Ubicacion from "../../components/UI/Ubicacion";
+import ImageBanner from "../../components/UI/ImageBanner";
+import CajaSorpresa from "../../components/FoodContainers/CajaSorpresa";
+import CercaTuyo from "../../components/FoodContainers/CercaTuyo";
 
-const ghostSpacePaddingFix = "8%";
-const ghostSpacePaddingFix2 = "16%";
-const ghostSpacePaddingFix3 = "22%";
+const ghostSpacePaddingFix = "4%";
+const ghostSpacePaddingFix2 = "8%";
+const ghostSpacePaddingFix3 = "12%";
+const ghostSpacePaddingFix4 = "18%";
+const ghostSpacePaddingFix5 = "22%";
+const ghostSpacePaddingFix6 = "26%";
+
+
+//Fix styling this container:
+  // components weird dimensioning
+  // container length
+//Fix retiro component
+
 
 export default function Tab() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-      <View>
+        <View>
           <Ubicacion />
-      </View>
+        </View>
+
         <View>
           <ImageCarousel />
         </View>
@@ -31,15 +45,32 @@ export default function Tab() {
           >
             <LlevateloAntesQueSeAcabe />
           </View>
-
           <View
             style={[styles.foodContainers, { bottom: ghostSpacePaddingFix2 }]}
+          >
+            <CajaSorpresa />
+          </View>
+
+          <View
+            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix3 }]}
+          >
+            <ImageBanner />
+          </View>
+
+          <View
+            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix4 }]}
+          >
+            <CercaTuyo />
+          </View>
+
+          <View
+            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix5 }]}
           >
             <RetirarParaCenar />
           </View>
 
           <View
-            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix3 }]}
+            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix6 }]}
           >
             <RetirarParaDesayuno />
           </View>
@@ -50,7 +81,9 @@ export default function Tab() {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    height: "100%",
+  },
   recommendationContainers: {
     marginTop: 20,
     padding: 0,
@@ -62,5 +95,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     marginTop: 0,
+    height: "100%",
   },
 });

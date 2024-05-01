@@ -5,22 +5,17 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { datosRestaurante } from "../../data/datosRestaurante";
 import { router } from "expo-router";
 
-const LlevateloAntesQueSeAcabe = () => {
-  let filteredRestaurants = datosRestaurante
-    .map((restaurant) => ({
-      ...restaurant,
-      Productos: restaurant.Productos.filter(
-        (product) => parseInt(product.cantidadDisponible) <= 3
-      ),
-    }))
-    .filter((restaurant) => restaurant.Productos.length > 0);
-
-  filteredRestaurants = filteredRestaurants.sort(() => Math.random() - 0.5);
+const CajaSorpresa = () => {
+    let filteredRestaurants = datosRestaurante.filter(restaurant =>
+        restaurant.Productos.some(product =>
+          product.categoria.includes("Caja sorpresa")
+        )
+      );
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Llévatelo antes que se acabe!</Text>
+        <Text style={styles.headerText}>Caja Sorpresa</Text>
         <FontAwesome name="chevron-right" size={12} color="black" />
       </View>
       <ScrollView
@@ -88,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LlevateloAntesQueSeAcabe;
+export default CajaSorpresa;
