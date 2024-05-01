@@ -1,5 +1,4 @@
 import { Stack } from "expo-router/stack";
-import RestaurantPage from "./Restaurants/[id]";
 
 export default function AppLayout() {
   return (

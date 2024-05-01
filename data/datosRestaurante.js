@@ -125,7 +125,7 @@ export const datosRestaurante = [
         horaRetiro: "07:15 - 11:45",
         descripcion:
           "Caja sorpresa con 2 platos principales, 2 postres y 2 bebidas",
-        categoriaProducto: ["Caja sorpresa"],
+        categoriaProducto: ["Caja sorpresa", 'Plato principal', 'Postre']
       },
     ],
   },

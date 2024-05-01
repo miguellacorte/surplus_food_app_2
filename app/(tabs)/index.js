@@ -4,14 +4,20 @@ import ImageCarousel from "../../components/UI/ImageCarousel";
 import RecomendadosParaTi from "../../components/FoodContainers/RecomendadosParaTi";
 import LlevateloAntesQueSeAcabe from "../../components/FoodContainers/LlevateloAntesQueSeAcabe";
 import RetirarParaCenar from "../../components/FoodContainers/RetirarParaCenar";
+import RetirarParaDesayuno from "../../components/FoodContainers/RetirarParaDesayuno";
+import Ubicacion from "../../components/UI/Ubicacion";
 
-const ghostSpacePaddingFix = '8%'
-const ghostSpacePaddingFix2 = '16%'
+const ghostSpacePaddingFix = "8%";
+const ghostSpacePaddingFix2 = "16%";
+const ghostSpacePaddingFix3 = "22%";
 
 export default function Tab() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
+      <View>
+          <Ubicacion />
+      </View>
         <View>
           <ImageCarousel />
         </View>
@@ -20,14 +26,23 @@ export default function Tab() {
           <View style={styles.foodContainers}>
             <RecomendadosParaTi />
           </View>
-          <View style={[styles.foodContainers, {bottom: ghostSpacePaddingFix}]}>
+          <View
+            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix }]}
+          >
             <LlevateloAntesQueSeAcabe />
           </View>
-         
-          <View style={[styles.foodContainers, {bottom: ghostSpacePaddingFix2}]}>
-          <RetirarParaCenar />
+
+          <View
+            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix2 }]}
+          >
+            <RetirarParaCenar />
           </View>
 
+          <View
+            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix3 }]}
+          >
+            <RetirarParaDesayuno />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -35,16 +50,15 @@ export default function Tab() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-  },
-  recommendationContainers: { 
+  container: {},
+  recommendationContainers: {
     marginTop: 20,
-    padding: 0
+    padding: 0,
   },
   foodContainers: {
     marginTop: 20,
     height: 400,
-    bottom: 'auto'
+    bottom: "auto",
   },
   scrollView: {
     marginTop: 0,

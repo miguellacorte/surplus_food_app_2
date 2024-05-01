@@ -5,24 +5,23 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { datosRestaurante } from "../../data/datosRestaurante";
 import { router } from "expo-router";
 
-const LlevateloAntesQueSeAcabe = () => {
-  
-  //Filtrar data
-  let filteredRestaurants = datosRestaurante
-    .map(restaurant => ({
-      ...restaurant,
-      Productos: restaurant.Productos.filter(
-        product => parseInt(product.cantidadDisponible) <= 3
-      ),
-    }))
-    .filter(restaurant => restaurant.Productos.length > 0);
-
-    filteredRestaurants = filteredRestaurants.sort(() => Math.random() - 0.5);
+const RetirarParaDesayuno = () => {
+    const filteredRestaurants = datosRestaurante
+      .map((restaurant) => ({
+        ...restaurant,
+        Productos: restaurant.Productos.filter(
+          (product) =>
+            product.diaRetiro === "hoy" &&
+            product.horaRetiro &&
+            parseInt(product.horaRetiro.split("-")[1].split(":")[0]) >= 15 // 15:00 hora de pickup para cenar
+        ),
+      }))
+      .filter((restaurant) => restaurant.Productos.length > 0);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Llevatelo antes que se acabe!</Text>
+        <Text style={styles.headerText}>Retira para cenar</Text>
         <FontAwesome name="chevron-right" size={12} color="black" />
       </View>
       <ScrollView
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginHorizontal: 22,
-    marginBottom: 20,
+    marginBottom: 0,
   },
   headerText: {
     fontSize: 20,
@@ -90,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LlevateloAntesQueSeAcabe;
+export default RetirarParaDesayuno;

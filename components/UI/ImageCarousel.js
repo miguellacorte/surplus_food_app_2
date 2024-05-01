@@ -12,6 +12,7 @@ import {
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
+
 const carouselWidth = windowWidth - 20;
 const imageWidth = carouselWidth;
 const dynamicHeight = windowHeight < 667 ? 130 : 175;
