@@ -3,8 +3,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ImageCarousel from "../../components/UI/ImageCarousel";
 import RecomendadosParaTi from "../../components/FoodContainers/RecomendadosParaTi";
 import LlevateloAntesQueSeAcabe from "../../components/FoodContainers/LlevateloAntesQueSeAcabe";
+import RetirarParaCenar from "../../components/FoodContainers/RetirarParaCenar";
 
-const ghostSpacePaddingFix = '10%'
+const ghostSpacePaddingFix = '8%'
+const ghostSpacePaddingFix2 = '16%'
 
 export default function Tab() {
   return (
@@ -22,6 +24,10 @@ export default function Tab() {
             <LlevateloAntesQueSeAcabe />
           </View>
          
+          <View style={[styles.foodContainers, {bottom: ghostSpacePaddingFix2}]}>
+          <RetirarParaCenar />
+          </View>
+
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -36,6 +42,7 @@ const styles = StyleSheet.create({
     padding: 0
   },
   foodContainers: {
+    marginTop: 20,
     height: 400,
     bottom: 'auto'
   },

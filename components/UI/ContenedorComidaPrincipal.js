@@ -27,7 +27,7 @@ const contenedorHorarioWidth = width < widthBreakpoint ? 155 : 190;
 const logoStyleWidth = width < widthBreakpoint ? 40 : 50;
 
 const marginTopDetallesRestaurante = height < heightBreakpoint ? "5%" : "7%";
-const fontSizeNombreRestaurante = height < heightBreakpoint ? 18 : 22;
+const fontSizeNombreRestaurante = height < heightBreakpoint ? 15 : 18;
 const fontSizePrecioAntes = width < widthBreakpoint ? 12 : 14;
 const fontSizePrecioDespues = width < widthBreakpoint ? 16 : 18;
 const topPrecioDespues = height < heightBreakpoint ? "0%" : "2%";

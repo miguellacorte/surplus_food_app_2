@@ -66,10 +66,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginHorizontal: 22,
-    marginBottom: 0,
+    marginBottom: 20,
   },
   headerText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 0,
   },
