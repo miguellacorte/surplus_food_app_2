@@ -7,8 +7,6 @@ import {
   Text,
   Dimensions,
 } from "react-native";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Colors } from "../../constants/Colors";
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
 import BotonFavoritos from "../BotonFavoritos";
 import TiempoDeRetiro from "./tiempodeRetiro";
@@ -27,7 +25,6 @@ const imagenRestauranteHeight = height < heightBreakpoint ? 100 : 120;
 const detallesRestauranteWidth = width < widthBreakpoint ? 140 : 190;
 const contenedorHorarioWidth = width < widthBreakpoint ? 155 : 190;
 const logoStyleWidth = width < widthBreakpoint ? 40 : 50;
-const resautantTitleTop = width < widthBreakpoint ? 2 : 0;
 
 const marginTopDetallesRestaurante = height < heightBreakpoint ? "5%" : "7%";
 const fontSizeNombreRestaurante = height < heightBreakpoint ? 18 : 22;
@@ -44,7 +41,6 @@ const ContenedorComidaPrincipal = ({
   nombre,
   distancia,
   calificaciones,
-  ordenesCantidad,
   urlImagenLogo,
   urlImagenPortada,
   Productos,
@@ -62,7 +58,7 @@ const ContenedorComidaPrincipal = ({
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: "rgba(128,128,128,0.5)",
+          backgroundColor: "rgba(120,120,120,0.5)",
         }}
       />
       <View style={estilos.contenedorTope}>
@@ -145,7 +141,8 @@ const estilos = StyleSheet.create({
     paddingHorizontal: 5,
     maxWidth: detallesRestauranteWidth,
     minWidth: 150,
-    top: resautantTitleTop,
+    top: 0,
+    bottom: 2,
   },
   miniaturaRestaurante: {
     width: logoStyleWidth,

@@ -10,10 +10,12 @@ const Precio = ({ precioAntes, precioDescuento }) => (
   </View>
 );
 
-function ContenedorComidaRestaurante({ datosRestaurante }) {
+function ContenedorComidaRestaurante({ productosRestaurante }) {
+  cantidadDisponible = productosRestaurante.length;
+  
   return (
     <View>
-      {datosRestaurante[0].Productos.map((item, index) => (
+      {productosRestaurante.map((item, index) => (
         <View key={index} style={styles.mainContainer}>
           <View style={styles.headerContainer}>
             <Text style={styles.headerTitle}>{item.nombre}</Text>
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: "#212121",
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "700",
   },
   availabilityText: {

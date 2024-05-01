@@ -5,13 +5,23 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { datosRestaurante } from "../../data/datosRestaurante";
 import { router } from "expo-router";
 
-const RecomendadosParaTi = () => {
-  //filtrar por distancia y rating
- 
+const LlevateloAntesQueSeAcabe = () => {
+  
+  let filteredRestaurants = datosRestaurante
+    .map(restaurant => ({
+      ...restaurant,
+      Productos: restaurant.Productos.filter(
+        product => parseInt(product.cantidadDisponible) <= 3
+      ),
+    }))
+    .filter(restaurant => restaurant.Productos.length > 0);
+
+    filteredRestaurants = filteredRestaurants.sort(() => Math.random() - 0.5);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Recomendados para ti</Text>
+        <Text style={styles.headerText}>Llevatelo antes que se acabe!</Text>
         <FontAwesome name="chevron-right" size={12} color="black" />
       </View>
       <ScrollView
@@ -21,7 +31,7 @@ const RecomendadosParaTi = () => {
         showsHorizontalScrollIndicator={false}
       >
         <View style={styles.productsContainer}>
-          {datosRestaurante.slice(0, 10).map((item, index) => (
+          {filteredRestaurants.map((item, index) => (
             <Pressable
               key={index}
               onPress={() =>
@@ -32,7 +42,7 @@ const RecomendadosParaTi = () => {
               }
               style={styles.foodContainer}
             >
-              <View >
+              <View>
                 <ContenedorComidaPrincipal {...item} />
               </View>
             </Pressable>
@@ -45,7 +55,7 @@ const RecomendadosParaTi = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    height: "100%",
   },
   foodContainer: {
     marginTop: 20,
@@ -77,7 +87,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
- 
 });
 
-export default RecomendadosParaTi;
+export default LlevateloAntesQueSeAcabe;

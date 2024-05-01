@@ -13,8 +13,8 @@ const CategoryIcons = {
     size: 18,
   },
   Desayuno: { library: MaterialIcons, name: "breakfast-dining", size: 18 },
-  Panaderia: { library: MaterialIcons, name: "bakery-dining", size: 20 },
-  "Comida rapida": {
+  Panadería: { library: MaterialIcons, name: "bakery-dining", size: 20 },
+  "Comida rápida": {
     library: MaterialCommunityIcons,
     name: "hamburger",
     size: 18,

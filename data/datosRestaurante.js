@@ -1,5 +1,6 @@
 export const datosRestaurante = [
   {
+    id: 1,
     nombre: "El Coyuco",
     direccion: "Trans. 3, Qta Guio, con Av 3, Caracas 1060, Distrito Capital",
     UrlDireccion: "https://maps.app.goo.gl/KEikhkDyTsXDkwk47",
@@ -103,6 +104,7 @@ export const datosRestaurante = [
       "https://cdn.builder.io/api/v1/image/assets/TEMP/164d420ddd7ad34c6edf2890f7912b900b98b29f58d00cd7cb13fba47b580fcb?apiKey=64cf540a2469411fb888e6001ea1b7f2&",
     Productos: [
       {
+        id: 1,
         nombre: "Plato de pollo",
         precioAntes: "$ 10,00",
         precioVenta: "$ 4,80",
@@ -114,6 +116,7 @@ export const datosRestaurante = [
         categoriaProducto: ["Plato principal"],
       },
       {
+        id: 2,
         nombre: "Caja sorpresa",
         precioAntes: "$ 18,00",
         precioVenta: "$ 9,00",
@@ -127,6 +130,7 @@ export const datosRestaurante = [
     ],
   },
   {
+    id: 2,
     nombre: "Cocina Caraqueña",
     direccion: "Av. Libertador, Chacao, Caracas 1060, Distrito Capital",
     UrlDireccion: "https://maps.app.goo.gl/sampleURL4",
@@ -151,6 +155,7 @@ export const datosRestaurante = [
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
       {
+        id: 3,
         nombre: "Hamburguesa Especial",
         precioAntes: "$ 8.00",
         precioVenta: "$ 5.60",
@@ -162,10 +167,12 @@ export const datosRestaurante = [
         categoriaProducto: ["Comida rápida"],
       },
       {
+        id: 4,
         nombre: "Cheesecake de Fresa",
         precioAntes: "$ 4.00",
         precioVenta: "$ 2.80",
         cantidadDisponible: "20",
+        diaRetiro: 'mañana',
         horaRetiro: "2:00pm - 6:00pm",
         descripcion:
           "Cheesecake cremoso con una capa generosa de fresas frescas",
@@ -174,6 +181,7 @@ export const datosRestaurante = [
     ],
   },
   {
+    id: 3,
     nombre: "Panadería del Este",
     direccion:
       "Av. Francisco de Miranda, Los Palos Grandes, Caracas 1070, Distrito Capital",
@@ -194,6 +202,7 @@ export const datosRestaurante = [
       "https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
       {
+        id: 5,
         nombre: "Croissant de Almendra",
         precioAntes: "$ 3.00",
         precioVenta: "$ 1.80",
@@ -205,6 +214,7 @@ export const datosRestaurante = [
         categoriaProducto: ["Panadería"],
       },
       {
+        id: 6,
         nombre: "Capuchino Clásico",
         precioAntes: "$ 2.50",
         precioVenta: "$ 1.50",
@@ -217,6 +227,7 @@ export const datosRestaurante = [
     ],
   },
   {
+    id: 4,
     nombre: "Dulces Delicias",
     direccion: "Calle Paris, Las Mercedes, Caracas 1060, Distrito Capital",
     UrlDireccion: "https://maps.app.goo.gl/sampleURL6",
@@ -237,6 +248,7 @@ export const datosRestaurante = [
       "https://images.unsplash.com/photo-1513135065346-a098a63a71ee?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
       {
+        id: 7,
         nombre: "Torta de Chocolate",
         precioAntes: "$ 12.00",
         precioVenta: "$ 8.00",
@@ -248,6 +260,7 @@ export const datosRestaurante = [
         categoriaProducto: ["Postre"],
       },
       {
+        id: 8,
         nombre: "Croissant de Mantequilla",
         precioAntes: "$ 2.00",
         precioVenta: "$ 1.20",
@@ -261,6 +274,7 @@ export const datosRestaurante = [
     ],
   },
   {
+    id: 5,
     nombre: "Bocados Rápidos",
     direccion: "Av. Principal de Las Mercedes, Caracas 1080, Distrito Capital",
     UrlDireccion: "https://maps.app.goo.gl/sampleURL7",
@@ -280,6 +294,7 @@ export const datosRestaurante = [
       "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
       {
+        id: 9,
         nombre: "Emparedado de Pollo",
         precioAntes: "$ 6.00",
         precioVenta: "$ 3.60",
@@ -291,6 +306,7 @@ export const datosRestaurante = [
         categoriaProducto: ["Comida rápida"],
       },
       {
+        id: 10,
         nombre: "Batido de Frutas",
         precioAntes: "$ 4.00",
         precioVenta: "$ 2.40",
@@ -304,6 +320,7 @@ export const datosRestaurante = [
     ],
   },
   {
+    id: 6,
     nombre: "Desayunos del Valle",
     direccion: "Boulevard de Sabana Grande, Caracas 1050, Distrito Capital",
     UrlDireccion: "https://maps.app.goo.gl/sampleURL8",
@@ -324,10 +341,11 @@ export const datosRestaurante = [
       "https://images.unsplash.com/photo-1432139509613-5c4255815697?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
       {
+        id: 11,
         nombre: "Arepa Rellena",
         precioAntes: "$ 4.00",
         precioVenta: "$ 2.50",
-        cantidadDisponible: "15",
+        cantidadDisponible: "1",
         diaRetiro: 'hoy',
         horaRetiro: "6:00am - 10:00am",
         descripcion:
@@ -335,6 +353,7 @@ export const datosRestaurante = [
         categoriaProducto: ["Desayuno"],
       },
       {
+        id: 12,
         nombre: "Pan de Jamón",
         precioAntes: "$ 3.00",
         precioVenta: "$ 2.00",
@@ -348,6 +367,7 @@ export const datosRestaurante = [
     ],
   },
   {
+    id: 7,
     nombre: "Sazón Urbano",
     direccion:
       "Av. Rómulo Gallegos, Santa Eduvigis, Caracas 1071, Distrito Capital",
@@ -368,10 +388,11 @@ export const datosRestaurante = [
       "https://images.unsplash.com/photo-1562051036-e0eea191d42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
       {
+        id: 13,
         nombre: "Bowl de Quinoa y Pollo",
         precioAntes: "$ 12.00",
         precioVenta: "$ 7.20",
-        cantidadDisponible: "15",
+        cantidadDisponible: "1",
         diaRetiro: 'hoy',
         horaRetiro: "11:00am - 3:00pm",
         descripcion:
@@ -379,6 +400,7 @@ export const datosRestaurante = [
         categoriaProducto: ["Plato principal"],
       },
       {
+        id: 14,
         nombre: "Mousse de Mango",
         precioAntes: "$ 6.00",
         precioVenta: "$ 3.60",
@@ -392,6 +414,7 @@ export const datosRestaurante = [
     ],
   },
   {
+    id: 8,
     nombre: "Punto Criollo",
     direccion: "Calle Mohedano, El Rosal, Caracas 1060, Distrito Capital",
     UrlDireccion: "https://maps.app.goo.gl/sampleURL10",
@@ -411,6 +434,7 @@ export const datosRestaurante = [
       "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
       {
+        id: 15,
         nombre: "Pabellón Criollo",
         precioAntes: "$ 10.00",
         precioVenta: "$ 6.00",
@@ -422,10 +446,11 @@ export const datosRestaurante = [
         categoriaProducto: ["Plato principal"],
       },
       {
+        id: 16,
         nombre: "Tequeños",
         precioAntes: "$ 3.00",
         precioVenta: "$ 1.80",
-        cantidadDisponible: "50",
+        cantidadDisponible: "3",
         diaRetiro: 'hoy',
         horaRetiro: "All day",
         descripcion:
@@ -435,6 +460,7 @@ export const datosRestaurante = [
     ],
   },
   {
+    id: 9,
     nombre: "El Rinconcito",
     direccion: "Boulevard de Sabana Grande, Caracas 1050, Distrito Capital",
     UrlDireccion: "https://maps.app.goo.gl/sampleURL11",
@@ -454,10 +480,11 @@ export const datosRestaurante = [
       "https://images.unsplash.com/photo-1556742522-0f4f5e8eb228?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
       {
+        id: 17,
         nombre: "Hot Dog Especial",
         precioAntes: "$ 4.00",
         precioVenta: "$ 2.40",
-        cantidadDisponible: "30",
+        cantidadDisponible: "2",
         diaRetiro: 'hoy',
         horaRetiro: "10:00am - 2:00pm",
         descripcion:
@@ -465,6 +492,7 @@ export const datosRestaurante = [
         categoriaProducto: ["Comida rápida"],
       },
       {
+        id: 18,
         nombre: "Empanada de Carne",
         precioAntes: "$ 2.00",
         precioVenta: "$ 1.20",

@@ -11,13 +11,14 @@ import {
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
-import { Colors } from "../constants/Colors";
+import { Colors } from "../../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CategoriesContainer from "./UI/CategoriesContainer";
-import ContenedorComidaRestaurante from "./UI/ContenedorComidaRestaurante";
-import { datosRestaurante } from "../data/datosRestaurante";
-import CalificacionesMiniatura from "./UI/calificacionesMiniatura";
-import { Link } from "expo-router";
+import CategoriesContainer from "../../components/UI/CategoriesContainer";
+import ContenedorProductosRestaurante from "../../components/UI/ContenedorProductosRestaurante";
+import { datosRestaurante } from "../../data/datosRestaurante";
+import CalificacionesMiniatura from "../../components/UI/calificacionesMiniatura";
+import { Link, useLocalSearchParams } from "expo-router";
+import { useNavigation } from "expo-router";
 
 const { width, height } = Dimensions.get("window");
 
@@ -27,7 +28,7 @@ const heightBreakpoint = 667;
 const imagenRestauranteHeight = height < heightBreakpoint ? 160 : 180;
 const logoStyleWidth = width < widthBreakpoint ? 70 : 90;
 const horarioFontSize = width < widthBreakpoint ? 12 : 14;
-const bottomContainerMargin = height < heightBreakpoint ? "5%" : "7.5%";
+const bottomContainerMargin = height < heightBreakpoint ? "5%" : "7%";
 const logoImageMarginBottom = height < heightBreakpoint ? 10 : 30;
 const logoImageTop = height < heightBreakpoint ? 10 : 25;
 const addressTextMargin = width < widthBreakpoint ? 8 : 12;
@@ -72,37 +73,57 @@ const HeartIcon = () => {
 };
 
 function RestaurantPage() {
+  const navigation = useNavigation();
+  const { id } = useLocalSearchParams();
+
+  const restaurante = datosRestaurante.find((rest) => rest.id == id);
+
+  if (!restaurante) {
+    return <Text>Restaurant not found</Text>;
+  }
+
+  const productos = restaurante.Productos;
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View>
           <ImageBackground
             resizeMode="cover"
-            source={{ uri: datosRestaurante[0].urlImagenPortada }}
+            source={{ uri: restaurante.urlImagenPortada }}
             style={[styles.restaurantImage, { padding: 0 }]}
           >
-            <Text> {"< GO BACK"} </Text>
+            <View style={{ position: "absolute", top: 10, left: 10 }}>
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={{
+                  borderRadius: 35,
+                  backgroundColor: "rgba(255, 255, 255, 0.8)",
+                  padding: 10,
+                }}
+              >
+                <Ionicons name="chevron-back" size={24} color="black" />
+              </Pressable>
+            </View>
           </ImageBackground>
         </View>
         <View style={{ paddingHorizontal: 20, bottom: bottomContainerMargin }}>
           <Image
             resizeMode="cover"
-            source={{ uri: datosRestaurante[0].urlImagenLogo }}
+            source={{ uri: restaurante.urlImagenLogo }}
             style={styles.miniaturaRestaurante}
           />
           <View style={styles.containerTituloRestaurante}>
-            <Text style={styles.restaurantName}>
-              {datosRestaurante[0].nombre}
-            </Text>
+            <Text style={styles.restaurantName}>{restaurante.nombre}</Text>
             <HeartIcon />
           </View>
-          <DireccionRestaurant />
+          <DireccionRestaurant direccion={restaurante.direccion} />
           <View style={[styles.divider, { bottom: 10 }]} />
           <Text style={styles.distance}>1.5 Km de distancia</Text>
           <View>
             <View style={styles.contenedorCalificacion}>
               <CalificacionesMiniatura
-                calificaciones={datosRestaurante[0].calificaciones}
+                calificaciones={restaurante.calificaciones}
               />
               <View
                 style={{
@@ -112,7 +133,7 @@ function RestaurantPage() {
                 }}
               >
                 <Ionicons name="bag-check-outline" size={14} color="black" />
-                <Text> {datosRestaurante[0].ordenesCantidad}+</Text>
+                <Text> {restaurante.ordenesCantidad}+</Text>
               </View>
 
               <View
@@ -131,12 +152,14 @@ function RestaurantPage() {
               </View>
             </View>
           </View>
-          <CategoriesContainer categories={datosRestaurante[0].categoria} />
+          <CategoriesContainer categories={restaurante.categoria} />
           <View style={[styles.divider, { top: 10 }]} />
 
           <SectionTitle title="Comida disponible" />
 
-          <ContenedorComidaRestaurante datosRestaurante={datosRestaurante} />
+          <ContenedorProductosRestaurante
+            productosRestaurante={restaurante.Productos}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
