@@ -7,12 +7,12 @@ const windowHeight = Dimensions.get("window").height;
 const imageWidth = windowWidth - 40;
 const dynamicHeight = windowHeight < 667 ? 130 : 175;
 
-const ImageBanner = () => {
-  const image = { uri: "https://source.unsplash.com/300x200/?promotion" };
+const ImageBanner = ({imageUrl}) => {
+  
 
   return (
     <View style={styles.imageContainer}>
-      <Image source={image} style={styles.image} />
+      <Image source={imageUrl} style={styles.image} />
     </View>
   );
 };

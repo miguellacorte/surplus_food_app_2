@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView, Text } from "react-native";
+import { StyleSheet, View, ScrollView, StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ImageCarousel from "../../components/UI/ImageCarousel";
 import RecomendadosParaTi from "../../components/FoodContainers/RecomendadosParaTi";
@@ -10,23 +10,28 @@ import ImageBanner from "../../components/UI/ImageBanner";
 import CajaSorpresa from "../../components/FoodContainers/CajaSorpresa";
 import CercaTuyo from "../../components/FoodContainers/CercaTuyo";
 
+const imageBanner1 = { uri: "https://source.unsplash.com/300x200/?promotion" };
+const imageBanner2 = { uri: "https://source.unsplash.com/300x200/?promotion" };
+
 const ghostSpacePaddingFix = "4%";
 const ghostSpacePaddingFix2 = "8%";
 const ghostSpacePaddingFix3 = "12%";
 const ghostSpacePaddingFix4 = "18%";
 const ghostSpacePaddingFix5 = "22%";
 const ghostSpacePaddingFix6 = "26%";
+const ghostSpacePaddingFix7 = "30%";
+
 
 
 //Fix styling this container:
-  // components weird dimensioning
-  // container length
-//Fix retiro component
+// components weird dimensioning
+// container length
 
 
 export default function Tab() {
   return (
     <SafeAreaView style={styles.container}>
+    <StatusBar  />
       <ScrollView style={styles.scrollView}>
         <View>
           <Ubicacion />
@@ -54,7 +59,7 @@ export default function Tab() {
           <View
             style={[styles.foodContainers, { bottom: ghostSpacePaddingFix3 }]}
           >
-            <ImageBanner />
+            <ImageBanner imageUrl={imageBanner1}/>
           </View>
 
           <View
@@ -74,6 +79,12 @@ export default function Tab() {
           >
             <RetirarParaDesayuno />
           </View>
+
+          <View
+            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix7 }]}
+          >
+            <ImageBanner imageUrl={imageBanner2}/>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -91,7 +102,6 @@ const styles = StyleSheet.create({
   foodContainers: {
     marginTop: 20,
     height: 400,
-    bottom: "auto",
   },
   scrollView: {
     marginTop: 0,
