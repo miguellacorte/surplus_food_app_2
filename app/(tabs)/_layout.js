@@ -5,6 +5,7 @@ import { Tabs } from "expo-router";
 import { Colors } from "../../constants/Colors";
 import { Dimensions } from "react-native";
 
+
 const windowWidth = Dimensions.get("window").width;
 const iconSize = windowWidth > 500 ? 28 : 24;
 

@@ -13,7 +13,6 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CategoriesContainer from "../../components/UI/CategoriesContainer";
 import ContenedorProductosRestaurante from "../../components/UI/ContenedorProductosRestaurante";
 import { datosRestaurante } from "../../data/datosRestaurante";
 import CalificacionesMiniatura from "../../components/UI/calificacionesMiniatura";
@@ -59,7 +58,7 @@ const SectionTitle = ({ title }) => (
   </View>
 );
 
-const HeartIcon = () => {
+const BotonFavoritos = () => {
   const [isPressed, setIsPressed] = useState(false);
   return (
     <Pressable onPress={() => setIsPressed(!isPressed)}>
@@ -115,7 +114,7 @@ function RestaurantPage() {
           />
           <View style={styles.containerTituloRestaurante}>
             <Text style={styles.restaurantName}>{restaurante.nombre}</Text>
-            <HeartIcon />
+            <BotonFavoritos />
           </View>
           <DireccionRestaurant direccion={restaurante.direccion} />
           <View style={[styles.divider, { bottom: 10 }]} />
@@ -145,7 +144,7 @@ function RestaurantPage() {
                 }}
               >
                 <View style={{ borderBottomWidth: 1 }}>
-                  <Link href="calificaciones">
+                  <Link href="Restaurants/calificaciones">
                     <Text style={{ fontWeight: "600" }}>Reseñas</Text>
                   </Link>
                 </View>

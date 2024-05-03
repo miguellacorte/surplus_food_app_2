@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   StyleSheet,
@@ -7,10 +6,11 @@ import {
   Text,
   Dimensions,
 } from "react-native";
+
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
-import BotonFavoritos from "../BotonFavoritos";
 import TiempoDeRetiro from "./tiempodeRetiro";
 import CalificacionesMiniatura from "./calificacionesMiniatura";
+import BotonFavoritos from "../BotonFavoritos";
 
 const { width, height } = Dimensions.get("window");
 
@@ -37,14 +37,16 @@ const bottomContenedorHorario = width < widthBreakpoint ? 0 : 3;
 const horarioFontSize = width < widthBreakpoint ? 12 : 14;
 const contenedorInfoProductoHeight = width < widthBreakpoint ? 50 : 60;
 
-const ContenedorComidaPrincipal = ({
+
+function ContenedorComidaPrincipal({
   nombre,
   distancia,
   calificaciones,
   urlImagenLogo,
   urlImagenPortada,
   Productos,
-}) => (
+}) {
+  return (
   <View style={estilos.contenedorTarjeta}>
     <ImageBackground
       resizeMode="cover"
@@ -113,6 +115,7 @@ const ContenedorComidaPrincipal = ({
     </View>
   </View>
 );
+}
 
 const estilos = StyleSheet.create({
   contenedorTarjeta: {

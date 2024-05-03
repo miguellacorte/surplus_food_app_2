@@ -1,10 +1,53 @@
-import { View, Text } from 'react-native';
-
+import React, { useContext } from "react";
+import { Text, Pressable, StyleSheet } from "react-native";
+import ContenedorComidaFavoritos from "../../components/UI/ContenedorComidaPrincipal";
+import { UserContext } from "../../store/UserContext"; // import UserContext
+import { datosRestaurante } from "../../data/datosRestaurante";
+import { router } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Tab() {
-  return (
-    <View style={{ flex: 1 }}>
+  const { user } = useContext(UserContext); // access user data
 
-    </View>
+  // Find the restaurants in datosRestaurante that match the ids in user.RestaurantesFavoritos
+  const favoriteRestaurants = user
+    ? datosRestaurante.filter((restaurant) =>
+        user.RestaurantesFavoritos.includes(restaurant.id)
+      )
+    : [];
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.header}>Favoritos</Text>
+      {favoriteRestaurants.map((restaurant, index) => (
+        <Pressable
+          key={index}
+          style={styles.restaurant}
+          onPress={() =>
+            router.push({
+              pathname: "/Restaurants/[id]",
+              params: { id: restaurant.id },
+            })
+          }
+        >
+          <ContenedorComidaFavoritos {...restaurant} />
+        </Pressable>
+      ))}
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  restaurant: {
+    marginBottom: 10,
+  },
+});

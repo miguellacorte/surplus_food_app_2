@@ -1,9 +1,14 @@
-import { View, Text } from 'react-native';
+import React, { useContext } from "react";
+import { View, Text } from "react-native";
+import { UserContext } from "../../store/UserContext";
 
 export default function Tab() {
+  const { user } = useContext(UserContext);
+  
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-      <Text>Perfil</Text>
+    <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
+      <Text>  </Text>
+      <Text>Bienvenido, {user.Nombre}</Text>
     </View>
   );
 }

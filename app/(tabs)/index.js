@@ -1,14 +1,14 @@
 import { StyleSheet, View, ScrollView, StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ImageCarousel from "../../components/UI/ImageCarousel";
-import RecomendadosParaTi from "../../components/FoodContainers/RecomendadosParaTi";
-import LlevateloAntesQueSeAcabe from "../../components/FoodContainers/LlevateloAntesQueSeAcabe";
-import RetirarParaCenar from "../../components/FoodContainers/RetirarParaCenar";
-import RetirarParaDesayuno from "../../components/FoodContainers/RetirarParaDesayuno";
+import RecomendadosParaTi from "../../components/IndexFoodContainers/RecomendadosParaTi";
+import LlevateloAntesQueSeAcabe from "../../components/IndexFoodContainers/LlevateloAntesQueSeAcabe";
+import RetirarParaCenar from "../../components/IndexFoodContainers/RetirarParaCenar";
+import RetirarParaDesayuno from "../../components/IndexFoodContainers/RetirarParaDesayuno";
 import Ubicacion from "../../components/UI/Ubicacion";
 import ImageBanner from "../../components/UI/ImageBanner";
-import CajaSorpresa from "../../components/FoodContainers/CajaSorpresa";
-import CercaTuyo from "../../components/FoodContainers/CercaTuyo";
+import CajaSorpresa from "../../components/IndexFoodContainers/CajaSorpresa";
+import CercaTuyo from "../../components/IndexFoodContainers/CercaTuyo";
 
 const imageBanner1 = { uri: "https://source.unsplash.com/300x200/?promotion" };
 const imageBanner2 = { uri: "https://source.unsplash.com/300x200/?promotion" };
@@ -26,6 +26,9 @@ const ghostSpacePaddingFix7 = "30%";
 //Fix styling this container:
 // components weird dimensioning
 // container length
+
+//Update restaurans page:
+// if restaurant only has one product, then render a certain page, otherwise list products. 
 
 
 export default function Tab() {

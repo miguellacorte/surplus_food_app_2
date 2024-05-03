@@ -4,7 +4,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 const { width, height } = Dimensions.get("window");
 
-const BotonFavoritos = ({ size = "medium" }) => {
+const BotonFavoritos = ({ size, onPress }) => {
   const [favorito, setFavorito] = useState(false);
 
   let scale;
@@ -36,6 +36,7 @@ const BotonFavoritos = ({ size = "medium" }) => {
 
   const toggleFavorito = () => {
     setFavorito(!favorito);
+    onPress();
   };
 
   return (
