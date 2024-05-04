@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
-import TiempoDeRetiro from "./tiempodeRetiro";
+import TiempoDeRetiro from "./TiempoDeRetiro";
 import CalificacionesMiniatura from "./calificacionesMiniatura";
 import BotonFavoritos from "../BotonFavoritos";
 
@@ -45,6 +45,7 @@ function ContenedorComidaPrincipal({
   urlImagenLogo,
   urlImagenPortada,
   Productos,
+  width
 }) {
   return (
   <View style={estilos.contenedorTarjeta}>

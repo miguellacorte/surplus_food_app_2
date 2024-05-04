@@ -3,10 +3,12 @@ import { Text, View } from "react-native";
 
 const TiempoDeRetiro = ({ dia, hora, textSize, containerSize }) => {
   const convertTo12HourFormat = (time) => {
-    let [hours, minutes] = time.split(":");
-    let period = +hours >= 12 ? "PM" : "AM";
-    hours = +hours % 12 || 12; // convert "00" to "12"
-    return `${hours}:${minutes} ${period}`;
+    return time.split(' - ').map(time => {
+      let [hours, minutes] = time.split(":");
+      let period = +hours >= 12 ? "PM" : "AM";
+      hours = +hours % 12 || 12; // convert "00" to "12"
+      return `${hours}:${minutes} ${period}`;
+    }).join(' - ');
   };
 
   const formattedHora = convertTo12HourFormat(hora);

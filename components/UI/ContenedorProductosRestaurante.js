@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
-import TiempoDeRetiro from "./tiempodeRetiro";
+import TiempoDeRetiro from "./TiempoDeRetiro";
 
 const Precio = ({ precioAntes, precioDescuento }) => (
   <View style={styles.discountContainer}>

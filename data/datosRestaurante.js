@@ -108,7 +108,7 @@ export const datosRestaurante = [
         nombre: "Plato de pollo",
         precioAntes: "$ 10,00",
         precioVenta: "$ 4,80",
-        cantidadDisponible: "5",
+        cantidadDisponible: "2",
         diaRetiro: "hoy",
         horaRetiro: "06:30 - 10:59",
         descripcion:
