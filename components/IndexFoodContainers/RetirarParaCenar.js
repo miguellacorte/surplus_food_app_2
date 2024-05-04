@@ -13,7 +13,7 @@ const RetirarParaCenar = () => {
           (product) =>
             product.diaRetiro === "hoy" &&
             product.horaRetiro &&
-            parseInt(product.horaRetiro.split("-")[1].split(":")[0]) >= 15 // 15:00 hora de pickup para cenar
+            parseInt(product.horaRetiro.split("-")[1].split(":")[0]) >= 16 // 15:00 hora de pickup para cenar
         ),
       }))
       .filter((restaurant) => restaurant.Productos.length > 0);

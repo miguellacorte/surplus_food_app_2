@@ -6,11 +6,23 @@ import { datosRestaurante } from "../../data/datosRestaurante";
 import { router } from "expo-router";
 
 const CajaSorpresa = () => {
-    let filteredRestaurants = datosRestaurante.filter(restaurant =>
-        restaurant.Productos.some(product =>
-          product.categoria.includes("Caja sorpresa")
-        )
-      );
+  let filteredRestaurants = datosRestaurante
+  .map(restaurant => {
+    // Filter out the products that do not belong to the "Caja sorpresa" category
+    let filteredProducts = restaurant.Productos.filter(product =>
+      product.categoria.includes("Caja sorpresa")
+    );
+
+    // If there are no "Caja sorpresa" products, do not include the restaurant
+    if (filteredProducts.length === 0) {
+      return null;
+    }
+
+    // Return a new object with the filtered products
+    return { ...restaurant, Productos: filteredProducts };
+  })
+  // Remove null values
+  .filter(Boolean);
 
   return (
     <View style={styles.container}>
