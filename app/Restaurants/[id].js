@@ -18,6 +18,7 @@ import { datosRestaurante } from "../../data/datosRestaurante";
 import CalificacionesMiniatura from "../../components/UI/calificacionesMiniatura";
 import { Link, useLocalSearchParams } from "expo-router";
 import { useNavigation } from "expo-router";
+import BotonFavoritos from "../../components/BotonFavoritos";
 
 const { width, height } = Dimensions.get("window");
 
@@ -31,6 +32,7 @@ const bottomContainerMargin = height < heightBreakpoint ? "5%" : "7%";
 const logoImageMarginBottom = height < heightBreakpoint ? 10 : 30;
 const logoImageTop = height < heightBreakpoint ? 10 : 25;
 const addressTextMargin = width < widthBreakpoint ? 8 : 12;
+const BotonFavoritosSize = width < widthBreakpoint ? "small" : "medium";
 
 const AddressItem = ({ address }) => (
   <View style={styles.addressContainer}>
@@ -58,22 +60,10 @@ const SectionTitle = ({ title }) => (
   </View>
 );
 
-const BotonFavoritos = () => {
-  const [isPressed, setIsPressed] = useState(false);
-  return (
-    <Pressable onPress={() => setIsPressed(!isPressed)}>
-      <FontAwesome
-        size={20}
-        name={isPressed ? "heart" : "heart-o"}
-        color={Colors.VerdeOscuro}
-      />
-    </Pressable>
-  );
-};
-
 function RestaurantPage() {
   const navigation = useNavigation();
   const { id } = useLocalSearchParams();
+  const idNumber = Number(id);
 
   const restaurante = datosRestaurante.find((rest) => rest.id == id);
 
@@ -114,7 +104,7 @@ function RestaurantPage() {
           />
           <View style={styles.containerTituloRestaurante}>
             <Text style={styles.restaurantName}>{restaurante.nombre}</Text>
-            <BotonFavoritos />
+            <BotonFavoritos size={BotonFavoritosSize} restaurantId={idNumber} />
           </View>
           <DireccionRestaurant direccion={restaurante.direccion} />
           <View style={[styles.divider, { bottom: 10 }]} />

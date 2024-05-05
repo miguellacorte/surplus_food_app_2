@@ -46,7 +46,7 @@ function UserProvider({ children }) {
 
   const value = {
     user: state.user,
-    newFavorites: state.user.RestaurantesFavoritos,
+    newFavorites: state.user?.RestaurantesFavoritos,
     updateFavorites: async (id) => {
       let newFavorites;
       if (state.user.RestaurantesFavoritos.includes(id)) {

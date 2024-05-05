@@ -9,16 +9,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Tab() {
   const { user, newFavorites, loading } = useContext(UserContext); // access user data
 
-  console.log("newFavorites:", newFavorites);
   // Find the restaurants in datosRestaurante that match the ids in user.RestaurantesFavoritos
   const favoriteRestaurants = !loading && newFavorites
     ? datosRestaurante.filter((restaurant) =>
         newFavorites.includes(restaurant.id)
       )
     : [];
-
-  console.log(newFavorites);
-  console.log(favoriteRestaurants);
 
   return (
     <SafeAreaView style={styles.container}>

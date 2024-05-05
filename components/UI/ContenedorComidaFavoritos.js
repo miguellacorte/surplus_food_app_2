@@ -36,6 +36,7 @@ const horarioFontSize = width < widthBreakpoint ? 12 : 14;
 const contenedorInfoProductoHeight = width < widthBreakpoint ? 50 : 60;
 
 function ContenedorComidaFavoritos({
+  id,
   nombre,
   distancia,
   calificaciones,
@@ -70,7 +71,10 @@ function ContenedorComidaFavoritos({
           </View>
 
           <View style={{ bottom: 3 }}>
-            <BotonFavoritos size={BotonFavoritosSize} />
+          <BotonFavoritos
+              size={BotonFavoritosSize}
+              restaurantId={id}
+            />
           </View>
         </View>
 

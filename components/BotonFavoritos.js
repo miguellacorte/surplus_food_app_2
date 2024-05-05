@@ -1,11 +1,17 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Pressable, View, StyleSheet } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { UserContext } from "../store/UserContext"; // Update this import path
 
 const BotonFavoritos = ({ size, restaurantId }) => {
   const { user, updateFavorites } = useContext(UserContext);
-  const [favorito, setFavorito] = useState(false);
+  const [favorito, setFavorito] = useState(
+    user?.RestaurantesFavoritos?.includes(restaurantId)
+  );
+
+  useEffect(() => {
+    setFavorito(user?.RestaurantesFavoritos?.includes(restaurantId));
+  }, [user?.RestaurantesFavoritos]);
 
   let scale;
   switch (size) {
