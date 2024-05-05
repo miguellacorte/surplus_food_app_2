@@ -8,7 +8,7 @@ export default function Tab() {
   return (
     <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
       <Text>  </Text>
-      <Text>Bienvenido, {user.Nombre}</Text>
+      {user ? <Text>Bienvenido, {user.Nombre}</Text> : <Text>Loading...</Text>}
     </View>
   );
 }

@@ -3,7 +3,7 @@ import { UserProvider } from "../store/UserContext";
 
 export default function AppLayout() {
   return (
-    <UserProvider>
+    <UserProvider >
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Pressable, View, StyleSheet, Dimensions } from "react-native";
+import React, { useState, useContext } from "react";
+import { Pressable, View, StyleSheet } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { UserContext } from "../store/UserContext"; // Update this import path
 
-const { width, height } = Dimensions.get("window");
-
-const BotonFavoritos = ({ size, onPress }) => {
+const BotonFavoritos = ({ size, restaurantId }) => {
+  const { user, updateFavorites } = useContext(UserContext);
   const [favorito, setFavorito] = useState(false);
 
   let scale;
@@ -36,7 +36,7 @@ const BotonFavoritos = ({ size, onPress }) => {
 
   const toggleFavorito = () => {
     setFavorito(!favorito);
-    onPress();
+    updateFavorites(restaurantId);
   };
 
   return (

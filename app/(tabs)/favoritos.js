@@ -6,16 +6,19 @@ import { datosRestaurante } from "../../data/datosRestaurante";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
 export default function Tab() {
-  const { user } = useContext(UserContext); // access user data
+  const { user, newFavorites, loading } = useContext(UserContext); // access user data
 
+  console.log("newFavorites:", newFavorites);
   // Find the restaurants in datosRestaurante that match the ids in user.RestaurantesFavoritos
-  const favoriteRestaurants = user
+  const favoriteRestaurants = !loading && newFavorites
     ? datosRestaurante.filter((restaurant) =>
-        user.RestaurantesFavoritos.includes(restaurant.id)
+        newFavorites.includes(restaurant.id)
       )
     : [];
+
+  console.log(newFavorites);
+  console.log(favoriteRestaurants);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,13 +36,14 @@ export default function Tab() {
             }
           >
             <ContenedorComidaFavoritos
+              id={restaurant.id}
               nombre={restaurant.nombre}
               distancia={restaurant.distancia}
               calificaciones={restaurant.calificaciones}
               urlImagenLogo={restaurant.urlImagenLogo}
               urlImagenPortada={restaurant.urlImagenPortada}
               Productos={restaurant.Productos}
-              width='larger'
+              width="larger"
             />
           </Pressable>
         </View>
