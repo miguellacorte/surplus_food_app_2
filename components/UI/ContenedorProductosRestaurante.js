@@ -1,7 +1,8 @@
-import React from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
 import TiempoDeRetiro from "./TiempoDeRetiro";
+import { Colors } from "../../constants/Colors";
 
 const Precio = ({ precioAntes, precioDescuento }) => (
   <View style={styles.discountContainer}>
@@ -10,40 +11,54 @@ const Precio = ({ precioAntes, precioDescuento }) => (
   </View>
 );
 
-function ContenedorComidaRestaurante({ productosRestaurante }) {
+function ContenedorProductosRestaurante({
+  productosRestaurante,
+  handlePress,
+  pressedProductId,
+}) {
   cantidadDisponible = productosRestaurante.length;
-  
+
   return (
     <View>
       {productosRestaurante.map((item, index) => (
-        <View key={index} style={styles.mainContainer}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.headerTitle}>{item.nombre}</Text>
-            <View>
-              <TagDisponibilidadProducto
-                size="medium"
-                cantidadDisponible={item.cantidadDisponible}
+        <TouchableOpacity key={index} onPress={() => handlePress(item.id)}>
+          <View
+            key={item.id}
+            style={[
+              styles.mainContainer,
+              item.id === pressedProductId && styles.pressed,
+            ]}
+          >
+            <View style={styles.headerContainer}>
+              <Text style={styles.headerTitle}>{item.nombre}</Text>
+              <View>
+                <TagDisponibilidadProducto
+                  size="medium"
+                  cantidadDisponible={item.cantidadDisponible}
+                />
+              </View>
+            </View>
+            <View style={styles.pickupInfoContainer}>
+              <TiempoDeRetiro
+                dia={item.diaRetiro}
+                hora={item.horaRetiro}
+                textSize={14}
+                containerSize={"80%"}
+              />
+              <Precio
+                precioAntes={item.precioAntes}
+                precioDescuento={item.precioVenta}
               />
             </View>
+            <View style={styles.divider} />
+            <Text style={styles.productDescriptionTitle}>
+              Descripción de producto:
+            </Text>
+            <Text style={styles.productDescriptionText}>
+              {item.descripcion}
+            </Text>
           </View>
-          <View style={styles.pickupInfoContainer}>
-            <TiempoDeRetiro
-              dia={item.diaRetiro}
-              hora={item.horaRetiro}
-              textSize={14}
-              containerSize={"80%"}
-            />
-            <Precio
-              precioAntes={item.precioAntes}
-              precioDescuento={item.precioVenta}
-            />
-          </View>
-          <View style={styles.divider} />
-          <Text style={styles.productDescriptionTitle}>
-            Descripción de producto:
-          </Text>
-          <Text style={styles.productDescriptionText}>{item.descripcion}</Text>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );
@@ -118,6 +133,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "500",
   },
+  pressed: {
+    borderWidth: 4,
+    borderColor: Colors.VerdeOscuro,
+  },
 });
 
-export default ContenedorComidaRestaurante;
+export default ContenedorProductosRestaurante;

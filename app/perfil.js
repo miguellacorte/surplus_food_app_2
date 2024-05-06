@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { View, Text } from "react-native";
-import { UserContext } from "../../store/UserContext";
+import { UserContext } from "../store/UserContext";
 
 export default function Tab() {
   const { user } = useContext(UserContext);

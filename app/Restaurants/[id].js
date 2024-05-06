@@ -19,6 +19,7 @@ import CalificacionesMiniatura from "../../components/UI/calificacionesMiniatura
 import { Link, useLocalSearchParams } from "expo-router";
 import { useNavigation } from "expo-router";
 import BotonFavoritos from "../../components/BotonFavoritos";
+import AgregarCarrito from "../../components/UI/AgregarCarrito";
 
 const { width, height } = Dimensions.get("window");
 
@@ -33,6 +34,7 @@ const logoImageMarginBottom = height < heightBreakpoint ? 10 : 30;
 const logoImageTop = height < heightBreakpoint ? 10 : 25;
 const addressTextMargin = width < widthBreakpoint ? 8 : 12;
 const BotonFavoritosSize = width < widthBreakpoint ? "small" : "medium";
+const extrSpaceSize = height < heightBreakpoint ? 50 : 30;
 
 const AddressItem = ({ address }) => (
   <View style={styles.addressContainer}>
@@ -61,6 +63,17 @@ const SectionTitle = ({ title }) => (
 );
 
 function RestaurantPage() {
+  const [pressedProductId, setPressedProductId] = useState(null);
+  const [isCarritoPressed, setIsCarritoPressed] = useState(false);
+
+  const handlePress = (productId) => {
+    if (pressedProductId === productId) {
+      setPressedProductId(null); // deselect the product if it's already selected
+    } else {
+      setPressedProductId(productId); // select the product
+    }
+  };
+
   const navigation = useNavigation();
   const { id } = useLocalSearchParams();
   const idNumber = Number(id);
@@ -147,9 +160,23 @@ function RestaurantPage() {
 
           <ContenedorProductosRestaurante
             productosRestaurante={restaurante.Productos}
+            handlePress={handlePress}
+            pressedProductId={pressedProductId}
           />
+          <View style={{ height: extrSpaceSize }}></View>
         </View>
       </ScrollView>
+      {pressedProductId !== null && (
+        <View style={{ alignItems: "center" }}>
+          <AgregarCarrito
+            restaurant={restaurante}
+            productId={pressedProductId}
+            onPress={() =>
+              console.log("Added product to cart:", pressedProductId)
+            }
+          />
+        </View>
+      )}
     </SafeAreaView>
   );
 }
