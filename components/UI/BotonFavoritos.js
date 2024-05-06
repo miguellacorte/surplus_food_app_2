@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Pressable, View, StyleSheet } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { UserContext } from "../store/UserContext"; // Update this import path
+import { UserContext } from "../../store/UserContext"; // Update this import path
 
 const BotonFavoritos = ({ size, restaurantId }) => {
   const { user, updateFavorites } = useContext(UserContext);

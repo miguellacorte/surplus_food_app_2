@@ -7,7 +7,49 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "ADD_TO_CART":
-      return { ...state, cart: [...state.cart, action.payload] };
+      const existingItem = state.cart.find(
+        (item) => item.id === action.payload.id
+      );
+
+      if (existingItem) {
+        // If the item already exists in the cart, update its quantity
+        return {
+          ...state,
+          cart: state.cart.map((cartItem) =>
+            cartItem.id === action.payload.id
+              ? { ...cartItem, quantity: cartItem.quantity + 1 }
+              : cartItem
+          ),
+        };
+      } else {
+        // If the item does not exist in the cart, add it
+        return {
+          ...state,
+          cart: [...state.cart, { ...action.payload, quantity: 1 }],
+        };
+      }
+    case "DECREASE_QUANTITY":
+      const existingItemDecrease = state.cart.find(
+        (item) => item.id === action.payload.id
+      );
+
+      if (existingItemDecrease && existingItemDecrease.quantity > 1) {
+        // If the item exists in the cart and its quantity is more than 1, decrease its quantity
+        return {
+          ...state,
+          cart: state.cart.map((cartItem) =>
+            cartItem.id === action.payload.id
+              ? { ...cartItem, quantity: cartItem.quantity - 1 }
+              : cartItem
+          ),
+        };
+      } else {
+        // If the item's quantity is 1, remove it from the cart
+        return {
+          ...state,
+          cart: state.cart.filter((item) => item.id !== action.payload.id),
+        };
+      }
     case "REMOVE_FROM_CART":
       return {
         ...state,
@@ -28,6 +70,8 @@ function CartProvider({ children }) {
     addToCart: (item) => dispatch({ type: "ADD_TO_CART", payload: item }),
     removeFromCart: (item) =>
       dispatch({ type: "REMOVE_FROM_CART", payload: item }),
+    decreaseQuantity: (item) =>
+      dispatch({ type: "DECREASE_QUANTITY", payload: item }),
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

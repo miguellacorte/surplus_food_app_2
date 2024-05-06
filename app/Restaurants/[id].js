@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Dimensions,
   ImageBackground,
   Pressable,
+  Modal,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
@@ -18,8 +19,10 @@ import { datosRestaurante } from "../../data/datosRestaurante";
 import CalificacionesMiniatura from "../../components/UI/calificacionesMiniatura";
 import { Link, useLocalSearchParams } from "expo-router";
 import { useNavigation } from "expo-router";
-import BotonFavoritos from "../../components/BotonFavoritos";
+import BotonFavoritos from "../../components/UI/BotonFavoritos";
 import AgregarCarrito from "../../components/UI/AgregarCarrito";
+import myGif from "../../assets/ezgif.gif";
+import { CartContext } from "../../store/CartContext";
 
 const { width, height } = Dimensions.get("window");
 
@@ -64,7 +67,7 @@ const SectionTitle = ({ title }) => (
 
 function RestaurantPage() {
   const [pressedProductId, setPressedProductId] = useState(null);
-  const [isCarritoPressed, setIsCarritoPressed] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handlePress = (productId) => {
     if (pressedProductId === productId) {
@@ -78,6 +81,8 @@ function RestaurantPage() {
   const { id } = useLocalSearchParams();
   const idNumber = Number(id);
 
+  const { addToCart } = useContext(CartContext);
+
   const restaurante = datosRestaurante.find((rest) => rest.id == id);
 
   if (!restaurante) {
@@ -86,6 +91,15 @@ function RestaurantPage() {
 
   const productos = restaurante.Productos;
 
+  const handleAddToCart = (productId) => {
+    const productToAdd = productos.find((product) => product.id === productId);
+    if (productToAdd) {
+      addToCart(productToAdd);
+      console.log("Added product to cart:", productToAdd);
+      setModalVisible(true);
+      setTimeout(() => setModalVisible(false), 2000); // Hide the modal after 2 seconds
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -171,12 +185,38 @@ function RestaurantPage() {
           <AgregarCarrito
             restaurant={restaurante}
             productId={pressedProductId}
-            onPress={() =>
-              console.log("Added product to cart:", pressedProductId)
-            }
+            onPress={() => handleAddToCart(pressedProductId)}
           />
         </View>
       )}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0, 0, 0)", // semi-transparent background
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              borderRadius: 20,
+              padding: 35,
+              alignItems: "center",
+            }}
+          >
+            <Text>Modal is visible</Text>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
