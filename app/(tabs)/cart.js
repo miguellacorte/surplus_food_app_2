@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -8,9 +8,12 @@ import {
   Dimensions,
 } from "react-native";
 import { CartContext } from "../../store/CartContext";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
 import TiempoDeRetiro from "../../components/UI/TiempoDeRetiro";
+import { Colors } from "../../constants/Colors";
+import MediosPago from "../../components/UI/MediosPago";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 
@@ -20,121 +23,197 @@ const windowHeight = Dimensions.get("window").height;
 const widthBreakpoint = 392;
 const heightBreakpoint = 667;
 const horarioFontSize = width < widthBreakpoint ? 12 : 14;
+const buttonRightMargin = width < widthBreakpoint ? "40%" : "37%";
+const priceRightMargin = width < widthBreakpoint ? "13%" : "3%";
 
 const ItemSummary = ({ item, onIncrease, onDecrease, onDelete }) => {
-    const [quantity, setQuantity] = useState(item.quantity || 1);
-  
-    const handleIncrease = () => {
-      const newQuantity = quantity + 1;
+  const [quantity, setQuantity] = useState(item.quantity || 1);
+
+  const handleIncrease = () => {
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+    onIncrease();
+  };
+
+  const handleDecrease = () => {
+    if (quantity > 1) {
+      const newQuantity = quantity - 1;
       setQuantity(newQuantity);
-      onIncrease();
-    };
-  
-    const handleDecrease = () => {
-      if (quantity > 1) {
-        const newQuantity = quantity - 1;
-        setQuantity(newQuantity);
-        onDecrease();
-      }
-    };
+      onDecrease();
+    }
+  };
 
-    const price = parseFloat(item.precioVenta) * quantity;
-    const originalPrice = parseFloat(item.precioAntes) * quantity;
+  //format code:
+  const price = parseFloat(item.precioVenta) * quantity;
+  const originalPrice = parseFloat(item.precioAntes) * quantity;
 
-    const formattedPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-  const formattedOriginalPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(originalPrice);
+  const formattedPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(price);
+  const formattedOriginalPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(originalPrice);
 
   return (
-    <View style={styles.itemContainer}>
-      <View>
-        <Text style={styles.itemName}>{item.nombre}</Text>
-        <TiempoDeRetiro
-          dia={item.diaRetiro}
-          hora={item.horaRetiro}
-          textSize={12}
-          containerSize="70%"
-        />
-      </View>
-      <View>
+    <>
+      <View style={styles.itemContainer}>
         <View>
-          <Text style={styles.originalPrice}>
-          {formattedOriginalPrice}
-          </Text>
-          <Text style={styles.discountedPrice}>{formattedPrice}</Text>
+          <Text style={styles.itemName}>{item.nombre}</Text>
+          <TiempoDeRetiro
+            dia={item.diaRetiro}
+            hora={item.horaRetiro}
+            textSize={14}
+            containerSize="70%"
+          />
         </View>
-        <View
-          style={{
-            right: 48,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: 100,
-            marginTop: 20,
-            padding: 10,
-            marginBottom: 20,
-          }}
-        >
-          <TouchableOpacity onPress={onDelete} >
-            <Icon
-              name="trash"
-              size={22}
-              color="#000"
-              style={{ marginRight: 10 }}
-            />
-          </TouchableOpacity>
+        <View>
+          <View style={{ right: priceRightMargin }}>
+            <Text style={styles.originalPrice}>{formattedOriginalPrice}</Text>
+            <Text style={styles.discountedPrice}>{formattedPrice}</Text>
+          </View>
+          <View
+            style={{
+              right: buttonRightMargin,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: 100,
+              marginTop: 10,
+              padding: 10,
+              marginBottom: 10,
+              marginRight: 10,
+            }}
+          >
+            <TouchableOpacity onPress={onDelete}>
+              <Icon
+                name="trash"
+                size={20}
+                color="gray"
+                style={{ marginRight: 5, bottom: 2 }}
+              />
+            </TouchableOpacity>
 
-          <TouchableOpacity onPress={handleDecrease} style={styles.iconButton}>
-            <Icon name="minus" size={16} color="#000" />
-          </TouchableOpacity>
-          <Text style={{ fontSize: 22, fontStyle: "bold" }}>{quantity}</Text>
-          <TouchableOpacity onPress={handleIncrease} style={styles.iconButton}>
-            <Icon name="plus" size={16} color="#000" />
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handleDecrease}
+              style={styles.iconButton}
+            >
+              <Icon name="minus" size={12} color="#000" />
+            </TouchableOpacity>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>{quantity}</Text>
+            <TouchableOpacity
+              onPress={handleIncrease}
+              style={styles.iconButton}
+            >
+              <Icon name="plus" size={12} color="#000" />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </>
   );
 };
 const Cart = () => {
   const { cart, addToCart, removeFromCart, decreaseQuantity } =
     useContext(CartContext);
+  const [productos, setProductos] = useState(0);
+  const [tarifaDeServicio, setTarifaDeServicio] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  const currencyFormat = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  useEffect(() => {
+    const newProductos = cart.reduce(
+      (acc, item) => acc + parseFloat(item.precioVenta) * item.quantity,
+      0
+    );
+    const newTarifaDeServicio = newProductos * 0.02;
+    const newTotal = newProductos + newTarifaDeServicio;
+
+    setProductos(newProductos);
+    setTarifaDeServicio(newTarifaDeServicio);
+    setTotal(newTotal);
+  }, [cart]);
 
   return (
-    <SafeAreaView style={styles.pageContainer}>
-      <ScrollView>
-        <View>
+    <>
+      <SafeAreaView style={styles.pageContainer} >
+      <View >
+        <ScrollView style={{  marginHorizontal: 20 }}>
           <View>
-            <Text style={styles.headerTitle}>Confirmar compra</Text>
+            <View>
+              <Text style={styles.headerTitle}>Confirmar compra:</Text>
+            </View>
           </View>
-        </View>
-        {cart.map((item, index) => (
-          <ItemSummary
-            key={index.toString()}
-            item={item}
-            onIncrease={() => addToCart(item)}
-            onDecrease={() => decreaseQuantity(item)}
-            onDelete={() => removeFromCart(item)}
-          />
-        ))}
-        <View>
-          {/* Order summary, payment methods, and billing address components */}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+          {cart.map((item, index) => (
+            <ItemSummary
+              key={index.toString()}
+              item={item}
+              onIncrease={() => addToCart(item)}
+              onDecrease={() => decreaseQuantity(item)}
+              onDelete={() => removeFromCart(item)}
+            />
+          ))}
+          <View style={styles.totalContainer}>
+            <View style={styles.row}>
+              <Text style={styles.boldText}>Productos</Text>
+              <Text style={styles.boldText}>
+                {currencyFormat.format(productos)}
+              </Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.boldText}>Tarifa de servicio </Text>
+              <Text style={styles.boldText}>
+                {currencyFormat.format(tarifaDeServicio)}
+              </Text>
+            </View>
+
+            <View style={styles.rowTotal}>
+              <Text style={styles.boldTotalText}>Total</Text>
+              <Text style={styles.boldTotalText}>
+                {currencyFormat.format(total)}
+              </Text>
+            </View>
+          </View>
+          <View>
+            <MediosPago />
+          </View>
+          <View style={{ alignItems: "center", marginTop: 35 }}>
+            <Text style={{ color: "gray", fontSize: 9 }}>
+              Al confirmar tu pedido aceptas los términos y condiciones de
+              nuestra App.{" "}
+            </Text>
+            <TouchableOpacity style={styles.pagarButton}>
+              <Text style={{ color: "#FFF", fontWeight: "bold", fontSize: 20 }}>
+                Pagar
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
+      </SafeAreaView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   pageContainer: {
-    backgroundColor: "#FFF",
-    padding: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flex: 1,
+    height: windowHeight,
+    backgroundColor: "white",
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+  },
+  headerTitle2: {
+    fontSize: 18,
+    fontWeight: "bold",
   },
   itemContainer: {
     flexDirection: "row",
@@ -156,20 +235,47 @@ const styles = StyleSheet.create({
   },
   itemName: {
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 18,
+    marginBottom: 5,
   },
   originalPrice: {
+    fontSize: 14,
     textAlign: "right",
     textDecorationLine: "line-through",
-    color: "#666",
   },
   discountedPrice: {
+    fontSize: 18,
     textAlign: "right",
-    color: "#E35940",
+    color: Colors.VerdeOscuro,
     fontWeight: "bold",
   },
   totalContainer: {
-    marginTop: 20,
+    marginTop: 10,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 5,
+  },
+  rowTotal: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+  boldText: {
+    fontSize: 16,
+  },
+  boldTotalText: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  pagarButton: {
+    width: "100%",
+    backgroundColor: Colors.VerdeOscuro,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    marginTop: 5,
   },
   // Additional styles for order summary, payment methods, and billing address
 });

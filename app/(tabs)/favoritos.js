@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Text, Pressable, StyleSheet, View } from "react-native";
+import { Text, Pressable, StyleSheet, View, ScrollView } from "react-native";
 import ContenedorComidaFavoritos from "../../components/UI/ContenedorComidaFavoritos";
 import { UserContext } from "../../store/UserContext"; // import UserContext
 import { datosRestaurante } from "../../data/datosRestaurante";
@@ -10,40 +10,43 @@ export default function Tab() {
   const { user, newFavorites, loading } = useContext(UserContext); // access user data
 
   // Find the restaurants in datosRestaurante that match the ids in user.RestaurantesFavoritos
-  const favoriteRestaurants = !loading && newFavorites
-    ? datosRestaurante.filter((restaurant) =>
-        newFavorites.includes(restaurant.id)
-      )
-    : [];
+  const favoriteRestaurants =
+    !loading && newFavorites
+      ? datosRestaurante.filter((restaurant) =>
+          newFavorites.includes(restaurant.id)
+        )
+      : [];
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Favoritos</Text>
-      {favoriteRestaurants.map((restaurant, index) => (
-        <View style={{ width: "100%" }} key={restaurant.id}>
-          <Pressable
-            key={index}
-            style={styles.restaurant}
-            onPress={() =>
-              router.push({
-                pathname: "/Restaurants/[id]",
-                params: { id: restaurant.id },
-              })
-            }
-          >
-            <ContenedorComidaFavoritos
-              id={restaurant.id}
-              nombre={restaurant.nombre}
-              distancia={restaurant.distancia}
-              calificaciones={restaurant.calificaciones}
-              urlImagenLogo={restaurant.urlImagenLogo}
-              urlImagenPortada={restaurant.urlImagenPortada}
-              Productos={restaurant.Productos}
-              width="larger"
-            />
-          </Pressable>
-        </View>
-      ))}
+      <ScrollView>
+        <Text style={styles.header}>Favoritos</Text>
+        {favoriteRestaurants.map((restaurant, index) => (
+          <View style={{ width: "100%" }} key={restaurant.id}>
+            <Pressable
+              key={index}
+              style={styles.restaurant}
+              onPress={() =>
+                router.push({
+                  pathname: "/Restaurants/[id]",
+                  params: { id: restaurant.id },
+                })
+              }
+            >
+              <ContenedorComidaFavoritos
+                id={restaurant.id}
+                nombre={restaurant.nombre}
+                distancia={restaurant.distancia}
+                calificaciones={restaurant.calificaciones}
+                urlImagenLogo={restaurant.urlImagenLogo}
+                urlImagenPortada={restaurant.urlImagenPortada}
+                Productos={restaurant.Productos}
+                width="larger"
+              />
+            </Pressable>
+          </View>
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -52,6 +55,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: "white",
   },
   header: {
     fontSize: 24,
