@@ -14,9 +14,7 @@ import TiempoDeRetiro from "../../components/UI/TiempoDeRetiro";
 import { Colors } from "../../constants/Colors";
 import MediosPago from "../../components/UI/MediosPago";
 import { useNavigation } from "expo-router";
-
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import carritoVacio from "../../assets/carritoVacio.png";
 
 const { width, height } = Dimensions.get("window");
