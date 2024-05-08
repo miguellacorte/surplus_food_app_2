@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Colors } from "../../constants/Colors";
@@ -12,27 +12,27 @@ const CategoryIcons = {
     name: "food-turkey",
     size: 18,
   },
-  Desayuno: { library: MaterialIcons, name: "breakfast-dining", size: 18 },
-  Panadería: { library: MaterialIcons, name: "bakery-dining", size: 20 },
+  "Desayuno": { library: MaterialIcons, name: "breakfast-dining", size: 18 },
+  "Panadería": { library: MaterialIcons, name: "bakery-dining", size: 20 },
   "Comida rápida": {
     library: MaterialCommunityIcons,
     name: "hamburger",
     size: 18,
   },
-  Postre: { library: MaterialCommunityIcons, name: "cupcake", size: 16 },
+  "Postre": { library: MaterialCommunityIcons, name: "cupcake", size: 16 },
   "Snacks y merienda": {
     library: MaterialCommunityIcons,
     name: "food-variant",
     size: 20,
   },
-  Otros: {
+  "Otros": {
     library: MaterialCommunityIcons,
     name: "silverware-fork-knife",
     size: 16,
   },
 };
 
-const CategoryButton = ({ category }) => {
+const CategoryButton = ({ category, isSelected, onSelect }) => {
   if (!CategoryIcons[category]) {
     console.error(`Invalid category: ${category}`);
     return null;
@@ -42,23 +42,37 @@ const CategoryButton = ({ category }) => {
   const iconSize = CategoryIcons[category].size;
 
   return (
-    <View style={styles.categoryButton}>
+    <TouchableOpacity
+      style={styles.categoryButton}
+      onPress={() => onSelect(category)}
+    >
+    
       <IconComponent
         name={iconName}
         size={iconSize}
         color={Colors.VerdeOscuro}
       />
       <Text style={styles.categoryButtonText}> {category}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
-const CategoriesContainer = ({ categories }) => {
+const CategoriesContainer = ({ selectedCategories = [], onSelectCategory }) => {
+
+
   return (
     <View style={styles.categoriesContainer}>
-      {categories.map((category) => (
-        <CategoryButton key={category} category={category} />
-      ))}
+      {Object.keys(CategoryIcons).map((category, index) => {
+        const isSelected = selectedCategories.includes(category);
+        return (
+          <CategoryButton
+            key={index}
+            category={category}
+            isSelected={isSelected}
+            onSelect={onSelectCategory}
+          />
+        );
+      })}
     </View>
   );
 };

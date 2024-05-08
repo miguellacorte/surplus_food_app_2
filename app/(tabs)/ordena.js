@@ -21,6 +21,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Ubicacion from "../../components/UI/Ubicacion";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import ToggleSwitch from "../../components/UI/ToggleSwitch";
+import CategoriesContainer from "../../components/UI/CategoriesContainer";
 
 const sliderStyle = Platform.OS === "ios" ? { color: "green" } : {};
 
@@ -104,6 +105,7 @@ function Ordena() {
   const [filteredData, setFilteredData] = useState(datosRestaurante);
   const [selectedDay, setSelectedDay] = useState("hoy");
   const [activeDay, setActiveDay] = useState("hoy");
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const daySwitchAnim = useRef(new Animated.Value(0)).current;
 
@@ -133,14 +135,15 @@ function Ordena() {
     const [startHour, endHour] = sliderValues;
 
     // Filter restaurant data
-    const timeFilteredData = datosRestaurante
+    const filteredData = datosRestaurante
       .map((restaurant) => {
         const filteredProducts = restaurant.Productos.filter((product) => {
           const productHour = parseInt(product.horaRetiro.split(":")[0]);
           return (
             productHour >= startHour &&
             productHour <= endHour &&
-            product.diaRetiro === selectedDay
+            product.diaRetiro === selectedDay &&
+            selectedCategories.includes(product.category) // Add this line
           );
         });
 
@@ -149,7 +152,7 @@ function Ordena() {
       .filter((restaurant) => restaurant.Productos.length > 0);
 
     // Update restaurant data
-    setFilteredData(timeFilteredData);
+    setFilteredData(filteredData);
 
     setModalVisible(false);
   };
@@ -209,6 +212,19 @@ function Ordena() {
                     customMarker={CustomMarker}
                     trackStyle={{ Color: Colors.VerdeOscuro }} // Set the slider line color
                     style={sliderStyle}
+                  />
+                </View>
+
+                <View>
+                  <CategoriesContainer
+                    selectedCategories={selectedCategories}
+                    onSelectCategory={(category) => {
+                      setSelectedCategories((prevCategories) =>
+                        prevCategories.includes(category)
+                          ? prevCategories.filter((c) => c !== category)
+                          : [...prevCategories, category]
+                      );
+                    }}
                   />
                 </View>
                 <TouchableOpacity

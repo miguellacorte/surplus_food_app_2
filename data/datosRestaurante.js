@@ -128,6 +128,7 @@ export const datosRestaurante = [
         categoria: ["Caja sorpresa", "Plato principal", "Postre"],
       },
     ],
+    MetodosPago: ['cash', 'transferencia', 'pago móvil', 'tarjeta']
   },
   {
     id: 2,
