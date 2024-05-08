@@ -12,20 +12,20 @@ const CategoryIcons = {
     name: "food-turkey",
     size: 18,
   },
-  "Desayuno": { library: MaterialIcons, name: "breakfast-dining", size: 18 },
-  "Panadería": { library: MaterialIcons, name: "bakery-dining", size: 20 },
+  Desayuno: { library: MaterialIcons, name: "breakfast-dining", size: 18 },
+  Panadería: { library: MaterialIcons, name: "bakery-dining", size: 20 },
   "Comida rápida": {
     library: MaterialCommunityIcons,
     name: "hamburger",
     size: 18,
   },
-  "Postre": { library: MaterialCommunityIcons, name: "cupcake", size: 16 },
+  Postre: { library: MaterialCommunityIcons, name: "cupcake", size: 16 },
   "Snacks y merienda": {
     library: MaterialCommunityIcons,
     name: "food-variant",
     size: 20,
   },
-  "Otros": {
+  Otros: {
     library: MaterialCommunityIcons,
     name: "silverware-fork-knife",
     size: 16,
@@ -43,23 +43,25 @@ const CategoryButton = ({ category, isSelected, onSelect }) => {
 
   return (
     <TouchableOpacity
-      style={styles.categoryButton}
+      style={[
+        styles.categoryButton,
+        isSelected && { backgroundColor: Colors.VerdeOscuro },
+      ]}
       onPress={() => onSelect(category)}
     >
-    
       <IconComponent
         name={iconName}
         size={iconSize}
-        color={Colors.VerdeOscuro}
+        color={isSelected ? "#FFFFFF" : Colors.VerdeOscuro}
       />
-      <Text style={styles.categoryButtonText}> {category}</Text>
+      <Text style={[styles.categoryButtonText, isSelected && { color: "#FFFFFF" }]}>
+        {category}
+      </Text>
     </TouchableOpacity>
   );
 };
 
 const CategoriesContainer = ({ selectedCategories = [], onSelectCategory }) => {
-
-
   return (
     <View style={styles.categoriesContainer}>
       {Object.keys(CategoryIcons).map((category, index) => {
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#34654B",
+    borderColor: Colors.VerdeOscuro,
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 10,
@@ -96,6 +98,8 @@ const styles = StyleSheet.create({
   },
   categoryButtonText: {
     color: "#34654B",
+    color: Colors.VerdeOscuro,
+    marginLeft:5,
   },
 });
 

@@ -125,7 +125,7 @@ export const datosRestaurante = [
         horaRetiro: "07:15 - 11:45",
         descripcion:
           "Caja sorpresa con 2 platos principales, 2 postres y 2 bebidas",
-        categoria: ["Caja sorpresa", "Plato principal", "Postre"],
+        categoria: ["Caja sorpresa"],
       },
     ],
     MetodosPago: ['cash', 'transferencia', 'pago móvil', 'tarjeta']
@@ -212,7 +212,7 @@ export const datosRestaurante = [
         horaRetiro: "10:30 - 15:00",
         descripcion:
           "Croissants recién horneados con relleno de crema de almendras",
-        categoria: ["Caja sorpresa", "Panadería"],
+        categoria: [ "Panadería"],
       },
       {
         id: 6,

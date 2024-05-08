@@ -66,7 +66,7 @@ const ModalHeader = ({ setModalVisible, modalVisible }) => (
 
 const Lista = ({ data }) => (
   <>
-    <Text>Ordernar por:</Text>
+    <Text style={{fontSize:16,fontWeight:'bold', marginLeft:20, marginTop:10}}>Ordernar por:</Text>
     <FlatList
       data={data}
       keyExtractor={(item) => item.id.toString()}
@@ -103,7 +103,7 @@ function Ordena() {
   const [modalVisible, setModalVisible] = useState(false);
   const [sliderValues, setSliderValues] = useState([0, 24]); // 0 represents 12:00 AM and 24 represents 12:00 PM
   const [filteredData, setFilteredData] = useState(datosRestaurante);
-  const [selectedDay, setSelectedDay] = useState("hoy");
+  const [selectedDay, setSelectedDay] = useState(null);
   const [activeDay, setActiveDay] = useState("hoy");
   const [selectedCategories, setSelectedCategories] = useState([]);
 
@@ -111,7 +111,9 @@ function Ordena() {
 
   const handleDayPress = (newActiveDay) => {
     setActiveDay(newActiveDay);
-    setSelectedDay(newActiveDay);
+    setSelectedDay(
+      newActiveDay === "hoy" || newActiveDay === "mañana" ? newActiveDay : null
+    );
 
     Animated.timing(daySwitchAnim, {
       toValue: newActiveDay === "hoy" ? 0 : 1,
@@ -130,8 +132,16 @@ function Ordena() {
     } ${ampm}`;
   };
 
+  const onSelectCategory = (category) => {
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(selectedCategories.filter((c) => c !== category));
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
+    // console.log(selectedCategories);
+  };
+
   const applyFilters = () => {
-    // Convert slider values to hours
     const [startHour, endHour] = sliderValues;
 
     // Filter restaurant data
@@ -142,8 +152,12 @@ function Ordena() {
           return (
             productHour >= startHour &&
             productHour <= endHour &&
-            product.diaRetiro === selectedDay &&
-            selectedCategories.includes(product.category) // Add this line
+            (selectedDay ? product.diaRetiro == selectedDay : true) &&
+            (product.categoria
+              ? product.categoria.some((category) =>
+                  selectedCategories.includes(category)
+                )
+              : true)
           );
         });
 
@@ -191,42 +205,49 @@ function Ordena() {
                   modalVisible={modalVisible}
                 />
                 <View>
-                  <ToggleSwitch
-                    active={activeDay}
-                    options={["hoy", "mañana"]}
-                    onToggle={handleDayPress}
-                  />
+                  <View>
+                    <View style={styles.modalCategoryContainer}>
+                      <Text style={styles.titleModaltext}>Día de retiro</Text>
+                      <View style={{ marginTop: 10, marginBottom: 10 }}>
+                        <ToggleSwitch
+                          active={activeDay}
+                          options={["hoy", "mañana"]}
+                          onToggle={handleDayPress}
+                        />
+                      </View>
+                    </View>
+                    <View>
+                      <Text style={styles.titleModaltext}>Hora de retiro</Text>
 
-                  <Text>
-                    Value: {sliderValues.map(convertToTime).join(" - ")}
-                  </Text>
-                  <MultiSlider
-                    values={sliderValues}
-                    sliderLength={Dimensions.get("window").width - 40} // Adjust this value to fit the slider to your modal width
-                    onValuesChange={(values) => setSliderValues(values)}
-                    min={0}
-                    max={24}
-                    step={0.5}
-                    allowOverlap={false}
-                    snapped
-                    customMarker={CustomMarker}
-                    trackStyle={{ Color: Colors.VerdeOscuro }} // Set the slider line color
-                    style={sliderStyle}
-                  />
+                      <MultiSlider
+                        values={sliderValues}
+                        sliderLength={Dimensions.get("window").width - 40} // Adjust this value to fit the slider to your modal width
+                        onValuesChange={(values) => setSliderValues(values)}
+                        min={0}
+                        max={24}
+                        step={0.5}
+                        allowOverlap={false}
+                        snapped
+                        customMarker={CustomMarker}
+                        trackStyle={{ Color: Colors.VerdeOscuro }} // Set the slider line color
+                        style={sliderStyle}
+                      />
+                    </View>
+                    <Text>{sliderValues.map(convertToTime).join(" - ")}</Text>
+                  </View>
+
+                  <View style={{ marginTop: 30, marginBottom: 40 }}>
+                    <Text style={styles.titleModaltext}>Hora de retiro</Text>
+                    <CategoriesContainer
+                      selectedCategories={selectedCategories}
+                      onSelectCategory={onSelectCategory}
+                    />
+                  </View>
+                  <View>
+                    <Text style={styles.titleModaltext}>Métodos de pago</Text>
+                  </View>
                 </View>
 
-                <View>
-                  <CategoriesContainer
-                    selectedCategories={selectedCategories}
-                    onSelectCategory={(category) => {
-                      setSelectedCategories((prevCategories) =>
-                        prevCategories.includes(category)
-                          ? prevCategories.filter((c) => c !== category)
-                          : [...prevCategories, category]
-                      );
-                    }}
-                  />
-                </View>
                 <TouchableOpacity
                   style={styles.pagarButton}
                   onPress={applyFilters}
@@ -325,7 +346,8 @@ const styles = StyleSheet.create({
   },
   centeredView: {
     flex: 1,
-    justifyContent: "center",
+    marginTop: "15%",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
   modalView: {
@@ -342,6 +364,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  modalCategoryContainer: {
+    marginVertical: 20,
+  },
+  titleModaltext: {
+    fontSize: 16,
+    fontWeight: "bold",
   },
   openButton: {
     backgroundColor: "#F194FF",
