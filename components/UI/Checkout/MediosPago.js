@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Colors } from "../../constants/Colors";
+import { Colors } from "../../../constants/Colors";
 
 const iconName = "chevron-forward";
 

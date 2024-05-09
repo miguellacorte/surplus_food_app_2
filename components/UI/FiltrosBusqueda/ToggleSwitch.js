@@ -6,7 +6,7 @@ import {
   Animated,
   StyleSheet,
 } from "react-native";
-import { Colors } from "../../constants/Colors";
+import { Colors } from "../../../constants/Colors";
 
 const ToggleSwitch = ({ active, options, onToggle }) => {
   const animation = useRef(new Animated.Value(options.indexOf(active))).current;

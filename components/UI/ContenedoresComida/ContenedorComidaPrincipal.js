@@ -9,7 +9,7 @@ import {
 
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
 import TiempoDeRetiro from "./TiempoDeRetiro";
-import CalificacionesMiniatura from "./calificacionesMiniatura";
+import CalificacionesMiniatura from "./CalificacionesMiniatura";
 import BotonFavoritos from "./BotonFavoritos";
 
 const { width, height } = Dimensions.get("window");

@@ -10,9 +10,9 @@ import {
 } from "react-native";
 import { CartContext } from "../../store/CartContext";
 import Icon from "react-native-vector-icons/FontAwesome";
-import TiempoDeRetiro from "../../components/UI/TiempoDeRetiro";
+import TiempoDeRetiro from "../../components/UI/ContenedoresComida/TiempoDeRetiro";
 import { Colors } from "../../constants/Colors";
-import MediosPago from "../../components/UI/MediosPago";
+import MediosPago from "../../components/UI/Checkout/MediosPago";
 import { useNavigation } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import carritoVacio from "../../assets/carritoVacio.png";

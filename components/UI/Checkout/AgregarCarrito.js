@@ -1,13 +1,8 @@
 import React, { useContext } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from "react-native";
-import { Colors } from "../../constants/Colors";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Colors } from "../../../constants/Colors";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { CartContext } from "../../store/CartContext";
+import { CartContext } from "../../../store/CartContext";
 
 const PriceTag = ({ price }) => (
   <View style={styles.priceContainer}>
@@ -39,9 +34,9 @@ function AgregarCarrito({ restaurant, productId }) {
         <CircleButton label="x1" />
         <PriceTag price={`${product.precioVenta}$`} />
         <AddToCartButton
-        text={"Agregar al carrito"}
-        onPress={() => addToCart(product)}
-      />
+          text={"Agregar al carrito"}
+          onPress={() => addToCart(product)}
+        />
         <View>
           <FontAwesome
             name="chevron-right"
@@ -59,7 +54,7 @@ const styles = StyleSheet.create({
   container: {
     position: "absolute",
     width: "90%",
-    bottom: 20, 
+    bottom: 20,
     marginHorizontal: 20,
     justifyContent: "space-between",
     alignItems: "stretch",

@@ -4,10 +4,10 @@ import {
   MaterialCommunityIcons,
   AntDesign,
   FontAwesome6,
-  MaterialIcons
+  MaterialIcons,
 } from "@expo/vector-icons";
 
-import { Colors } from "../../constants/Colors";
+import { Colors } from "../../../constants/Colors";
 
 const PaymentIcons = {
   Cash: {
@@ -56,7 +56,10 @@ const PaymentButton = ({ method, isSelected, onSelect }) => {
         color={isSelected ? "#FFFFFF" : iconColor}
       />
       <Text
-        style={[styles.paymentButtonText, { color: isSelected ? "#FFFFFF" : iconColor }]}
+        style={[
+          styles.paymentButtonText,
+          { color: isSelected ? "#FFFFFF" : iconColor },
+        ]}
       >
         {method}
       </Text>
@@ -92,7 +95,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: "black",
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 10,

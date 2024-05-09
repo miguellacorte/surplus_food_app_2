@@ -1,12 +1,12 @@
 import { StyleSheet, View, ScrollView, StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ImageCarousel from "../../components/UI/ImageCarousel";
+import ImageCarousel from "../../components/UI/Image/ImageCarousel";
 import RecomendadosParaTi from "../../components/IndexFoodContainers/RecomendadosParaTi";
 import LlevateloAntesQueSeAcabe from "../../components/IndexFoodContainers/LlevateloAntesQueSeAcabe";
 import RetirarParaCenar from "../../components/IndexFoodContainers/RetirarParaCenar";
 import RetirarParaDesayuno from "../../components/IndexFoodContainers/RetirarParaDesayuno";
 import Ubicacion from "../../components/UI/Ubicacion";
-import ImageBanner from "../../components/UI/ImageBanner";
+import ImageBanner from "../../components/UI/Image/ImageBanner";
 import CajaSorpresa from "../../components/IndexFoodContainers/CajaSorpresa";
 import CercaTuyo from "../../components/IndexFoodContainers/CercaTuyo";
 

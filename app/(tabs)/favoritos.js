@@ -9,7 +9,7 @@ import {
   Dimensions,
   ActivityIndicator,
 } from "react-native";
-import ContenedorComidaFavoritos from "../../components/UI/ContenedorComidaFavoritos";
+import ContenedorComidaFavoritos from "../../components/UI/ContenedoresComida/ContenedorComidaFavoritos";
 import { UserContext } from "../../store/UserContext"; // import UserContext
 import { datosRestaurante } from "../../data/datosRestaurante";
 import { router } from "expo-router";

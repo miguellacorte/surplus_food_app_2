@@ -15,14 +15,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../constants/Colors";
 import { datosRestaurante } from "../../data/datosRestaurante";
-import ContenedorComidaOrdena from "../../components/UI/ContenedorComidaOrdena";
+import ContenedorComidaOrdena from "../../components/UI/ContenedoresComida/ContenedorComidaOrdena";
 import { router } from "expo-router";
 import Ubicacion from "../../components/UI/Ubicacion";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
-import ToggleSwitch from "../../components/UI/ToggleSwitch";
-import CategoriesContainer from "../../components/UI/CategoriesContainer";
-import PaymentContainers from "../../components/UI/PaymentContainers";
-import SortSearch from '../../components/UI/SortSearch'
+import ToggleSwitch from "../../components/UI/FiltrosBusqueda/ToggleSwitch";
+import CategoriesContainer from "../../components/UI/FiltrosBusqueda/CategoriesContainer";
+import PaymentContainers from "../../components/UI/FiltrosBusqueda/PaymentContainers";
+import SortSearch from "../../components/UI/FiltrosBusqueda/SortSearch";
+import BotonesDiaRetiro from "../../components/UI/FiltrosBusqueda/BotonesDiaRetiro";
 
 const sliderStyle = Platform.OS === "ios" ? { color: "green" } : {};
 
@@ -67,8 +68,7 @@ const ModalHeader = ({ setModalVisible, modalVisible }) => (
 
 const Lista = ({ data }) => (
   <>
-   
-    <SortSearch/>
+    <SortSearch />
     <FlatList
       data={data}
       keyExtractor={(item) => item.id.toString()}
@@ -156,12 +156,15 @@ function Ordena() {
           const isDayMatched = selectedDay
             ? product.diaRetiro === selectedDay
             : true;
-            const isCategoryMatched = selectedCategories.length > 0
-            ? product.categoria
-              ? product.categoria.some((category) => selectedCategories.includes(category))
-              : false
-            : true;
-            // console.log(productHour, startHour, endHour, selectedDay,selectedCategories, product.diaRetiro, product.categoria)
+          const isCategoryMatched =
+            selectedCategories.length > 0
+              ? product.categoria
+                ? product.categoria.some((category) =>
+                    selectedCategories.includes(category)
+                  )
+                : false
+              : true;
+          // console.log(productHour, startHour, endHour, selectedDay,selectedCategories, product.diaRetiro, product.categoria)
           return isWithinTimeRange && isDayMatched && isCategoryMatched;
         });
 
@@ -170,7 +173,6 @@ function Ordena() {
         return { ...restaurant, Productos: filteredProducts };
       })
       .filter((restaurant) => restaurant.Productos.length > 0);
-
 
     setFilteredData(filteredData);
 
@@ -215,10 +217,9 @@ function Ordena() {
                     <View style={styles.modalCategoryContainer}>
                       <Text style={styles.titleModaltext}>Día de retiro</Text>
                       <View style={{ marginTop: 10, marginBottom: 10 }}>
-                        <ToggleSwitch
-                          active={activeDay}
-                          options={["Hoy", "Mañana"]}
-                          onToggle={handleDayPress}
+                        <BotonesDiaRetiro
+                          activeDay={activeDay}
+                          handleDayPress={handleDayPress}
                         />
                       </View>
                     </View>

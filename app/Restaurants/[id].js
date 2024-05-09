@@ -14,13 +14,13 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ContenedorProductosRestaurante from "../../components/UI/ContenedorProductosRestaurante";
+import ContenedorProductosRestaurante from "../../components/UI/ContenedoresComida/ContenedorProductosRestaurante";
 import { datosRestaurante } from "../../data/datosRestaurante";
-import CalificacionesMiniatura from "../../components/UI/calificacionesMiniatura";
+import CalificacionesMiniatura from "../../components/UI/ContenedoresComida/CalificacionesMiniatura";
 import { Link, useLocalSearchParams } from "expo-router";
 import { useNavigation } from "expo-router";
-import BotonFavoritos from "../../components/UI/BotonFavoritos";
-import AgregarCarrito from "../../components/UI/AgregarCarrito";
+import BotonFavoritos from "../../components/UI/ContenedoresComida/BotonFavoritos";
+import AgregarCarrito from "../../components/UI/Checkout/AgregarCarrito";
 import myGif from "../../assets/ezgif.gif";
 import { CartContext } from "../../store/CartContext";
 

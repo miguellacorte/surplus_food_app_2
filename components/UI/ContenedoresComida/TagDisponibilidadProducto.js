@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
-import { Colors } from "../../constants/Colors";
+import { Colors } from "../../../constants/Colors";
 
 const VerdeOscuro = Colors.VerdeOscuro;
 const VerdeMedio = Colors.VerdeMedio;
@@ -10,7 +10,7 @@ const Rojo = Colors.Rojo;
 
 const { width, height } = Dimensions.get("window");
 
-const TagDisponibilidadProducto = ({ size , cantidadDisponible }) => {
+const TagDisponibilidadProducto = ({ size, cantidadDisponible }) => {
   let scale;
   switch (size) {
     case "small":
@@ -45,7 +45,7 @@ const TagDisponibilidadProducto = ({ size , cantidadDisponible }) => {
     backgroundColor = Rojo;
     textoDisponible = "Último disponible!";
   } else {
-    backgroundColor = '#000';
+    backgroundColor = "#000";
     textoDisponible = "Agotado";
   }
 
@@ -70,4 +70,3 @@ const TagDisponibilidadProducto = ({ size , cantidadDisponible }) => {
 };
 
 export default TagDisponibilidadProducto;
-

@@ -1,5 +1,5 @@
 import React from "react";
-import ContenedorComidaPrincipal from "../UI/ContenedorComidaPrincipal";
+import ContenedorComidaPrincipal from "../UI/ContenedoresComida/ContenedorComidaPrincipal";
 import { StyleSheet, View, Text, ScrollView, Pressable } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { datosRestaurante } from "../../data/datosRestaurante";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View, Modal, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Colors } from "../../constants/Colors";
+import { Colors } from "../../../constants/Colors";
 
 const SortSearch = () => {
   const [modalVisible, setModalVisible] = useState(false);

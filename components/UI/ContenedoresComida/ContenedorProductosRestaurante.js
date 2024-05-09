@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
 import TiempoDeRetiro from "./TiempoDeRetiro";
-import { Colors } from "../../constants/Colors";
+import { Colors } from "../../../constants/Colors";
 
 const Precio = ({ precioAntes, precioDescuento }) => {
-  const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
   const formattedPrecioAntes = formatter.format(precioAntes);
   const formattedPrecioDescuento = formatter.format(precioDescuento);
 

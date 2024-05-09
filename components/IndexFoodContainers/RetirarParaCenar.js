@@ -1,5 +1,5 @@
 import React from "react";
-import ContenedorComidaPrincipal from "../UI/ContenedorComidaPrincipal";
+import ContenedorComidaPrincipal from "../UI/ContenedoresComida/ContenedorComidaPrincipal";
 import { StyleSheet, View, Text, ScrollView, Pressable } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { datosRestaurante } from "../../data/datosRestaurante";
@@ -11,7 +11,7 @@ const RetirarParaCenar = () => {
         ...restaurant,
         Productos: restaurant.Productos.filter(
           (product) =>
-            product.diaRetiro === "hoy" &&
+            product.diaRetiro === "Hoy" &&
             product.horaRetiro &&
             parseInt(product.horaRetiro.split("-")[1].split(":")[0]) >= 16 // 15:00 hora de pickup para cenar
         ),

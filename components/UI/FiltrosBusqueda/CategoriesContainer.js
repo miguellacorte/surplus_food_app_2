@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Colors } from "../../constants/Colors";
+import { Colors } from "../../../constants/Colors";
 import {
   MaterialIcons,
   MaterialCommunityIcons,
@@ -32,8 +32,6 @@ const CategoryIcons = {
     name: "hamburger",
     size: 18,
   },
-  
-  
 };
 
 const CategoryButton = ({ category, isSelected, onSelect }) => {
@@ -58,7 +56,9 @@ const CategoryButton = ({ category, isSelected, onSelect }) => {
         size={iconSize}
         color={isSelected ? "#FFFFFF" : Colors.VerdeOscuro}
       />
-      <Text style={[styles.categoryButtonText, isSelected && { color: "#FFFFFF" }]}>
+      <Text
+        style={[styles.categoryButtonText, isSelected && { color: "#FFFFFF" }]}
+      >
         {category}
       </Text>
     </TouchableOpacity>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   categoryButtonText: {
     color: "#34654B",
     color: Colors.VerdeOscuro,
-    marginLeft:5,
+    marginLeft: 5,
   },
 });
 

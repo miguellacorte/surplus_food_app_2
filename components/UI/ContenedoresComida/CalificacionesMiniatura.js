@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Colors } from "../../constants/Colors";
+import { Colors } from "../../../constants/Colors";
 
 const { width } = Dimensions.get("window");
 
@@ -13,8 +13,8 @@ const CalificacionesMiniatura = ({ calificaciones }) => {
     calificaciones.reduce((sum, { calificacion }) => sum + calificacion, 0) /
     calificaciones.length;
 
-    const averageFormatted = average.toFixed(1);
- 
+  const averageFormatted = average.toFixed(1);
+
   return (
     <View style={styles.contenedorCalificacion}>
       <FontAwesome

@@ -304,7 +304,7 @@ export const datosRestaurante = [
         horaRetiro: "15:25 - 19:55",
         descripcion:
           "Emparedado de pollo grillado con lechuga, tomate y mayonesa en pan artesanal",
-        categoria: ["Comida rápida"],
+        categoria: ["Comida rápida", 'Caja sorpresa'],
       },
       {
         id: 10,
