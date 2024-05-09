@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -15,7 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../constants/Colors";
 import { datosRestaurante } from "../../data/datosRestaurante";
-import ContenedorComidaOrdena from "../../components/UI/ContenedoresComida/ContenedorComidaOrdena";
+import ContenedorComidaLista from "../../components/UI/ContenedoresComida/ContenedorComidaLista";
 import { router } from "expo-router";
 import Ubicacion from "../../components/UI/Ubicacion";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
@@ -66,41 +66,101 @@ const ModalHeader = ({ setModalVisible, modalVisible }) => (
   </View>
 );
 
-const Lista = ({ data }) => (
-  <>
-    <SortSearch />
-    <FlatList
-      data={data}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item, index }) => (
-        <View style={{ width: "100%" }}>
-          <Pressable
-            key={index}
-            style={styles.restaurant}
-            onPress={() =>
-              router.push({
-                pathname: "/Restaurants/[id]",
-                params: { id: item.id },
-              })
-            }
-          >
-            <ContenedorComidaOrdena
-              id={item.id}
-              nombre={item.nombre}
-              distancia={item.distancia}
-              calificaciones={item.calificaciones}
-              urlImagenLogo={item.urlImagenLogo}
-              urlImagenPortada={item.urlImagenPortada}
-              Productos={item.Productos}
-            />
-          </Pressable>
-        </View>
-      )}
-    />
-  </>
-);
+function Lista({ data, handleSortOptionChange, sortOption }) {
+  const [sortedData, setSortedData] = useState(data);
 
-function Ordena() {
+  useEffect(() => {
+    if (!data) {
+      return; // If 'data' is undefined, exit the useEffect hook early
+    }
+
+    let flattenedProducts = data.flatMap((restaurant) =>
+      restaurant.Productos.map((product) => ({
+        ...product,
+        restaurantId: restaurant.id, // clearly naming restaurant ID
+        restaurantName: restaurant.nombre,
+        distancia: restaurant.distancia,
+        urlImagenLogo: restaurant.urlImagenLogo,
+        urlImagenPortada: restaurant.urlImagenPortada,
+        calificaciones: restaurant.calificaciones,
+      }))
+    );
+
+    switch (sortOption) {
+      case "Relevancia":
+        // sort by relevance
+        break;
+      case "Distancia":
+        flattenedProducts.sort(
+          (a, b) => Number(a.distancia) - Number(b.distancia)
+        );
+        break;
+      case "Precio":
+        flattenedProducts.sort(
+          (a, b) => Number(a.precioVenta) - Number(b.precioVenta)
+        );
+        break;
+      case "Calificación":
+        flattenedProducts.sort((a, b) => {
+          const avgA =
+            a.calificaciones.reduce((acc, curr) => acc + curr.calificacion, 0) /
+            a.calificaciones.length;
+          const avgB =
+            b.calificaciones.reduce((acc, curr) => acc + curr.calificacion, 0) /
+            b.calificaciones.length;
+          return avgB - avgA;
+        });
+        break;
+      default:
+        // default sort
+        break;
+    }
+    setSortedData(flattenedProducts);
+
+    // console.log(sortedData)
+  }, [sortOption, data]);
+  return (
+    <>
+      <SortSearch onSortOptionChange={handleSortOptionChange} />
+      <FlatList
+        data={sortedData}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item, index }) => (
+          <View style={{ width: "100%" }}>
+            <Pressable
+              key={index}
+              style={styles.restaurant}
+              onPress={() =>
+                router.push({
+                  pathname: "/Restaurants/[id]",
+                  params: { id: item.id },
+                })
+              }
+            >
+              <ContenedorComidaLista
+                id={item.id}
+                nombre={item.nombre}
+                restaurantName={item.restaurantName}
+                distancia={item.distancia}
+                calificaciones={item.calificaciones}
+                urlImagenLogo={item.urlImagenLogo}
+                urlImagenPortada={item.urlImagenPortada}
+                precioAntes={item.precioAntes}
+                precioVenta={item.precioVenta}
+                cantidadDisponible={item.cantidadDisponible}
+                diaRetiro={item.diaRetiro}
+                horaRetiro={item.horaRetiro}
+                restaurantId={item.restaurantId}
+              />
+            </Pressable>
+          </View>
+        )}
+      />
+    </>
+  );
+}
+
+function Ordena({ data, initialSortOption }) {
   const [active, setActive] = useState("Lista");
   const [modalVisible, setModalVisible] = useState(false);
   const [sliderValues, setSliderValues] = useState([0, 24]); // 0 represents 12:00 AM and 24 represents 12:00 PM
@@ -108,8 +168,16 @@ function Ordena() {
   const [selectedDay, setSelectedDay] = useState(null);
   const [activeDay, setActiveDay] = useState("hoy");
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [sortOption, setSortOption] = useState(
+    initialSortOption || "Relevancia"
+  );
 
   const daySwitchAnim = useRef(new Animated.Value(0)).current;
+
+  const handleSortOptionChange = (option) => {
+    
+    setSortOption(option);
+  };
 
   const handleDayPress = (newActiveDay) => {
     setActiveDay(newActiveDay);
@@ -300,7 +368,11 @@ function Ordena() {
 
       <View style={styles.content}>
         {active === "Lista" ? (
-          <Lista data={filteredData} />
+          <Lista
+            data={filteredData}
+            handleSortOptionChange={handleSortOptionChange}
+            sortOption={sortOption}
+          />
         ) : (
           <Text>Content for Mapa</Text>
         )}

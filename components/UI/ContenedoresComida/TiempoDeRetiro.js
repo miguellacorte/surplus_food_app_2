@@ -2,7 +2,10 @@ import React from "react";
 import { Text, View } from "react-native";
 
 const TiempoDeRetiro = ({ dia, hora, textSize, containerSize }) => {
+  
   const convertTo12HourFormat = (time) => {
+    if (!time) return ''; // Add this line
+
     return time.split(' - ').map(time => {
       let [hours, minutes] = time.split(":");
       let period = +hours >= 12 ? "PM" : "AM";
