@@ -46,6 +46,13 @@ function ContenedorComidaPrincipal({
   urlImagenPortada,
   Productos,
 }) {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const precioAntes = formatter.format(Productos[0].precioAntes);
+  const precioVenta = formatter.format(Productos[0].precioVenta);
+
   return (
     <View style={estilos.contenedorTarjeta}>
       <ImageBackground
@@ -72,10 +79,7 @@ function ContenedorComidaPrincipal({
           </View>
 
           <View style={{ bottom: 3 }}>
-            <BotonFavoritos
-              size={BotonFavoritosSize}
-              restaurantId={id}
-            />
+            <BotonFavoritos size={BotonFavoritosSize} restaurantId={id} />
           </View>
         </View>
 
@@ -111,10 +115,8 @@ function ContenedorComidaPrincipal({
             </View>
           </View>
           <View style={estilos.contenedorPrecio}>
-            <Text style={estilos.precioAntes}>{Productos[0].precioAntes}</Text>
-            <Text style={estilos.precioDespues}>
-              {Productos[0].precioVenta}
-            </Text>
+            <Text style={estilos.precioAntes}>{precioAntes}</Text>
+            <Text style={estilos.precioDespues}>{precioVenta}</Text>
           </View>
         </View>
       </View>

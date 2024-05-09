@@ -29,6 +29,13 @@ function ContenedorComidaFavoritos({
 }) {
   const firstProduct = Productos[0];
 
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const precioAntes = formatter.format(Productos[0].precioAntes);
+  const precioVenta = formatter.format(Productos[0].precioVenta);
+
   const estilos = getStyles(width, height);
 
   return (
@@ -87,10 +94,8 @@ function ContenedorComidaFavoritos({
             </View>
           </View>
           <View style={estilos.contenedorPrecio}>
-            <Text style={estilos.precioAntes}>{firstProduct.precioAntes}</Text>
-            <Text style={estilos.precioDespues}>
-              {firstProduct.precioVenta}
-            </Text>
+            <Text style={estilos.precioAntes}>{precioAntes}</Text>
+            <Text style={estilos.precioDespues}>{precioVenta}</Text>
           </View>
         </View>
       </View>

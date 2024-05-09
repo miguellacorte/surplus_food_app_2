@@ -28,82 +28,88 @@ export default function ContenedorComidaFavoritos({
   urlImagenPortada,
   Productos,
 }) {
- 
   const estilos = getStyles(width, height);
 
   return (
     <View>
-      {Productos.map((producto, index) => (
-        <View key={index} style={estilos.contenedorTarjeta}>
-          <ImageBackground
-            resizeMode="cover"
-            source={{ uri: urlImagenPortada }}
-            style={estilos.imagenRestaurante}
-          >
-            <View
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: "rgba(120,120,120,0.5)",
-              }}
-            />
-            <View style={estilos.contenedorTope}>
-              <View style={{ marginTop: 10, marginLeft: 10 }}>
-                <TagDisponibilidadProducto
-                  size={TagSize}
-                  cantidadDisponible={producto.cantidadDisponible}
-                />
-              </View>
+      {Productos.map((producto, index) => {
+        const formatter = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        });
+        const precioAntes = formatter.format(Productos[0].precioAntes);
+        const precioVenta = formatter.format(Productos[0].precioVenta);
 
-              <View style={{ bottom: 3 }}>
-                <BotonFavoritos size={BotonFavoritosSize} restaurantId={id} />
-              </View>
-            </View>
-
-            <View style={estilos.detallesRestaurante}>
-              <Image
-                resizeMode="cover"
-                source={{ uri: urlImagenLogo }}
-                style={estilos.miniaturaRestaurante}
+        return (
+          <View key={index} style={estilos.contenedorTarjeta}>
+            <ImageBackground
+              resizeMode="cover"
+              source={{ uri: urlImagenPortada }}
+              style={estilos.imagenRestaurante}
+            >
+              <View
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: "rgba(120,120,120,0.5)",
+                }}
               />
-              <View style={estilos.contenedorNombreRestaurante}>
-                <Text style={estilos.nombreRestaurante}>{nombre}</Text>
-              </View>
-            </View>
-          </ImageBackground>
-
-          <View style={estilos.detallesProducto}>
-            <Text style={estilos.nombrePlato}>{producto.nombre}</Text>
-
-            <View style={estilos.contenedorInfoProducto}>
-              <View>
-                <View style={estilos.contenedorHorario}>
-                  <TiempoDeRetiro
-                    dia={producto.diaRetiro}
-                    hora={producto.horaRetiro}
-                    textSize={horarioFontSize}
-                    containerSize="100%"
+              <View style={estilos.contenedorTope}>
+                <View style={{ marginTop: 10, marginLeft: 10 }}>
+                  <TagDisponibilidadProducto
+                    size={TagSize}
+                    cantidadDisponible={producto.cantidadDisponible}
                   />
                 </View>
-                <View style={estilos.contenedorDistanciaCalificacion}>
-                  <Text style={estilos.distancia}>{distancia} km</Text>
-                  <Text style={estilos.separador}>|</Text>
-                  <CalificacionesMiniatura calificaciones={calificaciones} />
+
+                <View style={{ bottom: 3 }}>
+                  <BotonFavoritos size={BotonFavoritosSize} restaurantId={id} />
                 </View>
               </View>
-              <View style={estilos.contenedorPrecio}>
-                <Text style={estilos.precioAntes}>{producto.precioAntes}</Text>
-                <Text style={estilos.precioDespues}>
-                  {producto.precioVenta}
-                </Text>
+
+              <View style={estilos.detallesRestaurante}>
+                <Image
+                  resizeMode="cover"
+                  source={{ uri: urlImagenLogo }}
+                  style={estilos.miniaturaRestaurante}
+                />
+                <View style={estilos.contenedorNombreRestaurante}>
+                  <Text style={estilos.nombreRestaurante}>{nombre}</Text>
+                </View>
+              </View>
+            </ImageBackground>
+
+            <View style={estilos.detallesProducto}>
+              <Text style={estilos.nombrePlato}>{producto.nombre}</Text>
+
+              <View style={estilos.contenedorInfoProducto}>
+                <View>
+                  <View style={estilos.contenedorHorario}>
+                    <TiempoDeRetiro
+                      dia={producto.diaRetiro}
+                      hora={producto.horaRetiro}
+                      textSize={horarioFontSize}
+                      containerSize="100%"
+                    />
+                  </View>
+                  <View style={estilos.contenedorDistanciaCalificacion}>
+                    <Text style={estilos.distancia}>{distancia} km</Text>
+                    <Text style={estilos.separador}>|</Text>
+                    <CalificacionesMiniatura calificaciones={calificaciones} />
+                  </View>
+                </View>
+                <View style={estilos.contenedorPrecio}>
+                  <Text style={estilos.precioAntes}>{precioAntes}</Text>
+                  <Text style={estilos.precioDespues}>{precioVenta}</Text>
+                </View>
               </View>
             </View>
           </View>
-        </View>
-      ))}
+        );
+      })}
     </View>
   );
 }
@@ -124,7 +130,6 @@ const getStyles = (width, height) => {
   const contenedorPrecioDerecha = width < widthBreakpoint ? 1 : 3;
   const bottomContenedorHorario = width < widthBreakpoint ? 0 : 3;
 
-  
   const contenedorInfoProductoHeight = width < widthBreakpoint ? 50 : 60;
 
   const estilos = StyleSheet.create({

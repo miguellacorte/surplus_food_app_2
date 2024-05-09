@@ -4,12 +4,18 @@ import TagDisponibilidadProducto from "./TagDisponibilidadProducto";
 import TiempoDeRetiro from "./TiempoDeRetiro";
 import { Colors } from "../../constants/Colors";
 
-const Precio = ({ precioAntes, precioDescuento }) => (
-  <View style={styles.discountContainer}>
-    <Text style={styles.precioAntes}>{precioAntes}</Text>
-    <Text style={styles.precioDescuento}>{precioDescuento}</Text>
-  </View>
-);
+const Precio = ({ precioAntes, precioDescuento }) => {
+  const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+  const formattedPrecioAntes = formatter.format(precioAntes);
+  const formattedPrecioDescuento = formatter.format(precioDescuento);
+
+  return (
+    <View style={styles.discountContainer}>
+      <Text style={styles.precioAntes}>{formattedPrecioAntes}</Text>
+      <Text style={styles.precioDescuento}>{formattedPrecioDescuento}</Text>
+    </View>
+  );
+};
 
 function ContenedorProductosRestaurante({
   productosRestaurante,

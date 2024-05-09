@@ -106,8 +106,8 @@ export const datosRestaurante = [
       {
         id: 1,
         nombre: "Plato de pollo",
-        precioAntes: "10,00",
-        precioVenta: "4,80",
+        precioAntes: "10.00",
+        precioVenta: "4.80",
         cantidadDisponible: "2",
         diaRetiro: "Hoy",
         horaRetiro: "06:30 - 10:59",
@@ -118,8 +118,8 @@ export const datosRestaurante = [
       {
         id: 2,
         nombre: "Caja sorpresa",
-        precioAntes: "18,00",
-        precioVenta: "9,00",
+        precioAntes: "18.00",
+        precioVenta: "9.00",
         cantidadDisponible: "1",
         diaRetiro: "Mañana",
         horaRetiro: "07:15 - 11:45",
