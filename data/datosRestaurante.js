@@ -109,7 +109,7 @@ export const datosRestaurante = [
         precioAntes: "10,00",
         precioVenta: "4,80",
         cantidadDisponible: "2",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "06:30 - 10:59",
         descripcion:
           "2x1 en pollo a la brasa, acompañado de papas fritas y ensalada",
@@ -121,7 +121,7 @@ export const datosRestaurante = [
         precioAntes: "18,00",
         precioVenta: "9,00",
         cantidadDisponible: "1",
-        diaRetiro: "mañana",
+        diaRetiro: "Mañana",
         horaRetiro: "07:15 - 11:45",
         descripcion:
           "Caja sorpresa con 2 platos principales, 2 postres y 2 bebidas",
@@ -161,7 +161,7 @@ export const datosRestaurante = [
         precioAntes: "8.00",
         precioVenta: "5.60",
         cantidadDisponible: "15",
-        diaRetiro: "mañana",
+        diaRetiro: "Mañana",
         horaRetiro: "08:00 - 12:30",
         descripcion:
           "Hamburguesa con doble carne, queso, y nuestras salsas secretas",
@@ -173,7 +173,7 @@ export const datosRestaurante = [
         precioAntes: "4.00",
         precioVenta: "2.80",
         cantidadDisponible: "20",
-        diaRetiro: "mañana",
+        diaRetiro: "Mañana",
         horaRetiro: "09:45 - 12:15",
         descripcion:
           "Cheesecake cremoso con una capa generosa de fresas frescas",
@@ -208,7 +208,7 @@ export const datosRestaurante = [
         precioAntes: "3.00",
         precioVenta: "1.80",
         cantidadDisponible: "25",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "10:30 - 15:00",
         descripcion:
           "Croissants recién horneados con relleno de crema de almendras",
@@ -220,7 +220,7 @@ export const datosRestaurante = [
         precioAntes: "2.50",
         precioVenta: "1.50",
         cantidadDisponible: "30",
-        diaRetiro: "mañana",
+        diaRetiro: "Mañana",
         horaRetiro: "11:00 - 15:30",
         descripcion: "Capuchino con espuma perfecta y un toque de canela",
         categoria: ["Desayuno"],
@@ -254,7 +254,7 @@ export const datosRestaurante = [
         precioAntes: "12.00",
         precioVenta: "8.00",
         cantidadDisponible: "10",
-        diaRetiro: "mañana",
+        diaRetiro: "Mañana",
         horaRetiro: "12:15 - 16:45",
         descripcion:
           "Torta de chocolate húmeda con capas de ganache y sprinkles de chocolate",
@@ -266,7 +266,7 @@ export const datosRestaurante = [
         precioAntes: "2.00",
         precioVenta: "1.20",
         cantidadDisponible: "30",
-        diaRetiro: "mañana",
+        diaRetiro: "Mañana",
         horaRetiro: "14:00 - 18:30",
         descripcion:
           "Croissant francés tradicional, ligero y aireado con exterior crujiente",
@@ -300,7 +300,7 @@ export const datosRestaurante = [
         precioAntes: "6.00",
         precioVenta: "3.60",
         cantidadDisponible: "20",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "15:25 - 19:55",
         descripcion:
           "Emparedado de pollo grillado con lechuga, tomate y mayonesa en pan artesanal",
@@ -312,7 +312,7 @@ export const datosRestaurante = [
         precioAntes: "4.00",
         precioVenta: "2.40",
         cantidadDisponible: "25",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "16:10 - 20:40",
         descripcion:
           "Batido de frutas naturales, selección del día según disponibilidad",
@@ -347,7 +347,7 @@ export const datosRestaurante = [
         precioAntes: "4.00",
         precioVenta: "2.50",
         cantidadDisponible: "1",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "06:00 - 10:00",
         descripcion:
           "Arepa rellena de queso de mano y pernil, acompañada de café con leche",
@@ -359,7 +359,7 @@ export const datosRestaurante = [
         precioAntes: "3.00",
         precioVenta: "2.00",
         cantidadDisponible: "20",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "07:00 - 11:00",
         descripcion:
           "Pan de jamón tradicional, relleno de jamón ahumado, pasas y aceitunas",
@@ -394,7 +394,7 @@ export const datosRestaurante = [
         precioAntes: "12.00",
         precioVenta: "7.20",
         cantidadDisponible: "1",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "11:00 - 17:00",
         descripcion:
           "Bowl nutritivo de quinoa con pollo grillado, aguacate y salsa de yogur",
@@ -406,7 +406,7 @@ export const datosRestaurante = [
         precioAntes: "6.00",
         precioVenta: "3.60",
         cantidadDisponible: "20",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "12:00 - 14:00",
         descripcion:
           "Mousse ligero de mango con un toque de jengibre fresco y menta",
@@ -440,7 +440,7 @@ export const datosRestaurante = [
         precioAntes: "10.00",
         precioVenta: "6.00",
         cantidadDisponible: "10",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "12:00 - 04:00",
         descripcion:
           "Plato tradicional venezolano con arroz, carne mechada, plátano y frijoles",
@@ -452,7 +452,7 @@ export const datosRestaurante = [
         precioAntes: "3.00",
         precioVenta: "1.80",
         cantidadDisponible: "3",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "12:00 - 15:00",
         descripcion:
           "Deditos de queso envueltos en masa dorada y crujiente, acompañados de salsa tártara",
@@ -486,7 +486,7 @@ export const datosRestaurante = [
         precioAntes: "4.00",
         precioVenta: "2.40",
         cantidadDisponible: "2",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "10:00 - 14:00",
         descripcion:
           "Hot dog con salchicha de res, cebolla caramelizada, queso cheddar y salsa especial",
@@ -498,7 +498,7 @@ export const datosRestaurante = [
         precioAntes: "2.00",
         precioVenta: "1.20",
         cantidadDisponible: "40",
-        diaRetiro: "hoy",
+        diaRetiro: "Hoy",
         horaRetiro: "08:00 - 11:00",
         descripcion:
           "Empanada de masa crujiente rellena de carne picada y especias",

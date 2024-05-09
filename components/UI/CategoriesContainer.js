@@ -1,22 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 import { Colors } from "../../constants/Colors";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  MaterialCommunityIcons,
+  AntDesign,
+} from "@expo/vector-icons";
 
 const CategoryIcons = {
   "Caja sorpresa": { library: AntDesign, name: "gift", size: 18 },
   "Plato principal": {
     library: MaterialCommunityIcons,
     name: "food-turkey",
-    size: 18,
-  },
-  Desayuno: { library: MaterialIcons, name: "breakfast-dining", size: 18 },
-  Panadería: { library: MaterialIcons, name: "bakery-dining", size: 20 },
-  "Comida rápida": {
-    library: MaterialCommunityIcons,
-    name: "hamburger",
     size: 18,
   },
   Postre: { library: MaterialCommunityIcons, name: "cupcake", size: 16 },
@@ -30,6 +25,15 @@ const CategoryIcons = {
     name: "silverware-fork-knife",
     size: 16,
   },
+  Desayuno: { library: MaterialIcons, name: "breakfast-dining", size: 18 },
+  Panadería: { library: MaterialIcons, name: "bakery-dining", size: 20 },
+  "Comida rápida": {
+    library: MaterialCommunityIcons,
+    name: "hamburger",
+    size: 18,
+  },
+  
+  
 };
 
 const CategoryButton = ({ category, isSelected, onSelect }) => {
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
   categoriesContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 20,
+    marginTop: 10,
   },
   categoryButton: {
     flexDirection: "row",

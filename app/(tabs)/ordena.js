@@ -12,16 +12,17 @@ import {
   Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../constants/Colors";
 import { datosRestaurante } from "../../data/datosRestaurante";
 import ContenedorComidaOrdena from "../../components/UI/ContenedorComidaOrdena";
 import { router } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
 import Ubicacion from "../../components/UI/Ubicacion";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import ToggleSwitch from "../../components/UI/ToggleSwitch";
 import CategoriesContainer from "../../components/UI/CategoriesContainer";
+import PaymentContainers from "../../components/UI/PaymentContainers";
+import SortSearch from '../../components/UI/SortSearch'
 
 const sliderStyle = Platform.OS === "ios" ? { color: "green" } : {};
 
@@ -53,7 +54,7 @@ const SearchButton = () => (
 
 const ModalHeader = ({ setModalVisible, modalVisible }) => (
   <View style={styles.modalHeader}>
-    <Text style={styles.modalHeaderText}>Filtro de busqueda</Text>
+    <Text style={styles.modalHeaderText}>Filtro de búsqueda</Text>
     <TouchableOpacity
       onPress={() => {
         setModalVisible(!modalVisible);
@@ -66,7 +67,8 @@ const ModalHeader = ({ setModalVisible, modalVisible }) => (
 
 const Lista = ({ data }) => (
   <>
-    <Text style={{fontSize:16,fontWeight:'bold', marginLeft:20, marginTop:10}}>Ordernar por:</Text>
+   
+    <SortSearch/>
     <FlatList
       data={data}
       keyExtractor={(item) => item.id.toString()}
@@ -112,11 +114,11 @@ function Ordena() {
   const handleDayPress = (newActiveDay) => {
     setActiveDay(newActiveDay);
     setSelectedDay(
-      newActiveDay === "hoy" || newActiveDay === "mañana" ? newActiveDay : null
+      newActiveDay === "Hoy" || newActiveDay === "Mañana" ? newActiveDay : null
     );
 
     Animated.timing(daySwitchAnim, {
-      toValue: newActiveDay === "hoy" ? 0 : 1,
+      toValue: newActiveDay === "Hoy" ? 0 : 1,
       duration: 200,
       useNativeDriver: false,
     }).start();
@@ -144,28 +146,32 @@ function Ordena() {
   const applyFilters = () => {
     const [startHour, endHour] = sliderValues;
 
-    // Filter restaurant data
     const filteredData = datosRestaurante
       .map((restaurant) => {
         const filteredProducts = restaurant.Productos.filter((product) => {
           const productHour = parseInt(product.horaRetiro.split(":")[0]);
-          return (
-            productHour >= startHour &&
-            productHour <= endHour &&
-            (selectedDay ? product.diaRetiro == selectedDay : true) &&
-            (product.categoria
-              ? product.categoria.some((category) =>
-                  selectedCategories.includes(category)
-                )
-              : true)
-          );
+
+          const isWithinTimeRange =
+            productHour >= startHour && productHour <= endHour;
+          const isDayMatched = selectedDay
+            ? product.diaRetiro === selectedDay
+            : true;
+            const isCategoryMatched = selectedCategories.length > 0
+            ? product.categoria
+              ? product.categoria.some((category) => selectedCategories.includes(category))
+              : false
+            : true;
+            // console.log(productHour, startHour, endHour, selectedDay,selectedCategories, product.diaRetiro, product.categoria)
+          return isWithinTimeRange && isDayMatched && isCategoryMatched;
         });
+
+        // console.log(filteredProducts)
 
         return { ...restaurant, Productos: filteredProducts };
       })
       .filter((restaurant) => restaurant.Productos.length > 0);
 
-    // Update restaurant data
+
     setFilteredData(filteredData);
 
     setModalVisible(false);
@@ -211,7 +217,7 @@ function Ordena() {
                       <View style={{ marginTop: 10, marginBottom: 10 }}>
                         <ToggleSwitch
                           active={activeDay}
-                          options={["hoy", "mañana"]}
+                          options={["Hoy", "Mañana"]}
                           onToggle={handleDayPress}
                         />
                       </View>
@@ -229,15 +235,32 @@ function Ordena() {
                         allowOverlap={false}
                         snapped
                         customMarker={CustomMarker}
-                        trackStyle={{ Color: Colors.VerdeOscuro }} // Set the slider line color
+                        selectedStyle={{
+                          backgroundColor: Colors.VerdeOscuro, // color for the selected part
+                        }}
+                        unselectedStyle={{
+                          backgroundColor: "gray", // color for the unselected part
+                        }}
                         style={sliderStyle}
                       />
                     </View>
-                    <Text>{sliderValues.map(convertToTime).join(" - ")}</Text>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Text>{convertToTime(sliderValues[0])}</Text>
+                      <Text>{convertToTime(sliderValues[1])}</Text>
+                    </View>
                   </View>
 
                   <View style={{ marginTop: 30, marginBottom: 40 }}>
-                    <Text style={styles.titleModaltext}>Hora de retiro</Text>
+                    <View>
+                      <Text style={styles.titleModaltext}>
+                        Categorías de productos:
+                      </Text>
+                    </View>
                     <CategoriesContainer
                       selectedCategories={selectedCategories}
                       onSelectCategory={onSelectCategory}
@@ -245,6 +268,9 @@ function Ordena() {
                   </View>
                   <View>
                     <Text style={styles.titleModaltext}>Métodos de pago</Text>
+                    <View>
+                      <PaymentContainers />
+                    </View>
                   </View>
                 </View>
 
@@ -399,7 +425,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
-    marginTop: 5,
+    marginTop: 30,
   },
   customMarker: {
     backgroundColor: Colors.VerdeOscuro,
