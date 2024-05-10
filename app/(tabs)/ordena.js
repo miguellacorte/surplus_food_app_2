@@ -10,6 +10,8 @@ import {
   Modal,
   Dimensions,
   Platform,
+  TextInput,
+  Button,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
@@ -26,7 +28,6 @@ import SortSearch from "../../components/UI/FiltrosBusqueda/SortSearch";
 import BotonesDiaRetiro from "../../components/UI/FiltrosBusqueda/BotonesDiaRetiro";
 
 const sliderStyle = Platform.OS === "ios" ? { color: "green" } : {};
-
 const CustomMarker = () => <View style={styles.customMarker} />;
 const ITEMS_PER_PAGE = 10;
 
@@ -46,7 +47,7 @@ const FilterButton = ({ toggleModal }) => (
 
 const SearchButton = () => (
   <TouchableOpacity style={styles.searchButton}>
-    <FontAwesome name="search" size={20} color={Colors.VerdeOscuro} />
+   
     <Text style={{ color: Colors.VerdeOscuro }}>
       {" "}
       Que te provoca comer hoy?{" "}
@@ -67,9 +68,63 @@ const ModalHeader = ({ setModalVisible, modalVisible }) => (
   </View>
 );
 
-function Lista({ data, handleSortOptionChange, sortOption }) {
+function Lista({
+  data,
+  handleSortOptionChange,
+  sortOption,
+  searchTerm,
+}) {
   const [page, setPage] = useState(1);
   const [sortedData, setSortedData] = useState(data);
+
+  const [filteredData, setFilteredData] = useState(data);
+
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchTerm);
+
+useEffect(() => {
+  const timerId = setTimeout(() => {
+    setDebouncedSearchTerm(searchTerm);
+  }, 500); // 500ms delay
+
+  return () => {
+    clearTimeout(timerId);
+  };
+}, [searchTerm]);
+
+useEffect(() => {
+  if (!data || !debouncedSearchTerm ) {
+    setFilteredData(data);
+    return; // If 'data' or 'debouncedSearchTerm' is undefined, exit the useEffect hook early
+  }
+
+  let filtered = data.flatMap((restaurant) =>
+    restaurant.Productos.map((product) => ({
+      ...product,
+      restaurantId: restaurant.id, // clearly naming restaurant ID
+      restaurantName: restaurant.nombre,
+      distancia: restaurant.distancia,
+      urlImagenLogo: restaurant.urlImagenLogo,
+      urlImagenPortada: restaurant.urlImagenPortada,
+      calificaciones: restaurant.calificaciones,
+      cocina: restaurant.cocina,
+      categoria: restaurant.categoria,
+    }))
+  );
+
+  filtered = filtered.filter(
+    (item) =>
+      item.nombre.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+      item.cocina.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+      item.categoria.some((cat) =>
+        cat.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+      ) ||
+      item.restaurantName.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+      item.descripcion.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+  );
+
+  setFilteredData(filtered);
+}, [data, debouncedSearchTerm]);
+
 
   useEffect(() => {
     if (!data) {
@@ -98,7 +153,7 @@ function Lista({ data, handleSortOptionChange, sortOption }) {
                 (acc, curr) => acc + curr.calificacion,
                 0
               ) / product.calificaciones.length;
-            return avgRating >= 4;
+            return avgRating >= 3.5;
           })
           .sort(
             (a, b) =>
@@ -149,7 +204,7 @@ function Lista({ data, handleSortOptionChange, sortOption }) {
         style={{ marginBottom: 5 }}
       />
       <FlatList
-        data={sortedData}
+       data={debouncedSearchTerm ? filteredData : sortedData}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item, index }) => (
           <View style={{ width: "100%" }}>
@@ -187,7 +242,7 @@ function Lista({ data, handleSortOptionChange, sortOption }) {
     </>
   );
 }
-
+//Delete data prop (not doing anything)
 function Ordena({ data, initialSortOption }) {
   const [active, setActive] = useState("Lista");
   const [modalVisible, setModalVisible] = useState(false);
@@ -199,6 +254,15 @@ function Ordena({ data, initialSortOption }) {
   const [sortOption, setSortOption] = useState(
     initialSortOption || "Relevancia"
   );
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  
+
+  const handleInputChange = (text) => {
+    setSearchTerm(text);
+  };
+
+  
 
   const daySwitchAnim = useRef(new Animated.Value(0)).current;
 
@@ -290,7 +354,16 @@ function Ordena({ data, initialSortOption }) {
           <FilterButton toggleModal={() => setModalVisible(!modalVisible)} />
         </View>
         <View style={styles.header}>
-          <SearchButton />
+        <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
+        
+        <FontAwesome name="search" size={20} color={Colors.VerdeOscuro} style={{marginTop:7,marginLeft:10, marginRight:9}} />
+          <TextInput
+            style={styles.searchButton}
+            placeholder="Que te provoca comer hoy?"
+            onChangeText={handleInputChange}
+          />
+        
+          </View>
         </View>
         <View>
           <Modal
@@ -399,6 +472,9 @@ function Ordena({ data, initialSortOption }) {
             data={filteredData}
             handleSortOptionChange={handleSortOptionChange}
             sortOption={sortOption}
+            searchResults={searchResults}
+            setSearchResults={setSearchResults}
+            searchTerm={searchTerm}
           />
         ) : (
           <Text>Content for Mapa</Text>
@@ -445,7 +521,7 @@ const styles = StyleSheet.create({
   },
   searchButton: {
     marginTop: 10,
-    width: "100%",
+    width: "90%",
     alignItems: "center",
     borderRadius: 32,
     borderColor: "rgba(95, 158, 94, 0.2)",
