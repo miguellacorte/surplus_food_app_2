@@ -28,6 +28,7 @@ import BotonesDiaRetiro from "../../components/UI/FiltrosBusqueda/BotonesDiaReti
 const sliderStyle = Platform.OS === "ios" ? { color: "green" } : {};
 
 const CustomMarker = () => <View style={styles.customMarker} />;
+const ITEMS_PER_PAGE = 10;
 
 const FilterButton = ({ toggleModal }) => (
   <View style={{ right: "50%" }}>
@@ -67,6 +68,7 @@ const ModalHeader = ({ setModalVisible, modalVisible }) => (
 );
 
 function Lista({ data, handleSortOptionChange, sortOption }) {
+  const [page, setPage] = useState(1);
   const [sortedData, setSortedData] = useState(data);
 
   useEffect(() => {
@@ -88,7 +90,22 @@ function Lista({ data, handleSortOptionChange, sortOption }) {
 
     switch (sortOption) {
       case "Relevancia":
-        // sort by relevance
+        flattenedProducts = flattenedProducts
+          .filter((product) => Number(product.distancia) <= 2)
+          .filter((product) => {
+            const avgRating =
+              product.calificaciones.reduce(
+                (acc, curr) => acc + curr.calificacion,
+                0
+              ) / product.calificaciones.length;
+            return avgRating >= 4;
+          })
+          .sort(
+            (a, b) =>
+              Number(b.precioAntes) -
+              Number(b.precioVenta) -
+              (Number(a.precioAntes) - Number(a.precioVenta))
+          );
         break;
       case "Distancia":
         flattenedProducts.sort(
@@ -117,11 +134,20 @@ function Lista({ data, handleSortOptionChange, sortOption }) {
     }
     setSortedData(flattenedProducts);
 
-    // console.log(sortedData)
-  }, [sortOption, data]);
+    const newItems = flattenedProducts.slice(0, page * ITEMS_PER_PAGE);
+    setSortedData(newItems);
+  }, [sortOption, page, data]);
+
+  const handleLoadMore = () => {
+    setPage(page + 1); // Increase the page count by 1 when the end is reached
+  };
+
   return (
     <>
-      <SortSearch onSortOptionChange={handleSortOptionChange} />
+      <SortSearch
+        onSortOptionChange={handleSortOptionChange}
+        style={{ marginBottom: 5 }}
+      />
       <FlatList
         data={sortedData}
         keyExtractor={(item) => item.id.toString()}
@@ -138,7 +164,6 @@ function Lista({ data, handleSortOptionChange, sortOption }) {
               }
             >
               <ContenedorComidaLista
-                id={item.id}
                 nombre={item.nombre}
                 restaurantName={item.restaurantName}
                 distancia={item.distancia}
@@ -155,6 +180,9 @@ function Lista({ data, handleSortOptionChange, sortOption }) {
             </Pressable>
           </View>
         )}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
+        contentContainerStyle={{ paddingBottom: 200 }}
       />
     </>
   );
@@ -175,7 +203,6 @@ function Ordena({ data, initialSortOption }) {
   const daySwitchAnim = useRef(new Animated.Value(0)).current;
 
   const handleSortOptionChange = (option) => {
-    
     setSortOption(option);
   };
 

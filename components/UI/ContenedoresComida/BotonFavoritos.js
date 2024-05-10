@@ -32,10 +32,12 @@ const BotonFavoritos = ({ size, restaurantId }) => {
     },
     iconoContenedor: {
       backgroundColor: "rgba(128, 128, 128, 0.7)",
-      borderRadius: 50 * scale,
+      borderRadius: 60 * scale,
       padding: 5 * scale,
-      width: 30 * scale,
+      width: 32 * scale,
+      height: 32 * scale,
       alignItems: "center",
+      justifyContent: "center",
       marginTop: 3,
     },
   });
@@ -50,7 +52,7 @@ const BotonFavoritos = ({ size, restaurantId }) => {
       <View style={estilos.iconoContenedor}>
         <FontAwesome
           name={favorito ? "heart" : "heart-o"}
-          size={20 * scale}
+          size={18 * scale}
           color="white"
         />
       </View>

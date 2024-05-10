@@ -20,10 +20,9 @@ import {
   const horarioFontSize = width < widthBreakpoint ? 12 : 14;
   
   export default function ContenedorComidaLista({
-    id, // This is now the product ID
     nombre, // Product name
     distancia,
-    calificaciones, // You might need to adjust how ratings are passed
+    calificaciones, 
     urlImagenLogo,
     urlImagenPortada,
     precioAntes, // Directly passed as a prop
