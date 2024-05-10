@@ -19,6 +19,7 @@ import { Colors } from "../../constants/Colors";
 import { datosRestaurante } from "../../data/datosRestaurante";
 import ContenedorComidaLista from "../../components/UI/ContenedoresComida/ContenedorComidaLista";
 import { router } from "expo-router";
+import { useRoute } from "@react-navigation/native";
 import Ubicacion from "../../components/UI/Ubicacion";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import ToggleSwitch from "../../components/UI/FiltrosBusqueda/ToggleSwitch";
@@ -45,16 +46,6 @@ const FilterButton = ({ toggleModal }) => (
   </View>
 );
 
-const SearchButton = () => (
-  <TouchableOpacity style={styles.searchButton}>
-   
-    <Text style={{ color: Colors.VerdeOscuro }}>
-      {" "}
-      Que te provoca comer hoy?{" "}
-    </Text>
-  </TouchableOpacity>
-);
-
 const ModalHeader = ({ setModalVisible, modalVisible }) => (
   <View style={styles.modalHeader}>
     <Text style={styles.modalHeaderText}>Filtro de búsqueda</Text>
@@ -68,70 +59,33 @@ const ModalHeader = ({ setModalVisible, modalVisible }) => (
   </View>
 );
 
-function Lista({
-  data,
-  handleSortOptionChange,
-  sortOption,
-  searchTerm,
-}) {
+function Lista({ data, handleSortOptionChange, sortOption, searchTerm }) {
   const [page, setPage] = useState(1);
-  const [sortedData, setSortedData] = useState(data);
+  const [sortedData, setSortedData] = useState([]);
 
-  const [filteredData, setFilteredData] = useState(data);
+  const [filteredData, setFilteredData] = useState([]);
 
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchTerm);
 
-useEffect(() => {
-  const timerId = setTimeout(() => {
-    setDebouncedSearchTerm(searchTerm);
-  }, 500); // 500ms delay
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 500); // 500ms delay
 
-  return () => {
-    clearTimeout(timerId);
-  };
-}, [searchTerm]);
-
-useEffect(() => {
-  if (!data || !debouncedSearchTerm ) {
-    setFilteredData(data);
-    return; // If 'data' or 'debouncedSearchTerm' is undefined, exit the useEffect hook early
-  }
-
-  let filtered = data.flatMap((restaurant) =>
-    restaurant.Productos.map((product) => ({
-      ...product,
-      restaurantId: restaurant.id, // clearly naming restaurant ID
-      restaurantName: restaurant.nombre,
-      distancia: restaurant.distancia,
-      urlImagenLogo: restaurant.urlImagenLogo,
-      urlImagenPortada: restaurant.urlImagenPortada,
-      calificaciones: restaurant.calificaciones,
-      cocina: restaurant.cocina,
-      categoria: restaurant.categoria,
-    }))
-  );
-
-  filtered = filtered.filter(
-    (item) =>
-      item.nombre.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
-      item.cocina.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
-      item.categoria.some((cat) =>
-        cat.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
-      ) ||
-      item.restaurantName.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
-      item.descripcion.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
-  );
-
-  setFilteredData(filtered);
-}, [data, debouncedSearchTerm]);
-
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [searchTerm]);
 
   useEffect(() => {
-    if (!data) {
-      return; // If 'data' is undefined, exit the useEffect hook early
+    //Check if the data is available
+    if (!data || !debouncedSearchTerm) {
+      setFilteredData(data || []);
+      return;
     }
 
-    let flattenedProducts = data.flatMap((restaurant) =>
+    // Flatten the data so that each product has a reference to its parent restaurant
+    let filtered = data.flatMap((restaurant) =>
       restaurant.Productos.map((product) => ({
         ...product,
         restaurantId: restaurant.id, // clearly naming restaurant ID
@@ -140,8 +94,54 @@ useEffect(() => {
         urlImagenLogo: restaurant.urlImagenLogo,
         urlImagenPortada: restaurant.urlImagenPortada,
         calificaciones: restaurant.calificaciones,
+        cocina: restaurant.cocina,
+        categoria: restaurant.categoria,
       }))
     );
+
+    // filter the data by the search term
+    filtered = filtered.filter(
+      (item) =>
+        item.nombre.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+        item.cocina.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+        item.categoria.some((cat) =>
+          cat.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+        ) ||
+        item.restaurantName
+          .toLowerCase()
+          .includes(debouncedSearchTerm.toLowerCase()) ||
+        item.descripcion
+          .toLowerCase()
+          .includes(debouncedSearchTerm.toLowerCase())
+    );
+
+    setFilteredData(filtered);
+  }, [data, debouncedSearchTerm]);
+
+  useEffect(() => {
+    if (!filteredData) {
+      return; // If 'data' is undefined, exit the useEffect hook early
+    }
+
+    let flattenedProducts;
+
+    // Check if the data needs to be flattened(since if you searhc for a product, the data is already flattened)
+    if (filteredData[0] && filteredData[0].Productos) {
+      flattenedProducts = filteredData.flatMap((restaurant) =>
+        (restaurant.Productos || []).map((product) => ({
+          ...product,
+          restaurantId: restaurant.id, // clearly naming restaurant ID
+          restaurantName: restaurant.nombre,
+          distancia: restaurant.distancia,
+          urlImagenLogo: restaurant.urlImagenLogo,
+          urlImagenPortada: restaurant.urlImagenPortada,
+          calificaciones: restaurant.calificaciones,
+        }))
+      );
+    } else {
+      // If the data is already flattened, use it as is
+      flattenedProducts = filteredData;
+    }
 
     switch (sortOption) {
       case "Relevancia":
@@ -191,7 +191,7 @@ useEffect(() => {
 
     const newItems = flattenedProducts.slice(0, page * ITEMS_PER_PAGE);
     setSortedData(newItems);
-  }, [sortOption, page, data]);
+  }, [sortOption, page, filteredData]);
 
   const handleLoadMore = () => {
     setPage(page + 1); // Increase the page count by 1 when the end is reached
@@ -204,7 +204,7 @@ useEffect(() => {
         style={{ marginBottom: 5 }}
       />
       <FlatList
-       data={debouncedSearchTerm ? filteredData : sortedData}
+        data={debouncedSearchTerm ? filteredData : sortedData}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item, index }) => (
           <View style={{ width: "100%" }}>
@@ -242,8 +242,8 @@ useEffect(() => {
     </>
   );
 }
-//Delete data prop (not doing anything)
-function Ordena({ data, initialSortOption }) {
+
+function Ordena({ initialSortOption }) {
   const [active, setActive] = useState("Lista");
   const [modalVisible, setModalVisible] = useState(false);
   const [sliderValues, setSliderValues] = useState([0, 24]); // 0 represents 12:00 AM and 24 represents 12:00 PM
@@ -254,15 +254,18 @@ function Ordena({ data, initialSortOption }) {
   const [sortOption, setSortOption] = useState(
     initialSortOption || "Relevancia"
   );
-  const [searchTerm, setSearchTerm] = useState("");
+  const route = useRoute();
+
+  const [searchTerm, setSearchTerm] = useState();
   const [searchResults, setSearchResults] = useState([]);
-  
+
+  useEffect(() => {
+    setSearchTerm(route.params?.searchTerm || "");
+  }, [route.params?.searchTerm]);
 
   const handleInputChange = (text) => {
     setSearchTerm(text);
   };
-
-  
 
   const daySwitchAnim = useRef(new Animated.Value(0)).current;
 
@@ -299,7 +302,6 @@ function Ordena({ data, initialSortOption }) {
     } else {
       setSelectedCategories([...selectedCategories, category]);
     }
-    // console.log(selectedCategories);
   };
 
   const applyFilters = () => {
@@ -308,7 +310,7 @@ function Ordena({ data, initialSortOption }) {
     const filteredData = datosRestaurante
       .map((restaurant) => {
         const filteredProducts = restaurant.Productos.filter((product) => {
-          const productHour = parseInt(product.horaRetiro.split(":")[0]);
+          const productHour = parseInt(product.horaRetiro.split(":")[0], 10);
 
           const isWithinTimeRange =
             productHour >= startHour && productHour <= endHour;
@@ -354,15 +356,25 @@ function Ordena({ data, initialSortOption }) {
           <FilterButton toggleModal={() => setModalVisible(!modalVisible)} />
         </View>
         <View style={styles.header}>
-        <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
-        
-        <FontAwesome name="search" size={20} color={Colors.VerdeOscuro} style={{marginTop:7,marginLeft:10, marginRight:9}} />
-          <TextInput
-            style={styles.searchButton}
-            placeholder="Que te provoca comer hoy?"
-            onChangeText={handleInputChange}
-          />
-        
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <FontAwesome
+              name="search"
+              size={20}
+              color={Colors.VerdeOscuro}
+              style={{ marginTop: 7, marginLeft: 10, marginRight: 9 }}
+            />
+            <TextInput
+              style={styles.searchButton}
+              placeholder="Que te provoca comer hoy?"
+              onChangeText={handleInputChange}
+              value={searchTerm}
+            />
           </View>
         </View>
         <View>
