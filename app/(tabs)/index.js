@@ -10,6 +10,7 @@ import ImageBanner from "../../components/UI/Image/ImageBanner";
 import CajaSorpresa from "../../components/IndexFoodContainers/CajaSorpresa";
 import CercaTuyo from "../../components/IndexFoodContainers/CercaTuyo";
 import MenuCategorias from "../../components/UI/MenuCategorias";
+import PerfilIcon from "../../components/UI/PerfilIcon";
 
 const imageBanner1 = { uri: "https://source.unsplash.com/300x200/?promotion" };
 const imageBanner2 = { uri: "https://source.unsplash.com/300x200/?promotion" };
@@ -37,8 +38,9 @@ export default function Tab() {
     <SafeAreaView style={styles.container}>
     <StatusBar  />
       <ScrollView style={styles.scrollView}>
-        <View>
+        <View style={{flexDirection:'row', alignItems:'baseline', width:'90%', marginTop:10}}>
           <Ubicacion />
+          <PerfilIcon  />
         </View>
 
         <View>
