@@ -3,17 +3,25 @@ import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import { Colors } from '../../../constants/Colors';
 
 const BotonesDiaRetiro = ({ activeDay, handleDayPress }) => {
+  const handlePress = (day) => {
+    if (activeDay === day) {
+      handleDayPress(null);
+    } else {
+      handleDayPress(day);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={[styles.button, activeDay === 'Hoy' && styles.activeButton]}
-        onPress={() => handleDayPress('Hoy')}
+        onPress={() => handlePress('Hoy')}
       >
         <Text style={[styles.text, activeDay === 'Hoy' && styles.activeText]}>Hoy</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.button, activeDay === 'Mañana' && styles.activeButton]}
-        onPress={() => handleDayPress('Mañana')}
+        onPress={() => handlePress('Mañana')}
       >
         <Text style={[styles.text, activeDay === 'Mañana' && styles.activeText]}>Mañana</Text>
       </TouchableOpacity>

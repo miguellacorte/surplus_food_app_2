@@ -11,7 +11,6 @@ import {
   Dimensions,
   Platform,
   TextInput,
-  Button,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
@@ -199,10 +198,12 @@ function Lista({ data, handleSortOptionChange, sortOption, searchTerm }) {
 
   return (
     <>
-      <SortSearch
-        onSortOptionChange={handleSortOptionChange}
-        style={{ marginBottom: 5 }}
-      />
+      <View>
+        <SortSearch
+          onSortOptionChange={handleSortOptionChange}
+          style={{ marginBottom: 5 }}
+        />
+      </View>
       <FlatList
         data={debouncedSearchTerm ? filteredData : sortedData}
         keyExtractor={(item) => item.id.toString()}
@@ -214,7 +215,7 @@ function Lista({ data, handleSortOptionChange, sortOption, searchTerm }) {
               onPress={() =>
                 router.push({
                   pathname: "/Restaurants/[id]",
-                  params: { id: item.id },
+                  params: { id: item.restaurantId },
                 })
               }
             >
