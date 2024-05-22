@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { Link } from "expo-router";
 
 export default function index() {
@@ -6,6 +6,7 @@ export default function index() {
     <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
       <View>
         <Link href="(tabs)"> INTRO </Link>
+        <Text>Home</Text>
       </View>
     </View>
   );

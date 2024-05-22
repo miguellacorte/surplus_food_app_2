@@ -10,37 +10,20 @@ import ImageBanner from "../../components/UI/Image/ImageBanner";
 import CajaSorpresa from "../../components/IndexFoodContainers/CajaSorpresa";
 import CercaTuyo from "../../components/IndexFoodContainers/CercaTuyo";
 import MenuCategorias from "../../components/UI/MenuCategorias";
-import PerfilIcon from "../../components/UI/PerfilIcon";
+// import PerfilIcon from "../../components/UI/PerfilIcon";
+
+//CORREGIR DISTANCIA ENTRE CONTENEDORES
 
 const imageBanner1 = { uri: "https://source.unsplash.com/300x200/?promotion" };
 const imageBanner2 = { uri: "https://source.unsplash.com/300x200/?promotion" };
 
-const ghostSpacePaddingFix = "4%";
-const ghostSpacePaddingFix2 = "8%";
-const ghostSpacePaddingFix3 = "12%";
-const ghostSpacePaddingFix4 = "18%";
-const ghostSpacePaddingFix5 = "22%";
-const ghostSpacePaddingFix6 = "26%";
-const ghostSpacePaddingFix7 = "30%";
-
-
-
-//Fix styling this container:
-// components weird dimensioning
-// container length
-
-//Update restaurans page:
-// if restaurant only has one product, then render a certain page, otherwise list products. 
-
-
 export default function Tab() {
   return (
     <SafeAreaView style={styles.container}>
-    <StatusBar  />
+      <StatusBar />
       <ScrollView style={styles.scrollView}>
-        <View style={{flexDirection:'row', alignItems:'baseline', width:'90%', marginTop:10}}>
+        <View>
           <Ubicacion />
-          <PerfilIcon  />
         </View>
 
         <View>
@@ -50,49 +33,30 @@ export default function Tab() {
           <MenuCategorias />
         </View>
 
-        <View style={styles.recommendationContainers}>
+        <View>
           <View style={styles.foodContainers}>
             <RecomendadosParaTi />
           </View>
-          <View
-            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix }]}
-          >
+          <View style={styles.foodContainers}>
             <LlevateloAntesQueSeAcabe />
           </View>
-          <View
-            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix2 }]}
-          >
+          <View style={styles.foodContainers}>
             <CajaSorpresa />
           </View>
-
-          <View
-            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix3 }]}
-          >
-            <ImageBanner imageUrl={imageBanner1}/>
+          <View style={styles.foodContainers}>
+            <ImageBanner imageUrl={imageBanner1} />
           </View>
-
-          <View
-            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix4 }]}
-          >
+          <View style={styles.foodContainers}>
             <CercaTuyo />
           </View>
-
-          <View
-            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix5 }]}
-          >
+          <View style={styles.foodContainers}>
             <RetirarParaCenar />
           </View>
-
-          <View
-            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix6 }]}
-          >
+          <View style={styles.foodContainers}>
             <RetirarParaDesayuno />
           </View>
-
-          <View
-            style={[styles.foodContainers, { bottom: ghostSpacePaddingFix7 }]}
-          >
-            <ImageBanner imageUrl={imageBanner2}/>
+          <View style={styles.foodContainers}>
+            <ImageBanner imageUrl={imageBanner2} />
           </View>
         </View>
       </ScrollView>
@@ -102,12 +66,8 @@ export default function Tab() {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     height: "100%",
-  },
-  recommendationContainers: {
-    marginTop: 20,
-    padding: 0,
   },
   foodContainers: {
     marginTop: 20,
