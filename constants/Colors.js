@@ -5,5 +5,5 @@ export const Colors = {
     Rojo: '#E35940',
     Naranja: '#E57F45',
     Amarillo: '#F6D348',
-    DarkGray: "#34654B"
+    DarkGray: "#878787"
   };

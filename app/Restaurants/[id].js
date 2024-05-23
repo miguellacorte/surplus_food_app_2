@@ -161,9 +161,15 @@ function RestaurantPage() {
                 }}
               >
                 <View style={{ borderBottomWidth: 1 }}>
-                  <Link href="Restaurants/calificaciones">
+                  <Pressable
+                    onPress={() => {
+                      navigation.navigate("Restaurants/calificaciones", {
+                        calificaciones: restaurante.calificaciones,
+                      });
+                    }}
+                  >
                     <Text style={{ fontWeight: "600" }}>Reseñas</Text>
-                  </Link>
+                  </Pressable>
                 </View>
               </View>
             </View>
