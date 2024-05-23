@@ -11,92 +11,137 @@ export const datosRestaurante = [
       {
         calificacion: 4.5,
         comentario: "Excelente servicio, la comida es deliciosa",
+        Fecha: "2024-05-01",
+        Nombre: "Juan Pérez",
       },
       {
         calificacion: 4,
         comentario: "La comida es buena, pero el servicio es lento",
+        Fecha: "2024-05-02",
+        Nombre: "María López",
       },
       {
         calificacion: 1,
         comentario: "La comida es deliciosa y el servicio es excelente",
+        Fecha: "2024-05-03",
+        Nombre: "Carlos Martínez",
       },
       {
         calificacion: 2,
         comentario: "El ambiente es agradable y la comida es sabrosa",
+        Fecha: "2024-05-04",
+        Nombre: "Ana González",
       },
       {
         calificacion: 3,
         comentario: "El servicio podría ser mejor, pero la comida es buena",
+        Fecha: "2024-05-05",
+        Nombre: "Luis Ramírez",
       },
       {
         calificacion: 4,
         comentario: "Me encanta la variedad del menú",
+        Fecha: "2024-05-06",
+        Nombre: "Sofía Torres",
       },
       {
         calificacion: 5,
         comentario: "Los precios son razonables para la calidad de la comida",
+        Fecha: "2024-05-07",
+        Nombre: "Miguel Sánchez",
       },
       {
         calificacion: 2,
         comentario: "La comida es buena, pero el lugar es un poco ruidoso",
+        Fecha: "2024-05-08",
+        Nombre: "Isabel Fernández",
       },
       {
         calificacion: 3,
         comentario: "El personal es amable y la comida es excelente",
+        Fecha: "2024-05-09",
+        Nombre: "José García",
       },
       {
         calificacion: 4,
         comentario: "La comida es promedio, pero el servicio es rápido",
+        Fecha: "2024-05-10",
+        Nombre: "Patricia Rodríguez",
       },
       {
         calificacion: 1,
         comentario: "El lugar es limpio y la comida es deliciosa",
+        Fecha: "2024-05-11",
+        Nombre: "Roberto Hernández",
       },
       {
         calificacion: 2,
         comentario: "La comida es buena, pero el lugar es un poco pequeño",
+        Fecha: "2024-05-12",
+        Nombre: "Daniela Castro",
       },
       {
         calificacion: 3,
         comentario: "El servicio es excelente y la comida es sabrosa",
+        Fecha: "2024-05-13",
+        Nombre: "Raúl Morales",
       },
       {
         calificacion: 4,
         comentario: "La comida es deliciosa, pero el servicio podría ser mejor",
+        Fecha: "2024-05-14",
+        Nombre: "Lucía Ruiz",
       },
       {
         calificacion: 5,
         comentario: "El lugar es agradable y la comida es buena",
+        Fecha: "2024-05-15",
+        Nombre: "Javier Ortiz",
       },
       {
         calificacion: 1,
         comentario: "El servicio es rápido y la comida es sabrosa",
+        Fecha: "2024-05-16",
+        Nombre: "Laura Muñoz",
       },
       {
         calificacion: 2,
         comentario: "La comida es promedio, pero el lugar es agradable",
+        Fecha: "2024-05-17",
+        Nombre: "Francisco Díaz",
       },
       {
         calificacion: 3,
         comentario: "El servicio es lento, pero la comida es buena",
+        Fecha: "2024-05-18",
+        Nombre: "Marta Jiménez",
       },
       {
         calificacion: 4,
         comentario: "La comida es deliciosa y el lugar es limpio",
+        Fecha: "2024-05-19",
+        Nombre: "Pedro Medina",
       },
       {
         calificacion: 5,
         comentario: "El servicio es excelente, pero la comida es promedio",
+        Fecha: "2024-05-20",
+        Nombre: "Gloria Chávez",
       },
       {
         calificacion: 1,
         comentario: "La comida es sabrosa y los precios son razonables",
+        Fecha: "2024-05-21",
+        Nombre: "Adriana Romero",
       },
       {
         calificacion: 2,
         comentario: "El lugar es ruidoso, pero la comida es buena",
+        Fecha: "2024-05-22",
+        Nombre: "Fernando Vargas",
       },
     ],
+
     ordenesCantidad: "200",
     urlImagenLogo:
       "https://cdn.builder.io/api/v1/image/assets/TEMP/d49a502485ec5cfa23e5bb59bc169df6a240c31ae56c86b3ad9ef8f1e5bb28ba?apiKey=64cf540a2469411fb888e6001ea1b7f2&",
@@ -128,7 +173,7 @@ export const datosRestaurante = [
         categoria: ["Caja sorpresa"],
       },
     ],
-    MetodosPago: ['cash', 'transferencia', 'pago móvil', 'tarjeta']
+    MetodosPago: ["cash", "transferencia", "pago móvil", "tarjeta"],
   },
   {
     id: 2,
@@ -145,8 +190,10 @@ export const datosRestaurante = [
     distancia: "2.5",
     calificaciones: [
       {
-        calificacion: 4.3,
-        comentario: "Rápido y delicioso, ideal para un almuerzo en la oficina.",
+        calificacion: 4.5,
+        comentario: "Excelente servicio, la comida es deliciosa",
+        Fecha: "2024-05-01",
+        Nombre: "Juan Pérez",
       },
     ],
     ordenesCantidad: "190",
@@ -194,6 +241,8 @@ export const datosRestaurante = [
       {
         calificacion: 4.9,
         comentario: "Los mejores croissants de Caracas, frescos cada día.",
+        Fecha: "2024-05-03",
+        Nombre: "Carlos Martínez",
       },
     ],
     ordenesCantidad: "300",
@@ -212,7 +261,7 @@ export const datosRestaurante = [
         horaRetiro: "10:30 - 15:00",
         descripcion:
           "Croissants recién horneados con relleno de crema de almendras",
-        categoria: [ "Panadería"],
+        categoria: ["Panadería"],
       },
       {
         id: 6,
@@ -240,6 +289,8 @@ export const datosRestaurante = [
         calificacion: 4.6,
         comentario:
           "Postres divinos y atención de primera, totalmente recomendado.",
+        Fecha: "2024-05-02",
+        Nombre: "María López",
       },
     ],
     ordenesCantidad: "215",
@@ -286,6 +337,8 @@ export const datosRestaurante = [
       {
         calificacion: 3.8,
         comentario: "Ideal para un snack rápido, precios accesibles.",
+        Fecha: "2024-05-04",
+        Nombre: "Ana González",
       },
     ],
     ordenesCantidad: "180",
@@ -304,7 +357,7 @@ export const datosRestaurante = [
         horaRetiro: "15:25 - 19:55",
         descripcion:
           "Emparedado de pollo grillado con lechuga, tomate y mayonesa en pan artesanal",
-        categoria: ["Comida rápida", 'Caja sorpresa'],
+        categoria: ["Comida rápida", "Caja sorpresa"],
       },
       {
         id: 10,
@@ -333,6 +386,8 @@ export const datosRestaurante = [
         calificacion: 4.8,
         comentario:
           "Desayunos completos y deliciosos, un must para empezar el día.",
+        Fecha: "2024-05-05",
+        Nombre: "Luis Ramírez",
       },
     ],
     ordenesCantidad: "305",
@@ -380,6 +435,8 @@ export const datosRestaurante = [
       {
         calificacion: 4.4,
         comentario: "Variedad increíble y cada plato es una experiencia única.",
+        Fecha: "2024-05-04",
+        Nombre: "Tomás Pérez",
       },
     ],
     ordenesCantidad: "250",
@@ -426,6 +483,8 @@ export const datosRestaurante = [
       {
         calificacion: 4.1,
         comentario: "Comida casera con sabor auténtico, como hecha en casa.",
+        Fecha: "2024-05-04",
+        Nombre: "Tomás Pérez",
       },
     ],
     ordenesCantidad: "170",
@@ -472,6 +531,8 @@ export const datosRestaurante = [
       {
         calificacion: 3.9,
         comentario: "Buen lugar para comer algo rápido y seguir tu camino.",
+        Fecha: "2024-05-06",
+        Nombre: "Sofía Torres",
       },
     ],
     ordenesCantidad: "195",
