@@ -32,25 +32,28 @@ const priceRightMargin = width < widthBreakpoint ? "13%" : "3%";
 const buscarProductsMargin = height < heightBreakpoint ? 20 : 50;
 
 const ItemSummary = ({ item, onIncrease, onDecrease, onDelete }) => {
-  const [quantity, setQuantity] = useState(item.quantity || 1);
+  if (!item) {
+    return null; // or a loading spinner
+  }
+
 
   const handleIncrease = () => {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    onIncrease();
+    if (item.quantity < item.cantidadDisponible) {
+      onIncrease();
+    } else {
+      alert('No se pueden agregar más productos. Cantidad máxima alcanzada.');
+    }
   };
 
   const handleDecrease = () => {
-    if (quantity > 1) {
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
+    if (item.quantity > 1) {
       onDecrease();
     }
   };
 
   //format code:
-  const price = parseFloat(item.precioVenta) * quantity;
-  const originalPrice = parseFloat(item.precioAntes) * quantity;
+  const price = parseFloat(item.precioVenta) * item.quantity;
+  const originalPrice = parseFloat(item.precioAntes) * item.quantity;
 
   const formattedPrice = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -106,7 +109,7 @@ const ItemSummary = ({ item, onIncrease, onDecrease, onDelete }) => {
             >
               <Icon name="minus" size={12} color="#000" />
             </TouchableOpacity>
-            <Text style={{ fontSize: 18, fontWeight: "bold" }}>{quantity}</Text>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>{item.quantity}</Text>
             <TouchableOpacity
               onPress={handleIncrease}
               style={styles.iconButton}

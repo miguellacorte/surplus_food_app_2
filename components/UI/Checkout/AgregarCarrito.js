@@ -30,6 +30,11 @@ function AgregarCarrito({ restaurant, productId }) {
     (product) => product.id === productId
   );
 
+  const handleAddToCart = () => {
+    addToCart(product);
+    navigation.navigate("cart");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -37,10 +42,7 @@ function AgregarCarrito({ restaurant, productId }) {
         <PriceTag price={`${product.precioVenta}$`} />
         <AddToCartButton
           text={"Agregar al carrito"}
-          onPress={() => {
-            addToCart(product);
-            navigation.navigate("cart");
-          }}
+          onPress={handleAddToCart}
         />
         <View>
           <FontAwesome
@@ -54,7 +56,6 @@ function AgregarCarrito({ restaurant, productId }) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     position: "absolute",

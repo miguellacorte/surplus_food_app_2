@@ -26,6 +26,7 @@ import CategoriesContainer from "../../components/UI/FiltrosBusqueda/CategoriesC
 import PaymentContainers from "../../components/UI/FiltrosBusqueda/PaymentContainers";
 import SortSearch from "../../components/UI/FiltrosBusqueda/SortSearch";
 import BotonesDiaRetiro from "../../components/UI/FiltrosBusqueda/BotonesDiaRetiro";
+import { StatusBar } from 'react-native';
 
 const sliderStyle = Platform.OS === "ios" ? { color: "green" } : {};
 const CustomMarker = () => <View style={styles.customMarker} />;
@@ -343,6 +344,7 @@ function Ordena({ initialSortOption }) {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+     <StatusBar backgroundColor="#E0E0E0" barStyle="auto" />
       <View style={styles.container}>
         <View
           style={{

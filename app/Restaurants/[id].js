@@ -21,7 +21,6 @@ import { Link, useLocalSearchParams } from "expo-router";
 import { useNavigation } from "expo-router";
 import BotonFavoritos from "../../components/UI/ContenedoresComida/BotonFavoritos";
 import AgregarCarrito from "../../components/UI/Checkout/AgregarCarrito";
-import myGif from "../../assets/ezgif.gif";
 import { CartContext } from "../../store/CartContext";
 
 const { width, height } = Dimensions.get("window");
