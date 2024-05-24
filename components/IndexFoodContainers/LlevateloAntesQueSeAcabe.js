@@ -54,7 +54,7 @@ const LlevateloAntesQueSeAcabe = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    marginVertical: 10,
   },
   foodContainer: {
     marginTop: 20,
@@ -65,16 +65,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginHorizontal: 22,
-    marginBottom: 20,
   },
   headerText: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 0,
   },
   scrollView: {
     marginTop: 0,
-    bottom: "18%", //dimensionsAPI
   },
   scrollViewContent: {
     flexDirection: "row",

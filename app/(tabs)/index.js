@@ -1,5 +1,12 @@
-import { StyleSheet, View, ScrollView, StatusBar } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  StatusBar,
+  SafeAreaView as RNSafeAreaView,
+  Platform,
+} from "react-native";
+import { SafeAreaView as SafeAreaContextView } from "react-native-safe-area-context";
 import ImageCarousel from "../../components/UI/Image/ImageCarousel";
 import RecomendadosParaTi from "../../components/IndexFoodContainers/RecomendadosParaTi";
 import LlevateloAntesQueSeAcabe from "../../components/IndexFoodContainers/LlevateloAntesQueSeAcabe";
@@ -14,50 +21,52 @@ import MenuCategorias from "../../components/UI/MenuCategorias";
 
 //CORREGIR DISTANCIA ENTRE CONTENEDORES
 
+const SafeAreaView =
+  Platform.OS === "android" ? SafeAreaContextView : RNSafeAreaView;
+
 const imageBanner1 = { uri: "https://source.unsplash.com/300x200/?promotion" };
 const imageBanner2 = { uri: "https://source.unsplash.com/300x200/?promotion" };
 
-export default function Tab() {
+export default function index() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />
-      <ScrollView style={styles.scrollView}>
-        <View>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
+      >
+        <View style={styles.section}>
           <Ubicacion />
         </View>
-
-        <View>
+        <View style={styles.section}>
           <ImageCarousel />
         </View>
-        <View>
+        <View style={styles.section}>
           <MenuCategorias />
         </View>
-
-        <View>
-          <View style={styles.foodContainers}>
-            <RecomendadosParaTi />
-          </View>
-          <View style={styles.foodContainers}>
-            <LlevateloAntesQueSeAcabe />
-          </View>
-          <View style={styles.foodContainers}>
-            <CajaSorpresa />
-          </View>
-          <View style={styles.foodContainers}>
-            <ImageBanner imageUrl={imageBanner1} />
-          </View>
-          <View style={styles.foodContainers}>
-            <CercaTuyo />
-          </View>
-          <View style={styles.foodContainers}>
-            <RetirarParaCenar />
-          </View>
-          <View style={styles.foodContainers}>
-            <RetirarParaDesayuno />
-          </View>
-          <View style={styles.foodContainers}>
-            <ImageBanner imageUrl={imageBanner2} />
-          </View>
+        <View style={styles.section}>
+          <RecomendadosParaTi />
+        </View>
+        <View style={styles.section}>
+          <LlevateloAntesQueSeAcabe />
+        </View>
+        <View style={styles.section}>
+          <CajaSorpresa />
+        </View>
+        <View style={styles.section}>
+          <ImageBanner imageUrl={imageBanner1} />
+        </View>
+        <View style={styles.section}>
+          <CercaTuyo />
+        </View>
+        <View style={styles.section}>
+          <RetirarParaCenar />
+        </View>
+        <View style={styles.section}>
+          <RetirarParaDesayuno />
+        </View>
+        <View style={styles.section}>
+          <ImageBanner imageUrl={imageBanner2} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -67,14 +76,14 @@ export default function Tab() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: "100%",
-  },
-  foodContainers: {
-    marginTop: 20,
-    height: 400,
   },
   scrollView: {
-    marginTop: 0,
-    height: "100%",
+    flex: 1,
+  },
+  contentContainer: {
+    paddingVertical: 10,
+  },
+  section: {
+    marginVertical: 10,
   },
 });
