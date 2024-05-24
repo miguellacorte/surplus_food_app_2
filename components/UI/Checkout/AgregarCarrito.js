@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Colors } from "../../../constants/Colors";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { CartContext } from "../../../store/CartContext";
+import { useNavigation } from "expo-router";
 
 const PriceTag = ({ price }) => (
   <View style={styles.priceContainer}>
@@ -23,6 +24,7 @@ const AddToCartButton = ({ text, onPress }) => (
 );
 
 function AgregarCarrito({ restaurant, productId }) {
+  const navigation = useNavigation();
   const { addToCart } = useContext(CartContext);
   const product = restaurant.Productos.find(
     (product) => product.id === productId
@@ -35,7 +37,10 @@ function AgregarCarrito({ restaurant, productId }) {
         <PriceTag price={`${product.precioVenta}$`} />
         <AddToCartButton
           text={"Agregar al carrito"}
-          onPress={() => addToCart(product)}
+          onPress={() => {
+            addToCart(product);
+            navigation.navigate("cart");
+          }}
         />
         <View>
           <FontAwesome

@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   locationTextContainer: {
     flex: 1,
     flexDirection: "column",
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   locationTitle: {
     fontSize: 12,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.16,
   },
   locationSubtitle: {
-    marginTop: 4,
+    marginTop: 2,
     color: "#101010",
     fontWeight: "600",
     fontSize: 14,

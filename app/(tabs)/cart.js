@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
+  Pressable,
   Image,
 } from "react-native";
 import { CartContext } from "../../store/CartContext";
@@ -13,6 +14,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import TiempoDeRetiro from "../../components/UI/ContenedoresComida/TiempoDeRetiro";
 import { Colors } from "../../constants/Colors";
 import MediosPago from "../../components/UI/Checkout/MediosPago";
+import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import carritoVacio from "../../assets/carritoVacio.png";
@@ -30,7 +32,6 @@ const priceRightMargin = width < widthBreakpoint ? "13%" : "3%";
 const buscarProductsMargin = height < heightBreakpoint ? 20 : 50;
 
 const ItemSummary = ({ item, onIncrease, onDecrease, onDelete }) => {
-    
   const [quantity, setQuantity] = useState(item.quantity || 1);
 
   const handleIncrease = () => {
@@ -119,7 +120,7 @@ const ItemSummary = ({ item, onIncrease, onDecrease, onDelete }) => {
   );
 };
 const Cart = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
   const { cart, addToCart, removeFromCart, decreaseQuantity } =
     useContext(CartContext);
   const [productos, setProductos] = useState(0);
@@ -172,7 +173,10 @@ const Cart = () => {
                 Actualmente no tienes ningún producto en el carrito! Para hacer
                 un pedido, agrega productos al carrito.
               </Text>
-              <TouchableOpacity style={styles.buscarButton} onPress={() => navigation.navigate('ordena')}>
+              <TouchableOpacity
+                style={styles.buscarButton}
+                onPress={() => navigation.navigate("ordena")}
+              >
                 <Text
                   style={{ color: "#FFF", fontWeight: "bold", fontSize: 20 }}
                 >
@@ -183,8 +187,26 @@ const Cart = () => {
           ) : (
             <ScrollView style={{ marginHorizontal: 20 }}>
               <View>
-                <View>
-                  <Text style={styles.headerTitle}>Confirmar compra:</Text>
+                <View
+                  style={{
+                    width: "100%",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                  }}
+                >
+                  <Pressable
+                    onPress={() => navigation.goBack()}
+                    style={styles.pressable}
+                  >
+                    <AntDesign
+                      name="left"
+                      size={24}
+                      color={Colors.VerdeOscuro}
+                      style={{ marginBottom: 20 }}
+                    />
+                  </Pressable>
+                  <Text style={styles.headerTitle}>Confirmar compra</Text>
                 </View>
               </View>
               {cart.map((item, index) => (
@@ -245,12 +267,12 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     height: windowHeight,
-
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+    left: width * 0.1,
   },
   headerTitle2: {
     fontSize: 18,
@@ -326,7 +348,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: buscarProductsMargin,
   },
-  // Additional styles for order summary, payment methods, and billing address
+  pressable: {
+    left: 0,
+    padding: 10,
+  },
+
 });
 
 export default Cart;

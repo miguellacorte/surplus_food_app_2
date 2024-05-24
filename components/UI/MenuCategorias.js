@@ -85,7 +85,6 @@ function MenuCategorias() {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    paddingVertical: 16,
     marginHorizontal: 7,
   },
   placeholderImage: {
