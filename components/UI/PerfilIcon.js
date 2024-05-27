@@ -11,9 +11,9 @@ const PerfilIcon = () => {
     <View style={styles.container}>
       <Pressable
         style={styles.iconContainer}
-        onPress={() => navigation.navigate('perfil')}
+        onPress={() => navigation.navigate('(perfil)')}
       >
-        <FontAwesome6 name="user" size={20} color={Colors.VerdeOscuro} />
+        <FontAwesome6 name="user" size={20} color={'black'} />
       </Pressable>
 
     </View>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     width: 34,
     height: 34,
     borderRadius: 4,
-    backgroundColor: "rgba(95, 158, 94, 0.10)",
+    backgroundColor: "rgba(105, 105, 105, 0.10)",
     padding: 8,
   },
 });

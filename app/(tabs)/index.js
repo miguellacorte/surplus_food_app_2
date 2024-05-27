@@ -17,9 +17,7 @@ import ImageBanner from "../../components/UI/Image/ImageBanner";
 import CajaSorpresa from "../../components/IndexFoodContainers/CajaSorpresa";
 import CercaTuyo from "../../components/IndexFoodContainers/CercaTuyo";
 import MenuCategorias from "../../components/UI/MenuCategorias";
-// import PerfilIcon from "../../components/UI/PerfilIcon";
-
-//CORREGIR DISTANCIA ENTRE CONTENEDORES
+import PerfilIcon from "../../components/UI/PerfilIcon";
 
 const SafeAreaView =
   Platform.OS === "android" ? SafeAreaContextView : RNSafeAreaView;
@@ -35,8 +33,9 @@ export default function index() {
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
       >
-        <View style={styles.section}>
+        <View style={styles.section1}>
           <Ubicacion />
+          <PerfilIcon />
         </View>
         <View style={styles.section}>
           <ImageCarousel />
@@ -85,5 +84,11 @@ const styles = StyleSheet.create({
   },
   section: {
     marginVertical: 10,
+  },
+  section1: {
+    marginVertical: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    width: "90%",
   },
 });
