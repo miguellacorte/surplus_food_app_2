@@ -18,6 +18,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import carritoVacio from "../../assets/carritoVacio.png";
+import DatosFacuracion from "../../components/UI/Checkout/DatosFacturacion";
 
 const { width, height } = Dimensions.get("window");
 
@@ -36,12 +37,11 @@ const ItemSummary = ({ item, onIncrease, onDecrease, onDelete }) => {
     return null; // or a loading spinner
   }
 
-
   const handleIncrease = () => {
     if (item.quantity < item.cantidadDisponible) {
       onIncrease();
     } else {
-      alert('No se pueden agregar más productos. Cantidad máxima alcanzada.');
+      alert("No se pueden agregar más productos. Cantidad máxima alcanzada.");
     }
   };
 
@@ -109,7 +109,9 @@ const ItemSummary = ({ item, onIncrease, onDecrease, onDelete }) => {
             >
               <Icon name="minus" size={12} color="#000" />
             </TouchableOpacity>
-            <Text style={{ fontSize: 18, fontWeight: "bold" }}>{item.quantity}</Text>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+              {item.quantity}
+            </Text>
             <TouchableOpacity
               onPress={handleIncrease}
               style={styles.iconButton}
@@ -194,22 +196,25 @@ const Cart = () => {
                   style={{
                     width: "100%",
                     flexDirection: "row",
-                    justifyContent: "flex-start",
+                    justifyContent: "space-between",
                     alignItems: "center",
                   }}
                 >
                   <Pressable
                     onPress={() => navigation.goBack()}
-                    style={styles.pressable}
+                    style={[styles.pressable, { alignSelf: "flex-start" }]}
                   >
                     <AntDesign
                       name="left"
                       size={24}
-                      color={Colors.VerdeOscuro}
+                      color="black"
                       style={{ marginBottom: 20 }}
                     />
                   </Pressable>
+     
                   <Text style={styles.headerTitle}>Confirmar compra</Text>
+                  
+                  
                 </View>
               </View>
               {cart.map((item, index) => (
@@ -244,11 +249,12 @@ const Cart = () => {
               </View>
               <View>
                 <MediosPago />
+                <DatosFacuracion />
               </View>
-              <View style={{ alignItems: "center", marginTop: 35 }}>
+              <View style={{ alignItems: "center", marginTop: 10 }}>
                 <Text style={{ color: "gray", fontSize: 9 }}>
                   Al confirmar tu pedido aceptas los términos y condiciones de
-                  nuestra App.{" "}
+                  nuestra App.
                 </Text>
                 <TouchableOpacity style={styles.pagarButton}>
                   <Text
@@ -269,13 +275,12 @@ const Cart = () => {
 const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
-    height: windowHeight,
+    backgroundColor: "white",
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-    left: width * 0.1,
   },
   headerTitle2: {
     fontSize: 18,
@@ -355,7 +360,6 @@ const styles = StyleSheet.create({
     left: 0,
     padding: 10,
   },
-
 });
 
 export default Cart;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const EditarInfoPersonal = () => {
+const MisUbicaciones = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Editar Información Personal</Text>
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default EditarInfoPersonal;
+export default MisUbicaciones;

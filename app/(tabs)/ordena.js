@@ -327,11 +327,8 @@ function Ordena({ initialSortOption }) {
                   )
                 : false
               : true;
-          // console.log(productHour, startHour, endHour, selectedDay,selectedCategories, product.diaRetiro, product.categoria)
           return isWithinTimeRange && isDayMatched && isCategoryMatched;
         });
-
-        // console.log(filteredProducts)
 
         return { ...restaurant, Productos: filteredProducts };
       })

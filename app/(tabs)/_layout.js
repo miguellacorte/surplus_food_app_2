@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { View } from "react-native";
-import {CartContext} from "../../store/CartContext";
+import { CartContext } from "../../store/CartContext";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Feather } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
@@ -78,6 +78,13 @@ export default function TabLayout() {
               )}
             </View>
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="(perfil)"
+        options={{
+          href: null,
+          headerShown: false,
         }}
       />
     </Tabs>

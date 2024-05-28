@@ -1,18 +1,26 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet, Platform, Image } from "react-native";
-import { UserContext } from "../../store/UserContext";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import { UserContext } from "../../../store/UserContext";
 import {
   FontAwesome6,
   AntDesign,
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import { Colors } from "../../constants/Colors";
+import { Colors } from "../../../constants/Colors";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import { View as SafeAreaContextView } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import TiempoDeRetiro from "../../components/UI/ContenedoresComida/TiempoDeRetiro";
-import { datosRestaurante } from "../../data/datosRestaurante";
+import TiempoDeRetiro from "../../../components/UI/ContenedoresComida/TiempoDeRetiro";
+import { datosRestaurante } from "../../../data/datosRestaurante";
+import { useNavigation } from "@react-navigation/native";
 
 //CAMBIAR DATOS RESTAURANTE INPUT A CASCADED DATA
 
@@ -21,12 +29,11 @@ const SafeAreaView =
 
 export default function index() {
   const { user } = useContext(UserContext);
+  const navigation = useNavigation();
 
   const orderedProducts = user.Pedidos.map((pedido) => {
     const restaurant = datosRestaurante.find((restaurant) =>
-      restaurant.Productos.some(
-        (product) => product.id === pedido.ProductoId
-      )
+      restaurant.Productos.some((product) => product.id === pedido.ProductoId)
     );
 
     if (restaurant) {
@@ -36,7 +43,7 @@ export default function index() {
 
       return {
         product,
-        restaurant
+        restaurant,
       };
     }
 
@@ -48,8 +55,6 @@ export default function index() {
   );
   const lastOrderedProduct =
     validOrderedProducts[validOrderedProducts.length - 1];
-
-  console.log(lastOrderedProduct);
 
   return (
     <>
@@ -66,47 +71,69 @@ export default function index() {
               <Text style={styles.welcomeText}>Bienvenido, {user.Nombre}!</Text>
             </View>
             <View>
-              <Ionicons
-                name="settings-sharp"
-                size={24}
-                color={Colors.VerdeOscuro}
-              />
+              <TouchableOpacity
+                onPress={() => navigation.navigate("(ajustes)")}
+              >
+                <Ionicons
+                  name="settings-sharp"
+                  size={24}
+                  color={Colors.VerdeOscuro}
+                />
+              </TouchableOpacity>
             </View>
           </View>
         ) : (
           <Text style={styles.loadingText}>Loading...</Text>
         )}
-        <View style={styles.contenedorPedidos}>
-          <View
-            style={{
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Text style={styles.priceText}>Tus pedidos:</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("TusPedidos")}>
+          <View style={styles.contenedorPedidos}>
+            <View
+              style={{
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Text style={styles.priceText}>Tus pedidos:</Text>
 
-            <View style={styles.contenedorPedidos}>
-              {lastOrderedProduct && (
-                <>
-                  <Image
-                    source={{ uri: lastOrderedProduct.restaurant.urlImagenLogo }}
-                    style={styles.imageLogo}
-                  />
-                  <Text style={styles.restaurantName}>
-                    {lastOrderedProduct.product.nombre}
-                  </Text>
-                  <TiempoDeRetiro
-                    dia={lastOrderedProduct.product.diaRetiro}
-                    hora={lastOrderedProduct.product.horaRetiro}
-                    containerSize="100%"
-                  />
-                </>
-              )}
+              <View
+                style={[styles.contenedorPedidos, { backgroundColor: "white" }]}
+              >
+                {lastOrderedProduct && (
+                  <>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        width: "100%",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Image
+                        source={{
+                          uri: lastOrderedProduct.restaurant.urlImagenLogo,
+                        }}
+                        style={styles.imageLogo}
+                      />
+                      <View style={{ marginLeft: 10 }}>
+                        <Text style={styles.restaurantName}>
+                          {lastOrderedProduct.product.nombre}
+                        </Text>
+                        <TiempoDeRetiro
+                          dia={lastOrderedProduct.product.diaRetiro}
+                          hora={lastOrderedProduct.product.horaRetiro}
+                          containerSize="90%"
+                        />
+                      </View>
+                    </View>
+                  </>
+                )}
+              </View>
+              <View style={{ marginTop: 20 }}>
+                <Text style={styles.Text}>Historial de pedidos</Text>
+              </View>
             </View>
-
-            <Text style={styles.Text}>Historial de pedidos</Text>
           </View>
-        </View>
+        </TouchableOpacity>
 
         <View
           style={{
@@ -117,8 +144,7 @@ export default function index() {
             marginVertical: 10,
           }}
         >
-          <Text style={[styles.priceText, { marginTop: 20 }]}>
-            {" "}
+          <Text style={[styles.priceText, { marginTop: 20, color: "black" }]}>
             Tu historial de ahorro:
           </Text>
           <View
@@ -135,49 +161,59 @@ export default function index() {
                 <MaterialCommunityIcons
                   name="cash-plus"
                   size={28}
-                  color={Colors.VerdeOscuro}
+                  color="black"
                 />
-                <Text style={styles.Text}>Dinero</Text>
-                <Text style={styles.priceText}>25$</Text>
+                <Text style={[styles.Text, { color: "black" }]}>Dinero</Text>
+                <Text style={[styles.priceText, { color: "black" }]}>25$</Text>
               </View>
             </View>
 
             <View style={[styles.columnContainer, { marginRight: "5%" }]}>
               <View style={{ flexDirection: "column", alignItems: "center" }}>
-                <AntDesign name="cloudo" size={28} color={Colors.VerdeOscuro} />
-                <Text style={styles.Text}>Co2</Text>
+                <AntDesign name="cloudo" size={28} color="black" />
+                <Text style={[styles.Text, { color: "black" }]}>Co2</Text>
                 <View>
-                  <Text style={styles.priceText}>2 kg</Text>
+                  <Text style={[styles.priceText, { color: "black" }]}>
+                    2 kg
+                  </Text>
                 </View>
               </View>
             </View>
           </View>
         </View>
-        <View style={styles.customerServiceContainer}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <FontAwesome6
-              name="question-circle"
-              size={24}
-              color={Colors.VerdeOscuro}
-            />
+        <TouchableOpacity onPress={() => navigation.navigate("ComoFunciona")}>
+          <View style={styles.customerServiceContainer}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <FontAwesome6
+                name="question-circle"
+                size={24}
+                color={Colors.VerdeOscuro}
+              />
+            </View>
+            <View>
+              <Text style={[styles.welcomeText, { color: Colors.VerdeOscuro }]}>
+                Cómo funciona este app?
+              </Text>
+            </View>
           </View>
-          <View>
-            <Text style={styles.welcomeText}>Cómo funciona este app?</Text>
-          </View>
-        </View>
+        </TouchableOpacity>
 
-        <View style={styles.customerServiceContainer}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <AntDesign
-              name="customerservice"
-              size={24}
-              color={Colors.VerdeOscuro}
-            />
+        <TouchableOpacity onPress={() => navigation.navigate("CentroDeAyuda")}>
+          <View style={styles.customerServiceContainer}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <AntDesign
+                name="customerservice"
+                size={24}
+                color={Colors.VerdeOscuro}
+              />
+            </View>
+            <View>
+              <Text style={[styles.welcomeText, { color: Colors.VerdeOscuro }]}>
+                Centro de ayuda
+              </Text>
+            </View>
           </View>
-          <View>
-            <Text style={styles.welcomeText}>Centro de ayuda</Text>
-          </View>
-        </View>
+        </TouchableOpacity>
       </SafeAreaView>
     </>
   );
@@ -248,11 +284,11 @@ const styles = StyleSheet.create({
   },
   contenedorPedidos: {
     marginTop: 20,
-    width: "90%",
+    width: "92%",
     height: "auto",
     padding: 20,
     borderRadius: 25,
-    backgroundColor: "white",
+    backgroundColor: Colors.VerdeOscuro,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -272,13 +308,18 @@ const styles = StyleSheet.create({
     marginVertical: 3,
     fontSize: 16,
     fontWeight: "bold",
-    color: Colors.VerdeOscuro,
+    color: "white",
+  },
+  restaurantName: {
+    marginVertical: 2,
+    fontSize: 16,
+    fontWeight: "bold",
   },
   priceText: {
     marginVertical: 2,
     fontSize: 20,
     fontWeight: "bold",
-    color: Colors.VerdeOscuro,
+    color: "white",
   },
   loadingText: {
     fontSize: 16,

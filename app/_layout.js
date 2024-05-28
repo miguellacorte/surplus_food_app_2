@@ -9,7 +9,6 @@ export default function AppLayout() {
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(perfil)" options={{ headerShown: false }} />
           <Stack.Screen
             name="Restaurants/calificaciones"
             options={{ headerShown: false }}

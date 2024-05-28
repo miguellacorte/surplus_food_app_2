@@ -15,7 +15,7 @@ export default function Layout() {
       {/* Optionally configure static options outside the route.*/}
       <Stack.Screen name="index" options={{headerShown: false}} />
       <Stack.Screen name="InformacionPersonal"  options={{}} />
-      <Stack.Screen name="EditarInfoPersonal" options={{}} />
+      <Stack.Screen name="MisUbicaciones" options={{}} />
       <Stack.Screen name="Notificaciones" options={{}} />
       <Stack.Screen name="InformacionLegal" options={{}} />
     </Stack>
