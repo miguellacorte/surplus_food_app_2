@@ -4,7 +4,7 @@ import { View, Image, StyleSheet, Dimensions } from "react-native";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const imageWidth = windowWidth - 40;
+const imageWidth = windowWidth - 40 ;
 const dynamicHeight = windowHeight < 667 ? 130 : 175;
 
 const ImageBanner = ({imageUrl}) => {
@@ -12,7 +12,7 @@ const ImageBanner = ({imageUrl}) => {
 
   return (
     <View style={styles.imageContainer}>
-      <Image source={imageUrl} style={styles.image} />
+      <Image source={imageUrl} style={styles.image} resizeMode="contain"/>
     </View>
   );
 };

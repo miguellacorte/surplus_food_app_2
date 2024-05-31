@@ -8,6 +8,7 @@ import {
   Image,
   Dimensions,
   ActivityIndicator,
+  StatusBar,
 } from "react-native";
 import ContenedorComidaFavoritos from "../../components/UI/ContenedoresComida/ContenedorComidaFavoritos";
 import { UserContext } from "../../store/UserContext"; // import UserContext
@@ -46,6 +47,9 @@ export default function Favoritos() {
   }
 
   return (
+    <>
+      <StatusBar barStyle="dark-content" />
+    
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <Text style={styles.header}>Favoritos</Text>
@@ -102,6 +106,7 @@ export default function Favoritos() {
         )}
       </ScrollView>
     </SafeAreaView>
+    </>
   );
 }
 
@@ -114,6 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
+    marginHorizontal: 20,
   },
   restaurant: {
     marginBottom: 10,

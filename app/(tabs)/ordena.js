@@ -341,7 +341,7 @@ function Ordena({ initialSortOption }) {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-     <StatusBar backgroundColor="#E0E0E0" barStyle="auto" />
+     <StatusBar barStyle='dark-content' backgroundColor='#E0E0E0'/>
       <View style={styles.container}>
         <View
           style={{
@@ -353,7 +353,7 @@ function Ordena({ initialSortOption }) {
           }}
         >
           <Ubicacion />
-          <FilterButton toggleModal={() => setModalVisible(!modalVisible)} />
+        
         </View>
         <View style={styles.header}>
           <View
@@ -375,6 +375,7 @@ function Ordena({ initialSortOption }) {
               onChangeText={handleInputChange}
               value={searchTerm}
             />
+              <FilterButton toggleModal={() => setModalVisible(!modalVisible)} />
           </View>
         </View>
         <View>
@@ -504,12 +505,13 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "stretch",
     borderTopEndRadius: 0,
-    borderBottomEndRadius: 23,
+    borderBottomRightRadius: 23,
+    borderBottomLeftRadius: 23,
     backgroundColor: "#E0E0E0",
     display: "flex",
     flexDirection: "column",
     padding: 20,
-    paddingTop: 23,
+   
     paddingHorizontal: 13,
   },
   header: {
@@ -520,6 +522,7 @@ const styles = StyleSheet.create({
     marginBottom: 29,
   },
   filterButton: {
+    marginTop: 10,
     alignItems: "center",
     borderRadius: 32,
     borderColor: "rgba(95, 158, 94, 0.2)",
@@ -533,7 +536,7 @@ const styles = StyleSheet.create({
   },
   searchButton: {
     marginTop: 10,
-    width: "90%",
+    width: "60%",
     alignItems: "center",
     borderRadius: 32,
     borderColor: "rgba(95, 158, 94, 0.2)",
@@ -544,6 +547,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 8,
     paddingHorizontal: 12,
+    marginRight: 30,
   },
   icon: {
     width: 20,

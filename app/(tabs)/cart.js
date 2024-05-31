@@ -8,6 +8,7 @@ import {
   Dimensions,
   Pressable,
   Image,
+  StatusBar,
 } from "react-native";
 import { CartContext } from "../../store/CartContext";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -152,6 +153,7 @@ const Cart = () => {
 
   return (
     <>
+    <StatusBar barStyle='dark-content' backgroundColor='#E0E0E0'/>
       <SafeAreaView style={styles.pageContainer}>
         <View>
           {cart.length === 0 ? (
@@ -190,7 +192,7 @@ const Cart = () => {
               </TouchableOpacity>
             </View>
           ) : (
-            <ScrollView style={{ marginHorizontal: 20 }}>
+            <ScrollView style={{ marginHorizontal: 20 }} showsVerticalScrollIndicator={false}>
               <View>
                 <View
                   style={{
@@ -347,6 +349,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     marginTop: 5,
+    marginBottom: 20,
   },
   buscarButton: {
     width: "80%",

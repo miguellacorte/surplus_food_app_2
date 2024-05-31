@@ -22,13 +22,13 @@ import PerfilIcon from "../../components/UI/PerfilIcon";
 const SafeAreaView =
   Platform.OS === "android" ? SafeAreaContextView : RNSafeAreaView;
 
-const imageBanner1 = { uri: "https://source.unsplash.com/300x200/?promotion" };
-const imageBanner2 = { uri: "https://source.unsplash.com/300x200/?promotion" };
+const imageBanner1 = require('../../assets/Frame 1000004974.png');
+const imageBanner2 = require('../../assets/Frame 1000004975.png');
 
 export default function index() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar />
+      <StatusBar barStyle='dark-content'/>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
@@ -52,7 +52,7 @@ export default function index() {
         <View style={styles.section}>
           <CajaSorpresa />
         </View>
-        <View style={styles.section}>
+        <View >
           <ImageBanner imageUrl={imageBanner1} />
         </View>
         <View style={styles.section}>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   section1: {
-    marginVertical: 10,
+    marginVertical: 5,
     flexDirection: "row",
     alignItems: "center",
     width: "90%",

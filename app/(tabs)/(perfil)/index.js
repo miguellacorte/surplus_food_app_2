@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,8 @@ import {
   Platform,
   Image,
   TouchableOpacity,
+  ScrollView,
+  Modal,
 } from "react-native";
 import { UserContext } from "../../../store/UserContext";
 import {
@@ -28,8 +30,31 @@ const SafeAreaView =
   Platform.OS === "android" ? SafeAreaContextView : RNSafeAreaView;
 
 export default function index() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [showCO2, setShowCO2] = useState(true);
+
   const { user } = useContext(UserContext);
   const navigation = useNavigation();
+
+  const totalAmountSpent = user.Pedidos.reduce((total, pedido) => {
+    return total + pedido.Precio * pedido.Cantidad;
+  }, 0).toFixed(2);
+
+  const totalCO2 = (
+    user.Pedidos.reduce((total, pedido) => {
+      return total + pedido.Cantidad;
+    }, 0) * 1.3
+  ).toFixed(2);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowCO2((prevShowCO2) => !prevShowCO2);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const totalLiters = user.Pedidos.length * 405;
 
   const orderedProducts = user.Pedidos.map((pedido) => {
     const restaurant = datosRestaurante.find((restaurant) =>
@@ -85,135 +110,215 @@ export default function index() {
         ) : (
           <Text style={styles.loadingText}>Loading...</Text>
         )}
-        <TouchableOpacity onPress={() => navigation.navigate("TusPedidos")}>
-          <View style={styles.contenedorPedidos}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              height: "100%",
+              padding: 0,
+            }}
+          >
+            <TouchableOpacity onPress={() => navigation.navigate("TusPedidos")}>
+              <View style={styles.contenedorPedidos}>
+                <View
+                  style={{
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={styles.priceText}>Tus pedidos:</Text>
+
+                  <View
+                    style={[
+                      styles.contenedorPedidos,
+                      { backgroundColor: "white" },
+                    ]}
+                  >
+                    {lastOrderedProduct && (
+                      <>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            width: "100%",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Image
+                            source={{
+                              uri: lastOrderedProduct.restaurant.urlImagenLogo,
+                            }}
+                            style={styles.imageLogo}
+                          />
+                          <View style={{ marginLeft: 10 }}>
+                            <Text style={styles.restaurantName}>
+                              {lastOrderedProduct.product.nombre}
+                            </Text>
+                            <TiempoDeRetiro
+                              dia={lastOrderedProduct.product.diaRetiro}
+                              hora={lastOrderedProduct.product.horaRetiro}
+                              containerSize="90%"
+                            />
+                          </View>
+                        </View>
+                      </>
+                    )}
+                  </View>
+                </View>
+              </View>
+            </TouchableOpacity>
+
             <View
               style={{
                 flexDirection: "column",
                 alignItems: "center",
+                width: "100%",
+                justifyContent: "space-between",
+                marginVertical: 10,
               }}
             >
-              <Text style={styles.priceText}>Tus pedidos:</Text>
-
-              <View
-                style={[styles.contenedorPedidos, { backgroundColor: "white" }]}
+              <Text
+                style={[styles.priceText, { marginTop: 20, color: "black" }]}
               >
-                {lastOrderedProduct && (
-                  <>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        width: "100%",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Image
-                        source={{
-                          uri: lastOrderedProduct.restaurant.urlImagenLogo,
-                        }}
-                        style={styles.imageLogo}
-                      />
-                      <View style={{ marginLeft: 10 }}>
-                        <Text style={styles.restaurantName}>
-                          {lastOrderedProduct.product.nombre}
+                Tu historial de ahorro:
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  width: "100%",
+                  justifyContent: "space-between",
+                  marginVertical: 20,
+                }}
+              >
+                <View style={[styles.columnContainer, { marginLeft: "5%" }]}>
+                  <View
+                    style={{ flexDirection: "column", alignItems: "center" }}
+                  >
+                    <MaterialCommunityIcons
+                      name="cash-plus"
+                      size={28}
+                      color="black"
+                    />
+                    <Text style={[styles.Text, { color: "black" }]}>
+                      Dinero
+                    </Text>
+                    <Text style={[styles.priceText, { color: "black" }]}>
+                      {totalAmountSpent}$
+                    </Text>
+                  </View>
+                </View>
+
+                <TouchableOpacity
+                  style={[styles.columnContainer, { marginRight: "5%" }]}
+                  onPress={() => setModalVisible(true)}
+                >
+                  <View
+                    style={{ flexDirection: "column", alignItems: "center" }}
+                  >
+                    {showCO2 ? (
+                      <>
+                        <AntDesign name="cloudo" size={28} color="black" />
+                        <Text style={[styles.Text, { color: "black" }]}>
+                          Co2
                         </Text>
-                        <TiempoDeRetiro
-                          dia={lastOrderedProduct.product.diaRetiro}
-                          hora={lastOrderedProduct.product.horaRetiro}
-                          containerSize="90%"
-                        />
-                      </View>
+                        <View>
+                          <Text style={[styles.priceText, { color: "black" }]}>
+                            {totalCO2} kg
+                          </Text>
+                        </View>
+                      </>
+                    ) : (
+                      <>
+                        <Ionicons name="water" size={24} color="black" />
+                        <Text style={[styles.Text, { color: "black" }]}>
+                          Agua
+                        </Text>
+                        <View>
+                          <Text style={[styles.priceText, { color: "black" }]}>
+                            {totalLiters} L
+                          </Text>
+                        </View>
+                      </>
+                    )}
+                  </View>
+                </TouchableOpacity>
+
+                <Modal
+                  animationType="slide"
+                  transparent={true}
+                  visible={modalVisible}
+                  onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                      <TouchableOpacity
+                        onPress={() => setModalVisible(!modalVisible)}
+                        style={{ alignSelf: "flex-end" }}
+                      >
+                        <AntDesign name="closecircle" size={24} color="black" />
+                      </TouchableOpacity>
+                      <Text style={styles.modalText}>
+                        Según un estudio de Mérieux NutriSciences | Blonk
+                        realizado en 2023, cada kg de comida desperdiciado
+                        equivale a 810 litros de agua desechados o 2.7 kg de CO2
+                        de impacto ambiental. {"\n"}
+                        {"\n"}Estimamos que el impacto ambiental ahorrado
+                        refiere a la cantidad de productos comprados por ti x
+                        500 g de desecho ahorrado (hacemos un promedio de 500 g
+                        de peso por producto comprado).
+                      </Text>
                     </View>
-                  </>
-                )}
-              </View>
-              <View style={{ marginTop: 20 }}>
-                <Text style={styles.Text}>Historial de pedidos</Text>
+                  </View>
+                </Modal>
               </View>
             </View>
-          </View>
-        </TouchableOpacity>
-
-        <View
-          style={{
-            flexDirection: "column",
-            alignItems: "center",
-            width: "100%",
-            justifyContent: "space-between",
-            marginVertical: 10,
-          }}
-        >
-          <Text style={[styles.priceText, { marginTop: 20, color: "black" }]}>
-            Tu historial de ahorro:
-          </Text>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              width: "100%",
-              justifyContent: "space-between",
-              marginVertical: 20,
-            }}
-          >
-            <View style={[styles.columnContainer, { marginLeft: "5%" }]}>
-              <View style={{ flexDirection: "column", alignItems: "center" }}>
-                <MaterialCommunityIcons
-                  name="cash-plus"
-                  size={28}
-                  color="black"
-                />
-                <Text style={[styles.Text, { color: "black" }]}>Dinero</Text>
-                <Text style={[styles.priceText, { color: "black" }]}>25$</Text>
-              </View>
-            </View>
-
-            <View style={[styles.columnContainer, { marginRight: "5%" }]}>
-              <View style={{ flexDirection: "column", alignItems: "center" }}>
-                <AntDesign name="cloudo" size={28} color="black" />
-                <Text style={[styles.Text, { color: "black" }]}>Co2</Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ComoFunciona")}
+            >
+              <View style={styles.customerServiceContainer}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <FontAwesome6
+                    name="question-circle"
+                    size={24}
+                    color={Colors.VerdeOscuro}
+                  />
+                </View>
                 <View>
-                  <Text style={[styles.priceText, { color: "black" }]}>
-                    2 kg
+                  <Text
+                    style={[styles.welcomeText, { color: Colors.VerdeOscuro }]}
+                  >
+                    Cómo funciona este app?
                   </Text>
                 </View>
               </View>
-            </View>
-          </View>
-        </View>
-        <TouchableOpacity onPress={() => navigation.navigate("ComoFunciona")}>
-          <View style={styles.customerServiceContainer}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <FontAwesome6
-                name="question-circle"
-                size={24}
-                color={Colors.VerdeOscuro}
-              />
-            </View>
-            <View>
-              <Text style={[styles.welcomeText, { color: Colors.VerdeOscuro }]}>
-                Cómo funciona este app?
-              </Text>
-            </View>
-          </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("CentroDeAyuda")}>
-          <View style={styles.customerServiceContainer}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <AntDesign
-                name="customerservice"
-                size={24}
-                color={Colors.VerdeOscuro}
-              />
-            </View>
-            <View>
-              <Text style={[styles.welcomeText, { color: Colors.VerdeOscuro }]}>
-                Centro de ayuda
-              </Text>
-            </View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("CentroDeAyuda")}
+            >
+              <View style={styles.customerServiceContainer}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <AntDesign
+                    name="customerservice"
+                    size={24}
+                    color={Colors.VerdeOscuro}
+                  />
+                </View>
+                <View>
+                  <Text
+                    style={[styles.welcomeText, { color: Colors.VerdeOscuro }]}
+                  >
+                    Centro de ayuda
+                  </Text>
+                </View>
+              </View>
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </ScrollView>
       </SafeAreaView>
     </>
   );
@@ -223,7 +328,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "flex-start",
     alignItems: "center",
-    flex: 1,
     backgroundColor: "#F4F4F4",
   },
   imageLogo: {
@@ -324,5 +428,32 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: 16,
     color: Colors.VerdeOscuro,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 15,
+    marginTop: 10,
+    textAlign: "center",
   },
 });

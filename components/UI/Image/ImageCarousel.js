@@ -25,11 +25,12 @@ const ImageCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const images = [
-    { uri: "https://source.unsplash.com/300x200/?promotion" },
-    { uri: "https://source.unsplash.com/300x200/?sale" },
-    { uri: "https://source.unsplash.com/300x200/?discount" },
-    { uri: "https://source.unsplash.com/300x200/?offer" },
-  ];
+  require('../../../assets/Frame 1000004974.png'),
+  require('../../../assets/Frame 1000004975.png'),
+  require('../../../assets/Auto Layout Vertical.png'),
+  require('../../../assets/Pack_sorpresa.png'),
+
+];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -38,7 +39,7 @@ const ImageCarousel = () => {
         scrollToIndex(nextIndex);
         return nextIndex;
       });
-    }, 2750);
+    }, 3500);
 
     return () => clearInterval(interval);
   }, []);

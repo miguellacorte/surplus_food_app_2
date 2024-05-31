@@ -1,8 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable, Dimensions } from "react-native";
 import { FontAwesome6 } from '@expo/vector-icons';
-import { Colors } from '../../constants/Colors';
 import { useNavigation } from "expo-router";
+
+
+const windowWidth = Dimensions.get('window').width;
+const iconSize = windowWidth * 0.04; // Adjust the multiplier as needed
 
 const PerfilIcon = () => {
     const navigation = useNavigation();
@@ -13,7 +16,7 @@ const PerfilIcon = () => {
         style={styles.iconContainer}
         onPress={() => navigation.navigate('(perfil)')}
       >
-        <FontAwesome6 name="user" size={20} color={'black'} />
+        <FontAwesome6 name="user" size={iconSize} color={'black'} />
       </Pressable>
 
     </View>

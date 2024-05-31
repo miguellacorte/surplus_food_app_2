@@ -146,7 +146,7 @@ const Calificaciones = () => {
               <AntDesign
                 name="left"
                 size={24}
-                color={Colors.VerdeOscuro}
+                color='black'
                 style={{ marginBottom: 20 }}
               />
             </Pressable>

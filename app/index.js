@@ -5,8 +5,7 @@ export default function index() {
   return (
     <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
       <View>
-        <Link href="(tabs)"> INTRO </Link>
-        <Text>Home</Text>
+        <Link href="(tabs)"> INICIO </Link>
       </View>
     </View>
   );
