@@ -17,7 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ContenedorProductosRestaurante from "../../components/UI/ContenedoresComida/ContenedorProductosRestaurante";
 import { datosRestaurante } from "../../data/datosRestaurante";
 import CalificacionesMiniatura from "../../components/UI/ContenedoresComida/CalificacionesMiniatura";
-import { Link, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { useNavigation } from "expo-router";
 import BotonFavoritos from "../../components/UI/ContenedoresComida/BotonFavoritos";
 import AgregarCarrito from "../../components/UI/Checkout/AgregarCarrito";
@@ -130,7 +130,7 @@ function RestaurantPage() {
           />
           <View style={styles.containerTituloRestaurante}>
             <Text style={styles.restaurantName}>{restaurante.nombre}</Text>
-            <BotonFavoritos size={BotonFavoritosSize} restaurantId={idNumber} />
+            <BotonFavoritos size={BotonFavoritosSize} restaurantId={idNumber} restaurantePage='True'/>
           </View>
           <DireccionRestaurant direccion={restaurante.direccion} />
           <View style={[styles.divider, { bottom: 10 }]} />

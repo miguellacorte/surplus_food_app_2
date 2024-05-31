@@ -2,8 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import { Pressable, View, StyleSheet } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { UserContext } from "../../../store/UserContext"; // Update this import path
+import { Colors } from "../../../constants/Colors";
 
-const BotonFavoritos = ({ size, restaurantId }) => {
+const BotonFavoritos = ({ size, restaurantId, restaurantePage }) => {
   const { user, updateFavorites } = useContext(UserContext);
   const [favorito, setFavorito] = useState(
     user?.RestaurantesFavoritos?.includes(restaurantId)
@@ -49,13 +50,21 @@ const BotonFavoritos = ({ size, restaurantId }) => {
 
   return (
     <Pressable onPress={toggleFavorito} style={estilos.boton}>
-      <View style={estilos.iconoContenedor}>
+      {restaurantePage ? (
         <FontAwesome
           name={favorito ? "heart" : "heart-o"}
-          size={18 * scale}
-          color="white"
+          size={22 * scale}
+          color={Colors.VerdeOscuro}
         />
-      </View>
+      ) : (
+        <View style={estilos.iconoContenedor}>
+          <FontAwesome
+            name={favorito ? "heart" : "heart-o"}
+            size={18 * scale}
+            color="white"
+          />
+        </View>
+      )}
     </Pressable>
   );
 };

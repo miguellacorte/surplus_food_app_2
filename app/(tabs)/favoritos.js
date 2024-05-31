@@ -49,70 +49,73 @@ export default function Favoritos() {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-    
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Text style={styles.header}>Favoritos</Text>
-        {favoriteRestaurants.length === 0 ? (
-          <View
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: 50,
-            }}
-          >
-            <Image
-              source={favoritosVacio}
-              style={{ width: 200, height: 200 }}
-            />
-            <Text style={{ textAlign: "center", marginTop: 25 }}>
-              Actualmente no tienes ningún restaurante favorito! Agrega tus
-              restaurantes favoritos y mantente al día con las últimas ofertas y
-              promociones .
-            </Text>
-            <Pressable
-              style={styles.button}
-              onPress={() => router.push("ordena")}
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{}}
+      >
+        <SafeAreaView style={styles.container}>
+          <Text style={styles.header}>Favoritos</Text>
+          {favoriteRestaurants.length === 0 ? (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: 50,
+              }}
             >
-              <Text style={styles.buttonText}>Buscar productos</Text>
-            </Pressable>
-          </View>
-        ) : (
-          favoriteRestaurants.map((restaurant, index) => (
-            <View style={{ width: "100%" }} key={restaurant.id}>
+              <Image
+                source={favoritosVacio}
+                style={{ width: 200, height: 200 }}
+              />
+              <Text style={{ textAlign: "center", marginTop: 25 }}>
+                Actualmente no tienes ningún restaurante favorito! Agrega tus
+                restaurantes favoritos y mantente al día con las últimas ofertas
+                y promociones .
+              </Text>
               <Pressable
-                key={index}
-                style={styles.restaurant}
-                onPress={() =>
-                  router.push({
-                    pathname: "/Restaurants/[id]",
-                    params: { id: restaurant.id },
-                  })
-                }
+                style={styles.button}
+                onPress={() => router.push("ordena")}
               >
-                <ContenedorComidaFavoritos
-                  id={restaurant.id}
-                  nombre={restaurant.nombre}
-                  distancia={restaurant.distancia}
-                  calificaciones={restaurant.calificaciones}
-                  urlImagenLogo={restaurant.urlImagenLogo}
-                  urlImagenPortada={restaurant.urlImagenPortada}
-                  Productos={restaurant.Productos}
-                  width="larger"
-                />
+                <Text style={styles.buttonText}>Buscar productos</Text>
               </Pressable>
             </View>
-          ))
-        )}
+          ) : (
+            favoriteRestaurants.map((restaurant, index) => (
+              <View style={{ width: "100%" }} key={restaurant.id}>
+                <Pressable
+                  key={index}
+                  style={styles.restaurant}
+                  onPress={() =>
+                    router.push({
+                      pathname: "/Restaurants/[id]",
+                      params: { id: restaurant.id },
+                    })
+                  }
+                >
+                  <ContenedorComidaFavoritos
+                    id={restaurant.id}
+                    nombre={restaurant.nombre}
+                    distancia={restaurant.distancia}
+                    calificaciones={restaurant.calificaciones}
+                    urlImagenLogo={restaurant.urlImagenLogo}
+                    urlImagenPortada={restaurant.urlImagenPortada}
+                    Productos={restaurant.Productos}
+                    width="larger"
+                  />
+                </Pressable>
+              </View>
+            ))
+          )}
+        </SafeAreaView>
       </ScrollView>
-    </SafeAreaView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     padding: 10,
   },
   header: {
