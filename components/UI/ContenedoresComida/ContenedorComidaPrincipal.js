@@ -54,6 +54,7 @@ function ContenedorComidaPrincipal({
   const precioVenta = formatter.format(Productos[0].precioVenta);
 
   return (
+    <View style={estilos.shadow}>
     <View style={estilos.contenedorTarjeta}>
       <ImageBackground
         resizeMode="cover"
@@ -121,10 +122,21 @@ function ContenedorComidaPrincipal({
         </View>
       </View>
     </View>
+    </View>
   );
 }
 
 const estilos = StyleSheet.create({
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.12,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
   contenedorTarjeta: {
     width: anchoTarjeta,
     alignSelf: "center",

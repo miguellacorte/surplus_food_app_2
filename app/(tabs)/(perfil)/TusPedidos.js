@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import UserOrders from '../../../components/UI/Perfil/UserOrders';
 
 const TusPedidos = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Tus Pedidos</Text>
+            <UserOrders displayStyle='fullDisplay' />
         </View>
     );
 };

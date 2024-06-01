@@ -39,6 +39,7 @@ function ContenedorComidaFavoritos({
   const estilos = getStyles(width, height);
 
   return (
+    <View style={estilos.shadow}>
     <View style={estilos.contenedorTarjeta}>
       <ImageBackground
         resizeMode="cover"
@@ -100,6 +101,7 @@ function ContenedorComidaFavoritos({
         </View>
       </View>
     </View>
+    </View>
   );
 }
 
@@ -120,6 +122,16 @@ const getStyles = (width, height) => {
   const contenedorInfoProductoHeight = width < widthBreakpoint ? 50 : 60;
 
   const estilos = StyleSheet.create({
+    shadow: {
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.12,
+      shadowRadius: 12,
+      elevation: 5,
+    },
     contenedorTarjeta: {
       width: "90%",
       alignSelf: "center",
@@ -128,14 +140,6 @@ const getStyles = (width, height) => {
       backgroundColor: "#FFF",
       marginBottom: 10,
       overflow: "hidden",
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 10,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
     },
     overlay: {
       position: "absolute",

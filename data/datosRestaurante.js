@@ -150,7 +150,7 @@ export const datosRestaurante = [
     Productos: [
       {
         id: 1,
-        nombre: "Plato de pollo",
+        nombre: "Plato de pollo", // MAX 27 CHARACHETERS  
         precioAntes: "10.00",
         precioVenta: "4.80",
         cantidadDisponible: "2",
@@ -216,7 +216,7 @@ export const datosRestaurante = [
       },
       {
         id: 4,
-        nombre: "Cheesecake de Fresa",
+        nombre: "Cheesecake de Fresa", 
         precioAntes: "4.00",
         precioVenta: "2.80",
         cantidadDisponible: "20",
@@ -247,7 +247,7 @@ export const datosRestaurante = [
     ],
     ordenesCantidad: "300",
     urlImagenLogo:
-      "https://images.unsplash.com/photo-1580920460745-f06f9cb71d62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+      "https://i.imgur.com/uzJ5Bts.png",
     urlImagenPortada:
       "https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [

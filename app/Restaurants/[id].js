@@ -101,7 +101,7 @@ function RestaurantPage() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <ImageBackground
             resizeMode="cover"

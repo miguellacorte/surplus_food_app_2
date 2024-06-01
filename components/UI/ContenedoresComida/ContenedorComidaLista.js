@@ -43,7 +43,7 @@ import {
     const formattedPrecioVenta = formatter.format(precioVenta);
   
     return (
-      <View>
+      <View style={estilos.shadow}>
         <View style={estilos.contenedorTarjeta}>
           <ImageBackground
             resizeMode="cover"
@@ -133,6 +133,16 @@ import {
     const contenedorInfoProductoHeight = width < widthBreakpoint ? 50 : 60;
   
     const estilos = StyleSheet.create({
+      shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.12,
+        shadowRadius: 3.84,
+        elevation: 5,
+      },
       contenedorTarjeta: {
         width: "90%",
         alignSelf: "center",
