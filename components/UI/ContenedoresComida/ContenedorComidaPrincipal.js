@@ -26,8 +26,8 @@ const detallesRestauranteWidth = width < widthBreakpoint ? 140 : 190;
 const contenedorHorarioWidth = width < widthBreakpoint ? 155 : 190;
 const logoStyleWidth = width < widthBreakpoint ? 40 : 50;
 
-const marginTopDetallesRestaurante = height < heightBreakpoint ? "5%" : "7%";
-const fontSizeNombreRestaurante = height < heightBreakpoint ? 15 : 18;
+const marginTopDetallesRestaurante = height < heightBreakpoint ? "5%" : "5%";
+const fontSizeNombreRestaurante = height < heightBreakpoint ? 15 : 20;
 const fontSizePrecioAntes = width < widthBreakpoint ? 12 : 14;
 const fontSizePrecioDespues = width < widthBreakpoint ? 16 : 18;
 const topPrecioDespues = height < heightBreakpoint ? "0%" : "2%";
@@ -164,7 +164,8 @@ const estilos = StyleSheet.create({
     maxWidth: detallesRestauranteWidth,
     minWidth: 150,
     top: 0,
-    bottom: 2,
+    bottom: 10,
+    marginBottom: 10,
   },
   miniaturaRestaurante: {
     width: logoStyleWidth,

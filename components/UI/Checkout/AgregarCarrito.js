@@ -4,6 +4,7 @@ import { Colors } from "../../../constants/Colors";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { CartContext } from "../../../store/CartContext";
 import { useNavigation } from "expo-router";
+import { Alert } from "react-native";
 
 const PriceTag = ({ price }) => (
   <View style={styles.priceContainer}>
@@ -25,15 +26,33 @@ const AddToCartButton = ({ text, onPress }) => (
 
 function AgregarCarrito({ restaurant, productId }) {
   const navigation = useNavigation();
-  const { addToCart } = useContext(CartContext);
+  const { cart, addToCartWithCheck, clearCart } = useContext(CartContext);
   const product = restaurant.Productos.find(
     (product) => product.id === productId
   );
 
-  const handleAddToCart = () => {
-    addToCart(product);
+const handleAddToCart = () => {
+  if (cart.length > 0 && cart[0].restaurant !== restaurant.id) {
+    Alert.alert(
+      "Disculpa! No puedes agregar productos de diferentes restaurantes al carrito.",
+      "",
+      [
+        { text: "Cancelar", style: "cancel" },
+        {
+          text: "Crear nuevo carrito",
+          onPress: () => {
+            clearCart();
+            addToCartWithCheck(product, restaurant.id);
+            navigation.navigate("cart");
+          },
+        },
+      ]
+    );
+  } else {
+    addToCartWithCheck(product, restaurant.id);
     navigation.navigate("cart");
-  };
+  }
+};
 
   return (
     <View style={styles.container}>
@@ -60,7 +79,7 @@ const styles = StyleSheet.create({
   container: {
     position: "absolute",
     width: "90%",
-    bottom: 20,
+    bottom: 10,
     marginHorizontal: 20,
     justifyContent: "space-between",
     alignItems: "stretch",

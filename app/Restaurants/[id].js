@@ -130,7 +130,13 @@ function RestaurantPage() {
           />
           <View style={styles.containerTituloRestaurante}>
             <Text style={styles.restaurantName}>{restaurante.nombre}</Text>
-            <BotonFavoritos size={BotonFavoritosSize} restaurantId={idNumber} restaurantePage='True'/>
+            <View style={{ top: 2 }}>
+              <BotonFavoritos
+                size={BotonFavoritosSize}
+                restaurantId={idNumber}
+                restaurantePage="True"
+              />
+            </View>
           </View>
           <DireccionRestaurant direccion={restaurante.direccion} />
           <View style={[styles.divider, { bottom: 10 }]} />
@@ -246,7 +252,7 @@ const styles = StyleSheet.create({
   },
   restaurantName: {
     fontWeight: "bold",
-    fontSize: 24,
+    fontSize: 28,
     marginVertical: 10,
   },
   containerTituloRestaurante: {

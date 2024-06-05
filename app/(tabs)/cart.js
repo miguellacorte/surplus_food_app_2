@@ -127,7 +127,7 @@ const ItemSummary = ({ item, onIncrease, onDecrease, onDelete }) => {
 };
 const Cart = () => {
   const navigation = useNavigation();
-  const { cart, addToCart, removeFromCart, decreaseQuantity } =
+  const { cart, addToCartWithCheck, removeFromCart, decreaseQuantity } =
     useContext(CartContext);
   const [productos, setProductos] = useState(0);
   const [tarifaDeServicio, setTarifaDeServicio] = useState(0);
@@ -223,7 +223,7 @@ const Cart = () => {
                 <ItemSummary
                   key={index.toString()}
                   item={item}
-                  onIncrease={() => addToCart(item)}
+                  onIncrease={() => addToCartWithCheck(item)}
                   onDecrease={() => decreaseQuantity(item)}
                   onDelete={() => removeFromCart(item)}
                 />

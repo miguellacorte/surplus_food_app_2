@@ -295,7 +295,7 @@ export const datosRestaurante = [
     ],
     ordenesCantidad: "215",
     urlImagenLogo:
-      "https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+      'https://i.imgur.com/fbY1m1T.png',
     urlImagenPortada:
       "https://images.unsplash.com/photo-1513135065346-a098a63a71ee?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
@@ -392,7 +392,7 @@ export const datosRestaurante = [
     ],
     ordenesCantidad: "305",
     urlImagenLogo:
-      "https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+      "https://i.imgur.com/eLmDidn.jpeg",
     urlImagenPortada:
       "https://images.unsplash.com/photo-1432139509613-5c4255815697?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
@@ -441,7 +441,7 @@ export const datosRestaurante = [
     ],
     ordenesCantidad: "250",
     urlImagenLogo:
-      "https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+      "https://i.imgur.com/WrKMtS8.png",
     urlImagenPortada:
       "https://images.unsplash.com/photo-1562051036-e0eea191d42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
@@ -489,7 +489,7 @@ export const datosRestaurante = [
     ],
     ordenesCantidad: "170",
     urlImagenLogo:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+      "https://i.imgur.com/Re0qssc.png",
     urlImagenPortada:
       "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
@@ -537,9 +537,9 @@ export const datosRestaurante = [
     ],
     ordenesCantidad: "195",
     urlImagenLogo:
-      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+      "https://i.imgur.com/SzSeEM4.png",
     urlImagenPortada:
-      "https://images.unsplash.com/photo-1556742522-0f4f5e8eb228?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     Productos: [
       {
         id: 17,
