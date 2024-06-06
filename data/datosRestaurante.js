@@ -198,7 +198,7 @@ export const datosRestaurante = [
     ],
     ordenesCantidad: "190",
     urlImagenLogo:
-      "https://images.unsplash.com/photo-1561758033-48d52648ae8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+      "https://i.imgur.com/e1O8gVl.jpeg",
     urlImagenPortada:
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     Productos: [
@@ -207,7 +207,7 @@ export const datosRestaurante = [
         nombre: "Hamburguesa Especial",
         precioAntes: "8.00",
         precioVenta: "5.60",
-        cantidadDisponible: "15",
+        cantidadDisponible: "5",
         diaRetiro: "Mañana",
         horaRetiro: "08:00 - 12:30",
         descripcion:
@@ -256,7 +256,7 @@ export const datosRestaurante = [
         nombre: "Croissant de Almendra",
         precioAntes: "3.00",
         precioVenta: "1.80",
-        cantidadDisponible: "25",
+        cantidadDisponible: "5",
         diaRetiro: "Hoy",
         horaRetiro: "10:30 - 15:00",
         descripcion:
@@ -268,7 +268,7 @@ export const datosRestaurante = [
         nombre: "Capuchino Clásico",
         precioAntes: "2.50",
         precioVenta: "1.50",
-        cantidadDisponible: "30",
+        cantidadDisponible: "3",
         diaRetiro: "Mañana",
         horaRetiro: "11:00 - 15:30",
         descripcion: "Capuchino con espuma perfecta y un toque de canela",
@@ -304,7 +304,7 @@ export const datosRestaurante = [
         nombre: "Torta de Chocolate",
         precioAntes: "12.00",
         precioVenta: "8.00",
-        cantidadDisponible: "10",
+        cantidadDisponible: "4",
         diaRetiro: "Mañana",
         horaRetiro: "12:15 - 16:45",
         descripcion:
@@ -316,7 +316,7 @@ export const datosRestaurante = [
         nombre: "Croissant de Mantequilla",
         precioAntes: "2.00",
         precioVenta: "1.20",
-        cantidadDisponible: "30",
+        cantidadDisponible: "3",
         diaRetiro: "Mañana",
         horaRetiro: "14:00 - 18:30",
         descripcion:
@@ -352,7 +352,7 @@ export const datosRestaurante = [
         nombre: "Emparedado de Pollo",
         precioAntes: "6.00",
         precioVenta: "3.60",
-        cantidadDisponible: "20",
+        cantidadDisponible: "2",
         diaRetiro: "Hoy",
         horaRetiro: "15:25 - 19:55",
         descripcion:
@@ -364,7 +364,7 @@ export const datosRestaurante = [
         nombre: "Batido de Frutas",
         precioAntes: "4.00",
         precioVenta: "2.40",
-        cantidadDisponible: "25",
+        cantidadDisponible: "5",
         diaRetiro: "Hoy",
         horaRetiro: "16:10 - 20:40",
         descripcion:
@@ -413,7 +413,7 @@ export const datosRestaurante = [
         nombre: "Pan de Jamón",
         precioAntes: "3.00",
         precioVenta: "2.00",
-        cantidadDisponible: "20",
+        cantidadDisponible: "2",
         diaRetiro: "Hoy",
         horaRetiro: "07:00 - 11:00",
         descripcion:
@@ -462,7 +462,7 @@ export const datosRestaurante = [
         nombre: "Mousse de Mango",
         precioAntes: "6.00",
         precioVenta: "3.60",
-        cantidadDisponible: "20",
+        cantidadDisponible: "2",
         diaRetiro: "Hoy",
         horaRetiro: "12:00 - 14:00",
         descripcion:
@@ -498,7 +498,7 @@ export const datosRestaurante = [
         nombre: "Pabellón Criollo",
         precioAntes: "10.00",
         precioVenta: "6.00",
-        cantidadDisponible: "10",
+        cantidadDisponible: "1",
         diaRetiro: "Hoy",
         horaRetiro: "12:00 - 04:00",
         descripcion:
@@ -558,7 +558,7 @@ export const datosRestaurante = [
         nombre: "Empanada de Carne",
         precioAntes: "2.00",
         precioVenta: "1.20",
-        cantidadDisponible: "40",
+        cantidadDisponible: "4",
         diaRetiro: "Hoy",
         horaRetiro: "08:00 - 11:00",
         descripcion:

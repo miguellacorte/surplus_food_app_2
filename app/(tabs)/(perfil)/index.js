@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Modal,
+  StatusBar,
 } from "react-native";
 import { UserContext } from "../../../store/UserContext";
 import {
@@ -19,7 +20,7 @@ import {
 import { Colors } from "../../../constants/Colors";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import { View as SafeAreaContextView } from "react-native";
-import { StatusBar } from "expo-status-bar";
+
 import { useNavigation } from "@react-navigation/native";
 import UserOrders from "../../../components/UI/Perfil/UserOrders";
 import CO2Display from "../../../components/UI/Perfil/Co2Display";
@@ -33,16 +34,19 @@ export default function index() {
   const { user } = useContext(UserContext);
   const navigation = useNavigation();
 
-  console.log('userPedidos:', user.Pedidos.length);
+  console.log("userPedidos:", user.Pedidos.length);
 
-const totalSavings = user.Pedidos.reduce((total, pedido) => {
-  const savingsForOrder = pedido.Productos.reduce((totalForOrder, producto) => {
-    const savingsForProduct = (producto.precioAntes - producto.precioVenta) * producto.cantidad;
-    return totalForOrder + savingsForProduct;
-  }, 0);
-  return total + savingsForOrder;
-}, 0).toFixed(2);
-
+  const totalSavings = user.Pedidos.reduce((total, pedido) => {
+    const savingsForOrder = pedido.Productos.reduce(
+      (totalForOrder, producto) => {
+        const savingsForProduct =
+          (producto.precioAntes - producto.precioVenta) * producto.cantidad;
+        return totalForOrder + savingsForProduct;
+      },
+      0
+    );
+    return total + savingsForOrder;
+  }, 0).toFixed(2);
 
   return (
     <>
@@ -78,7 +82,7 @@ const totalSavings = user.Pedidos.reduce((total, pedido) => {
             style={{
               flex: 1,
               alignItems: "center",
-              height: "100%",
+              minHeight: "100%", // Change height to minHeight
               padding: 0,
             }}
           >
@@ -218,32 +222,33 @@ const commonShadow = {
 
 const styles = StyleSheet.create({
   container: {
+    
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#F4F4F4",
   },
- userContainer: {
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "space-between",
-  width: "100%",
-  padding: 20,
-  borderBottomLeftRadius: 25,
-  borderBottomRightRadius: 25,
-  backgroundColor: "#F4F4F4",
-  borderColor: "#E4E4E4",
-  borderBottomWidth: 2,
-  borderLeftWidth: 2,
-  borderRightWidth: 2,
-  shadowColor: "#000",
-  shadowOffset: {
-    width: 0,
-    height: 7,
+  userContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    padding: 20,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
+    backgroundColor: "#F4F4F4",
+    borderColor: "#E4E4E4",
+    borderBottomWidth: 2,
+    borderLeftWidth: 2,
+    borderRightWidth: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.12,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-  shadowOpacity: 0.12,
-  shadowRadius: 3.84,
-  elevation: 5,
-},
   customerServiceContainer: {
     marginVertical: 10,
     flexDirection: "row",

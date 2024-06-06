@@ -88,7 +88,7 @@ export default function Favoritos() {
                   style={styles.restaurant}
                   onPress={() =>
                     router.push({
-                      pathname: "/Restaurants/[id]",
+                      pathname: "(Restaurantes)/[id]",
                       params: { id: restaurant.id },
                     })
                   }

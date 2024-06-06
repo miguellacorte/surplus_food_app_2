@@ -8,20 +8,19 @@ import {
   Dimensions,
   ImageBackground,
   Pressable,
-  Modal,
+  SafeAreaView as RNSafeAreaView,
+  Platform
 } from "react-native";
+import { SafeAreaView as SafeAreaContextView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
-import { Colors } from "../../constants/Colors";
-import { SafeAreaView } from "react-native-safe-area-context";
-import ContenedorProductosRestaurante from "../../components/UI/ContenedoresComida/ContenedorProductosRestaurante";
-import { datosRestaurante } from "../../data/datosRestaurante";
-import CalificacionesMiniatura from "../../components/UI/ContenedoresComida/CalificacionesMiniatura";
-import { useLocalSearchParams } from "expo-router";
-import { useNavigation } from "expo-router";
-import BotonFavoritos from "../../components/UI/ContenedoresComida/BotonFavoritos";
-import AgregarCarrito from "../../components/UI/Checkout/AgregarCarrito";
-import { CartContext } from "../../store/CartContext";
+import { Colors } from "../../../constants/Colors";
+import ContenedorProductosRestaurante from "../../../components/UI/ContenedoresComida/ContenedorProductosRestaurante";
+import { datosRestaurante } from "../../../data/datosRestaurante";
+import CalificacionesMiniatura from "../../../components/UI/ContenedoresComida/CalificacionesMiniatura";
+import { useLocalSearchParams, useNavigation } from "expo-router";
+import BotonFavoritos from "../../../components/UI/ContenedoresComida/BotonFavoritos";
+import AgregarCarrito from "../../../components/UI/Checkout/AgregarCarrito";
 
 const { width, height } = Dimensions.get("window");
 
@@ -43,6 +42,9 @@ const AddressItem = ({ address }) => (
     <Text style={styles.addressText}>{address}</Text>
   </View>
 );
+
+const SafeAreaView =
+  Platform.OS === "android" ? SafeAreaContextView : RNSafeAreaView;
 
 const DireccionRestaurant = () => {
   return (
@@ -66,7 +68,6 @@ const SectionTitle = ({ title }) => (
 
 function RestaurantPage() {
   const [pressedProductId, setPressedProductId] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
 
   const handlePress = (productId) => {
     if (pressedProductId === productId) {
@@ -80,26 +81,14 @@ function RestaurantPage() {
   const { id } = useLocalSearchParams();
   const idNumber = Number(id);
 
-  const { addToCart } = useContext(CartContext);
-
   const restaurante = datosRestaurante.find((rest) => rest.id == id);
 
   if (!restaurante) {
     return <Text>Restaurant not found</Text>;
   }
 
-  const productos = restaurante.Productos;
-
-  const handleAddToCart = (productId) => {
-    const productToAdd = productos.find((product) => product.id === productId);
-    if (productToAdd) {
-      addToCart(productToAdd);
-      console.log("Added product to cart:", productToAdd);
-      setModalVisible(true);
-      setTimeout(() => setModalVisible(false), 2000); // Hide the modal after 2 seconds
-    }
-  };
   return (
+    
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
@@ -168,7 +157,7 @@ function RestaurantPage() {
                 <View style={{ borderBottomWidth: 1 }}>
                   <Pressable
                     onPress={() => {
-                      navigation.navigate("Restaurants/calificaciones", {
+                      navigation.navigate("calificaciones", {
                         calificaciones: restaurante.calificaciones,
                       });
                     }}
@@ -196,45 +185,15 @@ function RestaurantPage() {
           <AgregarCarrito
             restaurant={restaurante}
             productId={pressedProductId}
-            onPress={() => handleAddToCart(pressedProductId)}
           />
         </View>
       )}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0, 0, 0)", // semi-transparent background
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: "white",
-              borderRadius: 20,
-              padding: 35,
-              alignItems: "center",
-            }}
-          >
-            <Text>Modal is visible</Text>
-          </View>
-        </View>
-      </Modal>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#FFF",
   },
   restaurantImage: {
@@ -267,7 +226,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   DireccionContainer: {
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

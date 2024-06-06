@@ -9,7 +9,10 @@ import {
   Pressable,
   Image,
   StatusBar,
+  SafeAreaView as RNSafeAreaView,
+  Platform
 } from "react-native";
+import { SafeAreaView as SafeAreaContextView } from "react-native-safe-area-context";
 import { CartContext } from "../../store/CartContext";
 import Icon from "react-native-vector-icons/FontAwesome";
 import TiempoDeRetiro from "../../components/UI/ContenedoresComida/TiempoDeRetiro";
@@ -17,9 +20,11 @@ import { Colors } from "../../constants/Colors";
 import MediosPago from "../../components/UI/Checkout/MediosPago";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
 import carritoVacio from "../../assets/carritoVacio.png";
 import DatosFacuracion from "../../components/UI/Checkout/DatosFacturacion";
+
+const SafeAreaView =
+  Platform.OS === "android" ? SafeAreaContextView : RNSafeAreaView;
 
 const { width, height } = Dimensions.get("window");
 
@@ -41,6 +46,7 @@ const ItemSummary = ({ item, onIncrease, onDecrease, onDelete }) => {
   const handleIncrease = () => {
     if (item.quantity < item.cantidadDisponible) {
       onIncrease();
+      console.log("Item quantity:", item.quantity);
     } else {
       alert("No se pueden agregar más productos. Cantidad máxima alcanzada.");
     }
@@ -132,6 +138,10 @@ const Cart = () => {
   const [productos, setProductos] = useState(0);
   const [tarifaDeServicio, setTarifaDeServicio] = useState(0);
   const [total, setTotal] = useState(0);
+  let restaurantId;
+  if (cart.length > 0) {
+    restaurantId = cart[0].restaurant;
+  }
 
   const currencyFormat = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -153,7 +163,7 @@ const Cart = () => {
 
   return (
     <>
-    <StatusBar barStyle='dark-content' backgroundColor='#E0E0E0'/>
+      <StatusBar barStyle="dark-content" backgroundColor="#E0E0E0" />
       <SafeAreaView style={styles.pageContainer}>
         <View>
           {cart.length === 0 ? (
@@ -192,7 +202,10 @@ const Cart = () => {
               </TouchableOpacity>
             </View>
           ) : (
-            <ScrollView style={{ marginHorizontal: 20 }} showsVerticalScrollIndicator={false}>
+            <ScrollView
+              style={{ marginHorizontal: 20 }}
+              showsVerticalScrollIndicator={false}
+            >
               <View>
                 <View
                   style={{
@@ -203,7 +216,9 @@ const Cart = () => {
                   }}
                 >
                   <Pressable
-                    onPress={() => navigation.goBack()}
+                    onPress={() =>
+                     navigation.navigate('(Restaurantes)')
+                    }
                     style={[styles.pressable, { alignSelf: "flex-start" }]}
                   >
                     <AntDesign
@@ -213,10 +228,8 @@ const Cart = () => {
                       style={{ marginBottom: 20 }}
                     />
                   </Pressable>
-     
+
                   <Text style={styles.headerTitle}>Confirmar compra</Text>
-                  
-                  
                 </View>
               </View>
               {cart.map((item, index) => (

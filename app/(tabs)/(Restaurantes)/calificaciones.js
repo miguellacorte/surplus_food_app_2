@@ -10,7 +10,7 @@ import {
 import { useNavigation } from "expo-router";
 import { useRoute } from "@react-navigation/native";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
-import { Colors } from "../../constants/Colors";
+import { Colors } from "../../../constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/MaterialIcons";
 

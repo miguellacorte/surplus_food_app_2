@@ -26,7 +26,7 @@ import CategoriesContainer from "../../components/UI/FiltrosBusqueda/CategoriesC
 import PaymentContainers from "../../components/UI/FiltrosBusqueda/PaymentContainers";
 import SortSearch from "../../components/UI/FiltrosBusqueda/SortSearch";
 import BotonesDiaRetiro from "../../components/UI/FiltrosBusqueda/BotonesDiaRetiro";
-import { StatusBar } from 'react-native';
+import { StatusBar } from "react-native";
 
 const sliderStyle = Platform.OS === "ios" ? { color: "green" } : {};
 const CustomMarker = () => <View style={styles.customMarker} />;
@@ -145,22 +145,28 @@ function Lista({ data, handleSortOptionChange, sortOption, searchTerm }) {
 
     switch (sortOption) {
       case "Relevancia":
-        flattenedProducts = flattenedProducts
-          .filter((product) => Number(product.distancia) <= 2)
-          .filter((product) => {
-            const avgRating =
-              product.calificaciones.reduce(
-                (acc, curr) => acc + curr.calificacion,
-                0
-              ) / product.calificaciones.length;
-            return avgRating >= 3.5;
-          })
-          .sort(
-            (a, b) =>
-              Number(b.precioAntes) -
-              Number(b.precioVenta) -
-              (Number(a.precioAntes) - Number(a.precioVenta))
-          );
+        flattenedProducts = flattenedProducts.sort((a, b) => {
+          const avgRatingA =
+            a.calificaciones.reduce((acc, curr) => acc + curr.calificacion, 0) /
+            a.calificaciones.length;
+          const avgRatingB =
+            b.calificaciones.reduce((acc, curr) => acc + curr.calificacion, 0) /
+            b.calificaciones.length;
+
+          // Compare by rating
+          if (avgRatingA > avgRatingB) return -1;
+          if (avgRatingA < avgRatingB) return 1;
+
+          // If ratings are equal, compare by distance
+          if (Number(a.distancia) < Number(b.distancia)) return -1;
+          if (Number(a.distancia) > Number(b.distancia)) return 1;
+
+          // If distances are also equal, compare by availability
+          if (Number(a.precioVenta) < Number(b.precioVenta)) return -1;
+          if (Number(a.precioVenta) > Number(b.precioVenta)) return 1;
+
+          return 0;
+        });
         break;
       case "Distancia":
         flattenedProducts.sort(
@@ -215,7 +221,7 @@ function Lista({ data, handleSortOptionChange, sortOption, searchTerm }) {
               style={styles.restaurant}
               onPress={() =>
                 router.push({
-                  pathname: "/Restaurants/[id]",
+                  pathname: "(Restaurantes)/[id]",
                   params: { id: item.restaurantId },
                 })
               }
@@ -341,7 +347,7 @@ function Ordena({ initialSortOption }) {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-     <StatusBar barStyle='dark-content' backgroundColor='#E0E0E0'/>
+      <StatusBar barStyle="dark-content" backgroundColor="#E0E0E0" />
       <View style={styles.container}>
         <View
           style={{
@@ -353,7 +359,6 @@ function Ordena({ initialSortOption }) {
           }}
         >
           <Ubicacion />
-        
         </View>
         <View style={styles.header}>
           <View
@@ -375,7 +380,7 @@ function Ordena({ initialSortOption }) {
               onChangeText={handleInputChange}
               value={searchTerm}
             />
-              <FilterButton toggleModal={() => setModalVisible(!modalVisible)} />
+            <FilterButton toggleModal={() => setModalVisible(!modalVisible)} />
           </View>
         </View>
         <View>
@@ -511,7 +516,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     padding: 20,
-   
+
     paddingHorizontal: 13,
   },
   header: {

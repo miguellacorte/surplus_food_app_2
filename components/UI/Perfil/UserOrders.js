@@ -93,7 +93,7 @@ function UserOrders({ displayStyle }) {
   if (displayStyle === "fullDisplay") {
     return (
       <ScrollView>
-        {orderedProducts.map((orderedProduct, index) => (
+         {orderedProducts.slice().reverse().map((orderedProduct, index) => (
           <View
             key={index}
             style={{ flexDirection: "column", alignItems: "center" }}
@@ -170,7 +170,7 @@ function UserOrders({ displayStyle }) {
                       dia={orderedProduct.product[0].diaRetiro}
                       hora={orderedProduct.product[0].horaRetiro}
                       containerSize="80%"
-                      style={{ marginBottom: 0 }}
+                      
                     />
                   )}
                 </View>
@@ -303,9 +303,6 @@ export const styles = StyleSheet.create({
     width: "90%",
     flexDirection: "row",
     marginTop: 10,
-    marginBottom: 0,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
   },
   container: {
     flexDirection: "row",

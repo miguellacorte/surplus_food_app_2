@@ -36,7 +36,7 @@ const RetirarParaCenar = () => {
               key={index}
               onPress={() =>
                 router.push({
-                  pathname: "/Restaurants/[id]",
+                  pathname: "(Restaurantes)/[id]",
                   params: { id: item.id },
                 })
               }

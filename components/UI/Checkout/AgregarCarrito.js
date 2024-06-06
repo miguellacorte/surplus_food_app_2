@@ -25,6 +25,7 @@ const AddToCartButton = ({ text, onPress }) => (
 );
 
 function AgregarCarrito({ restaurant, productId }) {
+ 
   const navigation = useNavigation();
   const { cart, addToCartWithCheck, clearCart } = useContext(CartContext);
   const product = restaurant.Productos.find(

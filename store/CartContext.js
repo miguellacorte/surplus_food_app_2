@@ -6,10 +6,18 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
+    case "INCREASE_QUANTITY": {
+      const newCart = [...state.cart];
+      const index = newCart.findIndex((item) => item.id === action.payload.id);
+      if (index !== -1) {
+        newCart[index].quantity += 1;
+      }
+      return { ...state, cart: newCart };
+    }
     case "ADD_TO_CART_WITH_CHECK":
       if (state.cart.length > 0) {
-        const currentRestaurant = state.cart[0].restaurant;
-        if (action.payload.restaurant !== currentRestaurant) {
+        const currentRestaurantId = state.cart[0].restaurant;
+        if (action.payload.restaurant !== currentRestaurantId) {
           return state;
         }
       }
@@ -19,17 +27,21 @@ function reducer(state, action) {
       );
 
       if (existingItem) {
-        // If the item already exists in the cart, update its quantity
+        console.log("Existing item:", existingItem);
+        const newCart = state.cart.map((cartItem) =>
+          cartItem.id === action.payload.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+        console.log(
+          "Updated item:",
+          newCart.find((item) => item.id === action.payload.id)
+        );
         return {
           ...state,
-          cart: state.cart.map((cartItem) =>
-            cartItem.id === action.payload.id
-              ? { ...cartItem, quantity: cartItem.quantity + 1 }
-              : cartItem
-          ),
+          cart: newCart,
         };
       } else {
-        // If the item does not exist in the cart, add it
         return {
           ...state,
           cart: [...state.cart, { ...action.payload, quantity: 1 }],
@@ -78,11 +90,17 @@ function CartProvider({ children }) {
 
   const value = {
     cart: state.cart,
-    addToCartWithCheck: (item, restaurantId) =>
-      dispatch({
-        type: "ADD_TO_CART_WITH_CHECK",
-        payload: { ...item, restaurant: restaurantId },
-      }),
+    addToCartWithCheck: (item, restaurantId) => {
+      const existingItem = state.cart.find((i) => i.id === item.id);
+      if (existingItem) {
+        dispatch({ type: "INCREASE_QUANTITY", payload: item });
+      } else {
+        dispatch({
+          type: "ADD_TO_CART_WITH_CHECK",
+          payload: { ...item, restaurant: restaurantId },
+        });
+      }
+    },
     removeFromCart: (item) =>
       dispatch({ type: "REMOVE_FROM_CART", payload: item }),
     decreaseQuantity: (item) =>
