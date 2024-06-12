@@ -9,7 +9,7 @@ import {
   ImageBackground,
   Pressable,
   SafeAreaView as RNSafeAreaView,
-  Platform
+  Platform,
 } from "react-native";
 import { SafeAreaView as SafeAreaContextView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -68,8 +68,10 @@ const SectionTitle = ({ title }) => (
 
 function RestaurantPage() {
   const [pressedProductId, setPressedProductId] = useState(null);
+  const [isProductAddedToCart, setIsProductAddedToCart] = useState(false);
 
   const handlePress = (productId) => {
+    setIsProductAddedToCart(false); // Reset cart addition state
     if (pressedProductId === productId) {
       setPressedProductId(null); // deselect the product if it's already selected
     } else {
@@ -77,9 +79,32 @@ function RestaurantPage() {
     }
   };
 
+  // Add a product to cart function (you need to implement or adjust this based on your existing logic)
+  const addProductToCart = (productId) => {
+    // Your logic to add product to cart
+    setIsProductAddedToCart(true); // Indicate that a product has been added to the cart
+    setPressedProductId(null); // Deselect the product after adding it to the cart
+  };
+
+  useEffect(() => {
+    let timeoutId;
+    if (pressedProductId !== null && !isProductAddedToCart) {
+      // Reset pressedProductId after 10 seconds if not added to cart
+      timeoutId = setTimeout(() => {
+        setPressedProductId(null);
+      }, 10000);
+    }
+
+    return () => clearTimeout(timeoutId); // Cleanup timeout on component unmount or if pressedProductId changes
+  }, [pressedProductId, isProductAddedToCart]);
+
   const navigation = useNavigation();
   const { id } = useLocalSearchParams();
   const idNumber = Number(id);
+
+  useEffect(() => {
+    setPressedProductId(null);
+  }, [id]);
 
   const restaurante = datosRestaurante.find((rest) => rest.id == id);
 
@@ -88,7 +113,6 @@ function RestaurantPage() {
   }
 
   return (
-    
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
@@ -180,11 +204,13 @@ function RestaurantPage() {
           <View style={{ height: extrSpaceSize }}></View>
         </View>
       </ScrollView>
+
       {pressedProductId !== null && (
         <View style={{ alignItems: "center" }}>
           <AgregarCarrito
             restaurant={restaurante}
             productId={pressedProductId}
+            onAddToCart={addProductToCart} // Passing addProductToCart as a prop
           />
         </View>
       )}

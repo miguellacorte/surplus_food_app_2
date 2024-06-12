@@ -24,13 +24,17 @@ const AddToCartButton = ({ text, onPress }) => (
   </TouchableOpacity>
 );
 
-function AgregarCarrito({ restaurant, productId }) {
- 
+function AgregarCarrito({ restaurant, productId, onAddToCart }) {
   const navigation = useNavigation();
   const { cart, addToCartWithCheck, clearCart } = useContext(CartContext);
   const product = restaurant.Productos.find(
     (product) => product.id === productId
   );
+
+  if (!product) {
+    console.error("Product not found");
+    return null; // Or handle this case appropriately
+  }
 
 const handleAddToCart = () => {
   if (cart.length > 0 && cart[0].restaurant !== restaurant.id) {
@@ -44,6 +48,7 @@ const handleAddToCart = () => {
           onPress: () => {
             clearCart();
             addToCartWithCheck(product, restaurant.id);
+            onAddToCart(productId)
             navigation.navigate("cart");
           },
         },
@@ -51,6 +56,7 @@ const handleAddToCart = () => {
     );
   } else {
     addToCartWithCheck(product, restaurant.id);
+    onAddToCart(productId)
     navigation.navigate("cart");
   }
 };

@@ -46,7 +46,6 @@ const ItemSummary = ({ item, onIncrease, onDecrease, onDelete }) => {
   const handleIncrease = () => {
     if (item.quantity < item.cantidadDisponible) {
       onIncrease();
-      console.log("Item quantity:", item.quantity);
     } else {
       alert("No se pueden agregar más productos. Cantidad máxima alcanzada.");
     }
