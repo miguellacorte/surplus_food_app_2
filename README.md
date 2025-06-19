@@ -1,7 +1,5 @@
 # React Native Surplus Food App
 
-![Surplus Food App Banner](https://raw.githubusercontent.com/miguellacorte/react_native_surplus_food_app/master/assets/Frame%201000004975.png)
-
 > 40% of all the food produced in the world is wasted. Through this app, NGOs can connect with restaurants to receive surplus food which will in turn be donated to people in need, reducing waste. This app is a free open-source template to enable citizens anywhere in the world to adopt this approach and modify it according to local laws and consumption patterns.
 
 ## Table of Contents
